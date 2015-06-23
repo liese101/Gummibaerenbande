@@ -1,0 +1,7 @@
+Unser Projekt befasst sich mit der Erstellung mehrere kleiner Minispiele. Die Bärenolympiade soll für Einzelspieler sowie als Spiel für zwei Personen geeignet sein. Die Charaktere unseres Spiels sind, wie es auch unser Gruppenname erschließen lässt, Bären. 
+  Unsere Gruppe einigte sich auf die Programmierumgebung NetBeans. Unsere Spielfiguren werden im Bugfixing mit Blender modelliert. 
+Bisher stehen drei Minispiele in unserer Ideenfindung:
+		a) Weltlauf zwischen zwei Bären in verschiedenen Welten 
+		b) Autorennen, bei dem es keine Kollision mit Häusern und Bäumen geben darf
+		c) Honigtopf: Bären müssen versuchen sich einen Topf Honig von einem Baum 	holen
+Für die Bewegungen werden die Pfeiltasten auf der Tastatur benötigt. Wenn zwei Personen miteinander spielen, dann verwendet der zweite Spieler die Tasten W-A-S-D. 
