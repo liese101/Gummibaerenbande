@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+    var THREE;
+
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 45, width/height, 0.1, 1000 );
 //    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer();
@@ -13,16 +15,22 @@
 
     var geometry = new THREE.SphereGeometry( ballsize );
     var geometry2 = new THREE.SphereGeometry( globsize );
-    var material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: false} );
-    var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00}) ;
+    var geometryg = new THREE.BoxGeometry ( 5, 5, 16 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xff0000});
+    var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
+    var materialg = new THREE.MeshBasicMaterial( {color: 0x0000ff});
     
     var ball = new THREE.Mesh( geometry, material );
     var glob = new THREE.Mesh( geometry2, material2 );
+    var ground = new THREE.Mesh( geometryg, materialg );
      
     scene.add( ball );
     scene.add( glob );
+    scene.add (ground);
 
-    camera.position.z = 5; 
+    ground.position.z = -8;
+    camera.position.z = 3;
+    camera.rotation.x = 0.3;
     
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
