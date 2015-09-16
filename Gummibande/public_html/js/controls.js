@@ -29,6 +29,11 @@ var actionStart = function (event) {
         case "K":
             reset = true;
             break;
+        case "C":
+            if(follow)
+                follow = false;
+            else
+                follow = true;
         default:
             break; 
 

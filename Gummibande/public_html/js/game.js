@@ -13,6 +13,7 @@ var ballposition, globposition, abstand;
 var score;
 var text2, text1;
 var currentscale;
+var follow = false;
 
 //
 //Ball wachsen Lassen
@@ -74,27 +75,57 @@ var repeatBorder = function(){
 //
 var move = function(){
 
-//Bewegung
-    if (moveu) {
-        ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
-        ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
-    }
+//Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
+    if(follow) {
+        if (moveu) {
+            ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
+            ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
+            camera.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
+            camera.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
+        }
 
-    if (moved) {
-        ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-        ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
-    }
+        if (moved) {
+            ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
+            ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+            camera.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
+            camera.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+        }
 
-    if (movel) {
-        ball.position.x -= Math.cos((ball.rotation.z)) * mspeed;
-        ball.position.y -= Math.sin((ball.rotation.z)) * mspeed;
-    }
+        if (movel) {
+            ball.position.x -= Math.cos((ball.rotation.z)) * mspeed;
+            ball.position.y -= Math.sin((ball.rotation.z)) * mspeed;
+            camera.position.x -= Math.cos((ball.rotation.z)) * mspeed;
+            camera.position.y -= Math.sin((ball.rotation.z)) * mspeed;
+        }
 
-    if (mover) {
-        ball.position.x += Math.cos((ball.rotation.z)) * mspeed;
-        ball.position.y += Math.sin((ball.rotation.z)) * mspeed;
+        if (mover) {
+            ball.position.x += Math.cos((ball.rotation.z)) * mspeed;
+            ball.position.y += Math.sin((ball.rotation.z)) * mspeed;
+            camera.position.x += Math.cos((ball.rotation.z)) * mspeed;
+            camera.position.y += Math.sin((ball.rotation.z)) * mspeed;
+        }
     }
-    
+    else{     
+        if (moveu) {
+            ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
+            ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
+        }
+
+        if (moved) {
+            ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
+            ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+        }
+
+        if (movel) {
+            ball.position.x -= Math.cos((ball.rotation.z)) * mspeed;
+            ball.position.y -= Math.sin((ball.rotation.z)) * mspeed;
+        }
+
+        if (mover) {
+            ball.position.x += Math.cos((ball.rotation.z)) * mspeed;
+            ball.position.y += Math.sin((ball.rotation.z)) * mspeed;
+        }
+    }
 //Rotation
     if (rollr === true) {
         ball.rotation.z -= rspeed;
@@ -110,6 +141,7 @@ var move = function(){
         ball.position.x = 0;
         ball.position.y = 0;
         ball.scale.set( 1, 1, 1);
+        camera.position.set( 0, 0, 3);
     }
 };
 

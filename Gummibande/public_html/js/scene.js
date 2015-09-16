@@ -15,10 +15,15 @@
 
     var geometry = new THREE.SphereGeometry( ballsize );
     var geometry2 = new THREE.SphereGeometry( globsize );
-    var geometryg = new THREE.BoxGeometry ( 5, 5, 16 );
+    var geometryg = new THREE.BoxGeometry ( 5, 5, 10 );
     var material = new THREE.MeshBasicMaterial( {color: 0xff0000});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
-    var materialg = new THREE.MeshBasicMaterial( {color: 0x0000ff});
+//    var materialg = new THREE.MeshBasicMaterial( {color: 0x0000ff, wireframe: false});
+    var groundtexture = new THREE.ImageUtils.loadTexture("nachttisch.jpg");
+    var materialg = new THREE.MeshBasicMaterial({
+        map:groundtexture,
+        side:THREE.DoubleSide
+    });
     
     var ball = new THREE.Mesh( geometry, material );
     var glob = new THREE.Mesh( geometry2, material2 );
@@ -28,9 +33,10 @@
     scene.add( glob );
     scene.add (ground);
 
-    ground.position.z = -8;
+    ground.position.z = -5;
     camera.position.z = 3;
-    camera.rotation.x = 0.3;
+    camera.rotation.x = Math.PI/12;
+//    camera.rotation.y =
     
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
