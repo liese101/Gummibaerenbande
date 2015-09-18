@@ -13,7 +13,7 @@ var ballposition, globposition, abstand;
 var score;
 var text2, text1;
 var currentscale;
-var follow = false;
+var follow = true;
 
 //
 //Ball wachsen Lassen
