@@ -66,3 +66,11 @@
         scene.add( bear_1 );
         bear_1.position.z = -20;
     }
+    
+    function clearScene(scene) {
+        var i;
+        for( var i = scene.children.length - 1; i >= 0; i--) {
+             obj = scene.children[i];
+             scene.remove(obj);
+        }
+    }

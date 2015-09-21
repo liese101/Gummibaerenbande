@@ -34,6 +34,10 @@ var actionStart = function (event) {
                 follow = false;
             else
                 follow = true;
+            break;
+        case "1":
+            clearScene();
+            break
         default:
             break; 
 
