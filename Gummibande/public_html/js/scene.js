@@ -6,17 +6,17 @@
     var THREE;
 
     var scene = new THREE.Scene(); // Scene erstellt
-    var camera = new THREE.PerspectiveCamera( 45, width/height, 0.1, 1000 ); //Kamera erstellt
+    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
 //    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
-    var renderer = new THREE.WebGLRenderer();
+    var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
     
     loader = new THREE.JSONLoader(); //laden von modellen aus blender 
     loader.load('files/models/bear2.json', addModel);
     
-    var spotLight = new THREE.SpotLight(0xffffff);
+    var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
     spotLight.castShadow = true;
     spotLight.position.set (20, 35, 40);
     scene.add(spotLight);
