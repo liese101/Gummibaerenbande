@@ -13,7 +13,7 @@
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
     
-    loader = new THREE.JSONLoader();
+    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
     loader.load('files/models/bear2.json', addModel);
     
     var spotLight = new THREE.SpotLight(0xffffff);
