@@ -69,7 +69,7 @@
     
     function clearScene() {
         var i;
-        for( var i = scene.children.length - 1; i >= 2; i--) {
+        for( var i = scene.children.length - 1; i >= 0; i--) {
              obj = scene.children[i];
              scene.remove(obj);
         }

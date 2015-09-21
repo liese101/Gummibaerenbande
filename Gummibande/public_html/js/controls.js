@@ -37,7 +37,7 @@ var actionStart = function (event) {
             break;
         case "1":
             clearScene();
-            break
+            break;
         default:
             break; 
 
