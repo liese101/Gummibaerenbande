@@ -67,9 +67,9 @@
         bear_1.position.z = -20;
     }
     
-    function clearScene(scene) {
+    function clearScene() {
         var i;
-        for( var i = scene.children.length - 1; i >= 0; i--) {
+        for( var i = scene.children.length - 1; i >= 2; i--) {
              obj = scene.children[i];
              scene.remove(obj);
         }
