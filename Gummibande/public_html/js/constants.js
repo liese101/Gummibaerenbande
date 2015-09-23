@@ -13,7 +13,7 @@ var posx = 100;
 var posy = 100;
 var score = 0;
 
-
+var pukspeed = 0.1;
 var mspeed = 0.1;
 var rspeed = 0.1;
 var movel, mover, moveu, moved, rollr, rolll, reset = false;

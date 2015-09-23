@@ -152,7 +152,7 @@ var move = function(){
 var render = function () {
     requestAnimationFrame( render );
     
-    text1.innerHTML = ballsize + " + " + globsize + " = " + (ballsize+globsize) +  " . . . " + abstand.distance();
+    text1.innerHTML = puk.rotation.z + " ___ " + border.children.length;
     
     move();
     
@@ -161,6 +161,8 @@ var render = function () {
     positionSet();    
         
     collect();
+    
+    movePuk();
 
     renderer.render(scene, camera);
     

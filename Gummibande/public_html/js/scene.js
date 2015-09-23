@@ -6,15 +6,15 @@
     var THREE;
 
     var scene = new THREE.Scene(); // Scene erstellt
-    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
-//    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+//    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
+    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
     
-    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
-    loader.load('files/models/bear2.json', addModel);
+//    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
+//    loader.load('files/models/bear2.json', addModel);
     
     var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
     spotLight.castShadow = true;
@@ -25,12 +25,19 @@
     var geometry2 = new THREE.SphereGeometry( globsize );
     var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
+    var spritemap = THREE.ImageUtils.loadTexture("files/test_sprite.png");
+    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
+    
     
     var ball = new THREE.Mesh( geometry1, material1 );
     var glob = new THREE.Mesh( geometry2, material2 );
-     
+    var fire = new THREE.Sprite (spriteMaterial);
+    fire.transparent = true;
+    fire.position.z = 1;
+    
     scene.add( ball );
     scene.add( glob );
+    ball.add( fire );
 
     camera.position.z = 3;
     camera.lookAt(ballposition);            //zentriert auf den Player
@@ -60,12 +67,12 @@
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
     
-    function addModel( geometry,  materials ){
-        var material = new THREE.MeshFaceMaterial( materials );
-        bear_1 = new THREE.Mesh( geometry, material );
-        scene.add( bear_1 );
-        bear_1.position.z = -20;
-    }
+//    function addModel( geometry,  materials ){
+//        var material = new THREE.MeshFaceMaterial( materials );
+//        bear_1 = new THREE.Mesh( geometry, material );
+//        scene.add( bear_1 );
+//        bear_1.position.z = -20;
+//    }
     
     function clearScene() {
         var i;
