@@ -15,11 +15,11 @@
     
 //    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
 //    loader.load('files/models/bear2.json', addModel);
-    
-    var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
-    spotLight.castShadow = true;
-    spotLight.position.set (20, 35, 40);
-    scene.add(spotLight);
+//    
+//    var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
+//    spotLight.castShadow = true;
+//    spotLight.position.set (20, 35, 40);
+//    scene.add(spotLight);
 
     var geometry1 = new THREE.SphereGeometry( ballsize );
     var geometry2 = new THREE.SphereGeometry( globsize );
@@ -35,9 +35,9 @@
     fire.transparent = true;
     fire.position.z = 1;
     
-    scene.add( ball );
-    scene.add( glob );
-    ball.add( fire );
+//    scene.add( ball );
+//    scene.add( glob );
+//   ball.add( fire );
 
     camera.position.z = 3;
     camera.lookAt(ballposition);            //zentriert auf den Player

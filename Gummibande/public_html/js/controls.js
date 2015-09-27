@@ -26,8 +26,17 @@ var actionStart = function (event) {
         case "E":
             mover = true;
             break;
+        case "I":
+            auf = true;
+            break;
         case "K":
-            reset = true;
+            ab = true;  
+            break;
+        case "J":
+            links = true;
+            break;
+        case "L":
+            rechts = true;
             break;
         case "C":
             if(follow)
@@ -37,7 +46,13 @@ var actionStart = function (event) {
             break;
         case "1":
             clearScene();
+            gamedome = false;
+            gamemoni = false;
+            gameclaudi = false;
+            gameelli = false;
             break;
+        case "4":
+            loadGameFour();
         default:
             break; 
 
@@ -66,8 +81,17 @@ var actionStop = function (event) {
         case "E":
             mover = false;
             break;
+        case "I":
+            auf = false;
+            break;
         case "K":
-            reset = false;
+            ab = false;  
+            break;
+        case "J":
+            links = false;
+            break;
+        case "L":
+            rechts = false;
             break;
         default:
             break; 
