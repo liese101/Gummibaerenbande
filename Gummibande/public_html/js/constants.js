@@ -38,6 +38,7 @@ var fieldheight = 4;
 var pukposition = new THREE.Vector3(0, 0, 0);
 var pukabstand = new THREE.Line3();
 var gamedome = false;
+var belongs = true;
 
 var ballposition = new THREE.Vector3(0, 0, 0);
 //var globposition = new THREE.Vector3(Math.random()*11 - 5.5, Math.random()*7 - 3.5, 0);
