@@ -14,6 +14,9 @@
 var THREE;
 
     var scene = new THREE.Scene();
-
+    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+    var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
+    renderer.setSize( width, height );
+    document.body.appendChild( renderer.domElement );
 
 
