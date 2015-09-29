@@ -15,6 +15,11 @@ var text2, text1, text3;
 var currentscale;
 var follow = true;
 
+//  unbedingt nochmal nachschauen, wie Array in ja funktionieren!!!
+//  irgendwas mach ich echt falsch!
+var astposition = new Array();
+var astabstand = new Array();
+
 //
 //Glob neu positionieren
 //
@@ -43,13 +48,30 @@ var collect = function(){
 };
 
 //
+//Kollision mit Ästen prüfen
+//
+//var kollision = function(){
+//    for(i = 0;i < anzahlAeste;i++){
+//       if (astabstand[i].distance() < (ballsize+0.25)){   //0.25 weil Ast 0.5 breit ist
+//        // tu was!
+//         }
+//    }
+//};
+
+//
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
+//      muss wahrscheinlich noch überarbeitet werden!!!
 //
 var positionSet = function(){
     
     ballposition.set(ball.position.x, ball.position.y, 0); 
     globposition.set(glob.position.x, glob.position.y, 0);
     abstand.set(ballposition, globposition);
+    
+//    for(i = 0;i < anzahlAeste;i++){
+//        astposition[i].set(aeste[i].koordinaten.x, aeste[i].koordinaten.y, aeste[i].koordinaten.z);
+//       astabstand[i].set(ballposition, astposition[i]);
+//    }
 };
 
 
@@ -61,17 +83,23 @@ var move = function(){
 //Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
     if(follow) {
         if (moveu) {
-            ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
-            ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
-            camera.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
-            camera.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
+            if(ball.position.y <= hoehe) {
+                ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
+                ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
+                camera.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
+                camera.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
+            }
+            
         }
 
         if (moved) {
-            ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
+            if(ball.position.y >= 0) {
+                ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
             ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
             camera.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
             camera.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+            }
+            
         }
     }
     else{     
@@ -86,11 +114,11 @@ var move = function(){
         }
     }
 //Rotation
-    if (rollr === true) {
+    if (rolll === true) {
         ball.rotation.y -= rspeed;
         ball.rotation.y %= 6.28;}
 
-    if (rolll === true) {
+    if (rollr === true) {
         ball.rotation.y += rspeed;
         ball.rotation.y %= 6.28;}
 
@@ -118,6 +146,8 @@ var render = function () {
     positionSet();    
         
     collect();
+    
+    //kollision();
 
     renderer.render(scene, camera);
     

@@ -29,21 +29,19 @@
     var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
     
     //Baum
-    var hoehe = 20;
-    var geometry3 = new THREE.CylinderGeometry( 0.9, 0.9, hoehe, 32 );
+    var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe, 32 );
     var material3 = new THREE.MeshBasicMaterial( {color: 0xffccdd} );
     var cylinder = new THREE.Mesh( geometry3, material3 );
-    cylinder.position.set(0, 10, 0);
+    cylinder.position.set(0, hoehe/2, 0);
     
     function aesteErstellen(){
-        var anzahlAeste = 15;
         for(i = 0; i < anzahlAeste; i++) {
-            var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, 5, 32 );
+            var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
             var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
             var ast = new THREE.Mesh( geometry4, material4 );
             var a = Math.random()*Math.PI*2;
-            var x = Math.cos(a)* 2.8;   //2.8 wegen halber Länge des Asts
-            var z = Math.sin(a)* 2.8;   //und Durchmesser des Baums
+            var x = Math.cos(a)* (dm+laenge)/2;   
+            var z = Math.sin(a)* (dm+laenge)/2;   
             var y = Math.random()* (hoehe/anzahlAeste) + i * (hoehe/anzahlAeste);
             y = (y % (hoehe-3)) + 1.5;
             //stellt sicher, dass die Äste gleichmäßig verteilt werden.
@@ -51,6 +49,13 @@
             ast.rotateX(a);
             ast.position.set(x, y, z);
             scene.add(ast);
+            
+            //Koordinaten des Asts speichern im Array "aeste
+            //var koordinaten = new Object();
+            //koordinaten.x = x;
+            //koordinaten.y = y;
+            //koordinaten.z = z;
+            //aeste.push(koordinaten);
         }
     }
     
