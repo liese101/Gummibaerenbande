@@ -111,28 +111,28 @@ function checkPlayers(){
     if(belongs){
         if(puk.position.x < -fieldwidth+1.4 && puk.position.x > -fieldwidth+1){
             if(puk.position.y < p1.position.y+1.3 && puk.position.y > p1.position.y){
-                puk.rotation.z = -(puk.rotation.z)+0.3;
+                puk.rotation.z = -(puk.rotation.z)+0.2;
                 belongs = false;
-                pukspeed *= 1.1;
+                pukspeed *= 1.05;
             }
             if(puk.position.y > p1.position.y-1.3 && puk.position.y < p1.position.y){
-                puk.rotation.z = -(puk.rotation.z)-0.3;
+                puk.rotation.z = -(puk.rotation.z)-0.2;
                 belongs = false;
-                pukspeed *= 1.1;
+                pukspeed *= 1.05;
             }
         }
     }
     else{
         if(puk.position.x < fieldwidth-1 && puk.position.x > fieldwidth-1.4){
             if(puk.position.y < p2.position.y+1.3 && puk.position.y > p2.position.y){
-                puk.rotation.z = -(puk.rotation.z)-0.3;
+                puk.rotation.z = -(puk.rotation.z)-0.2;
                 belongs = true;
-                pukspeed *= 1.1;
+                pukspeed *= 1.05;
             }
             if(puk.position.y > p2.position.y-1.3 && puk.position.y < p2.position.y){
-                puk.rotation.z = -(puk.rotation.z)+0.3;
+                puk.rotation.z = -(puk.rotation.z)+0.2;
                 belongs = true;
-                pukspeed *= 1.1;
+                pukspeed *= 1.05;
             }
         }
     }
@@ -163,13 +163,13 @@ function checkBorder(){
     
 
     
-    if (p1.position.y < -fieldheight)
+    if (p1.position.y < -(fieldheight+0.5))
         p1.position.y += 0.11;
-    if (p1.position.y > fieldheight)
+    if (p1.position.y > fieldheight+0.5)
         p1.position.y -= 0.11;
-    if (p2.position.y < -fieldheight)
+    if (p2.position.y < -(fieldheight+0.5))
         p2.position.y += 0.11;
-    if (p2.position.y > fieldheight)
+    if (p2.position.y > fieldheight+0.5)
         p2.position.y -= 0.11;
     
 }
