@@ -34,8 +34,10 @@ var setGlob = function() {
         text3.innerHTML = "nach oben!";
     }
     text2.innerHTML = "Score: " + score;
-//    text1.innerHTML = "distanceToPoint: " + abstand.distance();
+    text1.innerHTML = "distanceToPoint: " + abstand.distance();
     score += 1;
+    
+    
 };
 
 //
@@ -73,7 +75,6 @@ var positionSet = function(){
 //       astabstand[i].set(ballposition, astposition[i]);
 //    }
 };
-
 
 //
 //Bewegung in rotierte Richtung und Rotation
@@ -131,6 +132,9 @@ var move = function(){
         camera.position.set( 0, 0, 3);
     }
 };
+
+
+
 
 
 //#######//
