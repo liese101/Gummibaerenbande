@@ -14,6 +14,30 @@
 var THREE;
 
     var scene = new THREE.Scene();
+    var scene = document.getElementById("scene");
+    
+    function spiel_auswahl()
+    function update_auswahl()
+    {
+    var kategorieAuswahl = document.forms.verzeichnis.kategorie;
+    var unterkategorieAuswahl = document.forms.verzeichnis.unterkategorie;
+    unterkategorieAuswahl.options.length = 0; // DropDown Menü entleeren
+
+       if (kategorieAuswahl.options
+    [kategorieAuswahl.selectedIndex].
+    value == "Email")
+    {
+    unterkategorieAuswahl.options[0] = new Option("Software");
+    unterkategorieAuswahl.options[1] = new Option("Anbieter");
+    }
+    else if (kategorieAuswahl.options
+    [kategorieAuswahl.selectedIndex].
+    value == "Internet")
+    {
+    unterkategorieAuswahl.options[0] = new Option("Internetzugang");
+    unterkategorieAuswahl.options[1] = new Option("Webseiten erstellen");
+    }
+    }
     
     
 

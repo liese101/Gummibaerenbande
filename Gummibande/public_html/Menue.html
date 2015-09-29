@@ -11,21 +11,30 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
          <script type="text/javascript" src="js/Menue.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
+                <link href="files/animiert_favicon.ico" rel="icon" type="image/x-icon" />
                 <style>
-			body {  margin: 0; background-color: red; }
+			body {  margin: 0; background-color: white; }
 			canvas { margin: 100px;    width: 600px; height: 400px }
-                        #canvasColor{z-index:998; opacity:1; background: red;}
                         #textCanvas { margin: 0; width: 200px; height: 50px; }
+                        #scene { margin: 45px;
+                                 width: 600px; 
+                                 height: 400px; 
+                                 background-color: red;}
 		</style>
     </head>
     <body>
         
-        <div>TODO write content</div>
+        <h1>Bärenolympiade</h1>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
         <script src="js/Menue.js"></script>
-        <script>
-                        			render();
-		</script>
-        <p>Bärenolympiade</p>
+        <div id = "scene">
+                            <form name = "spiele" action="select.html"> 
+                                <select name="Spielauswahl" size="1"> 
+                                    <option>PONG</option> 
+                                    <option>Eiersuche</option> 
+                                    <option>Klettern</option>  
+                                </select> </form>
+        </div>
+        <div id ="spiele">Hier entsteht die Spieleanleitung</div>
     </body>
 </html>
