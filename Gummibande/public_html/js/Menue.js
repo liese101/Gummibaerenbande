@@ -16,28 +16,17 @@ var THREE;
     var scene = new THREE.Scene();
     var scene = document.getElementById("scene");
     
-    function spiel_auswahl()
-    function update_auswahl()
+    function spiel1()
     {
-    var kategorieAuswahl = document.forms.verzeichnis.kategorie;
-    var unterkategorieAuswahl = document.forms.verzeichnis.unterkategorie;
-    unterkategorieAuswahl.options.length = 0; // DropDown Menü entleeren
-
-       if (kategorieAuswahl.options
-    [kategorieAuswahl.selectedIndex].
-    value == "Email")
-    {
-    unterkategorieAuswahl.options[0] = new Option("Software");
-    unterkategorieAuswahl.options[1] = new Option("Anbieter");
+        var button1 = document.getElementById("button1");
+        if(button1){
+           // button1.src="http://localhost:8383/Gummibande/index.html";
+           alert ("Hallo");
+        }
     }
-    else if (kategorieAuswahl.options
-    [kategorieAuswahl.selectedIndex].
-    value == "Internet")
-    {
-    unterkategorieAuswahl.options[0] = new Option("Internetzugang");
-    unterkategorieAuswahl.options[1] = new Option("Webseiten erstellen");
-    }
-    }
+    
+    
+    
     
     
 
