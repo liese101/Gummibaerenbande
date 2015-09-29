@@ -51,14 +51,15 @@
             scene.add(ast);
             
             //Koordinaten des Asts speichern im Array "aeste
-            //var koordinaten = new Object();
-            //koordinaten.x = x;
-            //koordinaten.y = y;
-            //koordinaten.z = z;
-            //aeste.push(koordinaten);
+            var koordinaten = new Object();
+            koordinaten.x = x;
+            koordinaten.y = y;
+            koordinaten.z = z;
+            aeste.push(koordinaten);
         }
     }
-    
+            
+            
     var ball = new THREE.Mesh( geometry1, material1 );
     var glob = new THREE.Mesh( geometry2, material2 );
     var fire = new THREE.Sprite (spriteMaterial);
