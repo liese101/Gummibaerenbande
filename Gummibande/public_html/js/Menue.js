@@ -17,8 +17,11 @@ var THREE;
     var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( width, height );
+    renderer.setClearColor(0xfffff);
     var geometry = new THREE.BoxGeometry( 1, 1, 1 );
     var material = new THREE.MeshBasicMaterial( { color: red } );
     document.body.appendChild( renderer.domElement );
+    
+    
 
 
