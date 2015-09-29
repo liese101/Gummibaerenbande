@@ -44,6 +44,9 @@ var actionStart = function (event) {
             else
                 follow = true;
             break;
+        case "G":
+            pukgo = true;
+            break;
         case "1":
             clearScene();
             gamedome = false;
