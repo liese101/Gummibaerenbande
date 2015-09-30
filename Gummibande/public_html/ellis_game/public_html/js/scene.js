@@ -55,7 +55,9 @@
             koordinaten.x = x;
             koordinaten.y = y;
             koordinaten.z = z;
-            aeste.push(koordinaten);
+            koordinaten.i = i;
+            // aeste.push(koordinaten);
+            kollisionErstellen(koordinaten);
         }
     }
             

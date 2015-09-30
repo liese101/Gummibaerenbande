@@ -15,11 +15,6 @@ var text2, text1, text3;
 var currentscale;
 var follow = true;
 
-//  unbedingt nochmal nachschauen, wie Array in ja funktionieren!!!
-//  irgendwas mach ich echt falsch!
-var astposition = new Array();
-var astabstand = new Array();
-
 //
 //Glob neu positionieren
 //
@@ -36,8 +31,14 @@ var setGlob = function() {
     text2.innerHTML = "Score: " + score;
     text1.innerHTML = "distanceToPoint: " + abstand.distance();
     score += 1;
-    
-    
+};
+
+//
+//  Hier sollen die Kollisionserkennungen für die Äste entstehen...
+//
+
+var kollisionErstellen = function(koordinaten) {
+    // koordinaten.x, koordinaten.y, koordinaten.z, koordinaten.i (i ist index)
 };
 
 //
@@ -50,19 +51,7 @@ var collect = function(){
 };
 
 //
-//Kollision mit Ästen prüfen
-//
-//var kollision = function(){
-//    for(i = 0;i < anzahlAeste;i++){
-//       if (astabstand[i].distance() < (ballsize+0.25)){   //0.25 weil Ast 0.5 breit ist
-//        // tu was!
-//         }
-//    }
-//};
-
-//
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
-//      muss wahrscheinlich noch überarbeitet werden!!!
 //
 var positionSet = function(){
     
@@ -70,10 +59,6 @@ var positionSet = function(){
     globposition.set(glob.position.x, glob.position.y, 0);
     abstand.set(ballposition, globposition);
     
-//    for(i = 0;i < anzahlAeste;i++){
-//        astposition[i].set(aeste[i].koordinaten.x, aeste[i].koordinaten.y, aeste[i].koordinaten.z);
-//       astabstand[i].set(ballposition, astposition[i]);
-//    }
 };
 
 //
@@ -150,8 +135,6 @@ var render = function () {
     positionSet();    
         
     collect();
-    
-    //kollision();
 
     renderer.render(scene, camera);
     
