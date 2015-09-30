@@ -61,16 +61,13 @@ var collect2 = function(){
         
         if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
             keinAst();
-            
-        //} else if (astabstand[i].distance() < 0){ 
-        //    astGefunden();
-            
+        } else if (astabstand[i-2].distance() < 2.2){ 
+            astGefunden();   
         } else {
             keinAst();
-            text2.innerHTML = "X:" + astposition[i-2].x/((dm+laenge)/2) + " - " + ball.position.x
-                    + "<br>Z: " + astposition[i-2].z/((dm+laenge)/2) + " - " + ball.position.z;
-        
-            
+            text2.innerHTML = astabstand[i-2].distance();
+            //text2.innerHTML = "X:" + astposition[i-2].x/((dm+laenge)/2) + " - " + ball.position.x
+            //        + "<br>Z: " + astposition[i-2].z/((dm+laenge)/2) + " - " + ball.position.z;   
         }
     //}
 };
