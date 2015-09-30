@@ -40,10 +40,12 @@ var setGlob = function() {
 //
 var kollisionErstellen = function(koordinaten) {
     // koordinaten.x, koordinaten.y, koordinaten.z, koordinaten.i (i ist index)
-    ast[koordinaten.i] = new Object();
-    ast[koordinaten.i].x = koordinaten.x;
-    ast[koordinaten.i].y = koordinaten.y;
-    ast[koordinaten.i].z = koordinaten.z;
+    astposition[koordinaten.i] = new THREE.Vector3(koordinaten.x, koordinaten.y, koordinaten.z);
+    astabstand[koordinaten.i] = new THREE.Line3(ballposition, astposition[koordinaten.i]);
+    
+    //ast[koordinaten.i].x = koordinaten.x;
+    //ast[koordinaten.i].y = koordinaten.y;
+    //ast[koordinaten.i].z = koordinaten.z;
     
 };
 
@@ -51,8 +53,19 @@ var kollisionErstellen = function(koordinaten) {
 //Abstand Prüfen
 //
 var collect = function(){
-    if (abstand.distance() < (ballsize+globsize)){
-        setGlob();
+    for(i = 0; i < anzahlAeste; i++) {
+        if (abstand.distance() < (ballsize+globsize)){
+            setGlob();
+        }
+    }
+};
+
+var collect2 = function(){
+    for(i = 0; i < anzahlAeste; i++) {
+        if (astabstand[i].distance() < (ballsize+globsize)){
+            setGlob();
+        }
+        
     }
 };
 
@@ -67,12 +80,12 @@ var positionSet = function(){
     
 };
 
+//Funktioniert nicht D:
 var positionSet2 = function(){
     
     ballposition.set(ball.position.x, ball.position.y, 0); 
     for(i = 0; i < anzahlAeste; i++) {
-        astposition[i].set(ast[i].x, ast[i].y, ast[i].z);
-        abstand.set(ballposition, astposition[i]);
+        astabstand[i].set(ballposition, astposition[i]);
     } 
 };
 
@@ -155,6 +168,7 @@ var render = function () {
     positionSet2();
         
     collect();
+    collect2();
 
     renderer.render(scene, camera);
     
