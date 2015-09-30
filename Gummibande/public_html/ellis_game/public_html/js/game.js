@@ -51,7 +51,6 @@ var kollisionErstellen = function(koordinaten) {
 var collect = function(){
     if (abstand.distance() < (ballsize+globsize)){
             setGlob();
-    
     }
 };
 
@@ -59,17 +58,18 @@ var collect2 = function(){
     //for(i = 0; i < anzahlAeste; i++) {
         i = Math.round(ball.position.y);
         
-        text2.innerHTML = "X:" + astposition[i].x/3 + " - " + ball.position.x + "<br>Y: "
-                + astposition[i].y + " - " + ball.position.y + "<br>Z: " + astposition[i].z/3 + " - " + ball.position.z;
         
-        if(i > hoehe-1 || i < 2) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
+        if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
             keinAst();
             
-        } else if (astabstand[i+2].distance() < 3){ 
-            astGefunden();
+        //} else if (astabstand[i].distance() < 0){ 
+        //    astGefunden();
             
         } else {
             keinAst();
+            text2.innerHTML = "X:" + astposition[i-2].x/((dm+laenge)/2) + " - " + ball.position.x
+                    + "<br>Z: " + astposition[i-2].z/((dm+laenge)/2) + " - " + ball.position.z;
+        
             
         }
     //}
@@ -154,21 +154,21 @@ var move = function(){
     }
 //Rotation
     if (rolll === true) {
-        ball.rotation.y -= rspeed;
+        ball.rotation.y += rspeed;
         ball.rotation.y %= Math.PI*2;
                                                             //Kamera mitdrehen
-        ball.position.x = Math.cos(ball.rotation.y)* (dm+0.9)/2;   
-        ball.position.z = Math.sin(ball.rotation.y)* (dm+0.9)/2;
+        ball.position.x = Math.cos(ball.rotation.y)* dm;
+        ball.position.z = Math.sin(ball.rotation.y)* dm;
             //y = (y % (hoehe-3)) + 1.5;
             //stellt sicher, dass die Äste gleichmäßig verteilt werden.
            
     }
 
     if (rollr === true) {
-        ball.rotation.y += rspeed;
+        ball.rotation.y -= rspeed;
         ball.rotation.y %= Math.PI*2;
-        ball.position.x = Math.cos(ball.rotation.y)* (dm+0.9)/2;   
-        ball.position.z = -Math.sin(ball.rotation.y)* (dm+0.9)/2;
+        ball.position.x = Math.cos(ball.rotation.y)* dm;   
+        ball.position.z = Math.sin(ball.rotation.y)* dm;
         //Kamera mitdrehen
     }
    

@@ -35,15 +35,14 @@
     cylinder.position.set(0, hoehe/2, 0);
     
     function aesteErstellen(){                 
-        for(i = 0; i < anzahlAeste; i++) {
+        for(i = 0; i < hoehe-3; i++) {
             var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
             var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
             var ast = new THREE.Mesh( geometry4, material4 );
             var a = Math.random()*Math.PI*2;
             var x = Math.cos(a) * ((dm+laenge)/2);   
             var z = Math.sin(a) * ((dm+laenge)/2);   
-            var y = Math.random()* (hoehe/anzahlAeste) + i * (hoehe/anzahlAeste);
-            y = (y % (hoehe-3)) + 1.5;
+            var y = i + 2;
             //stellt sicher, dass die Äste gleichmäßig verteilt werden.
             ast.rotateZ(Math.PI / 2);
             ast.rotateX(a);
@@ -61,36 +60,6 @@
             astposition[i] = new THREE.Vector3(x, y, z);
             astabstand[i] = new THREE.Line3();
         }
-    }
-    
-    function aesteErstellen2(){             //NICHT VERWENDET!
-        for(i = 0; i < (hoehe - 3); i++) {
-            var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
-            var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
-            var ast = new THREE.Mesh( geometry4, material4 );
-            var a = Math.random()*Math.PI*2;
-            var x = Math.cos(a)* (dm+laenge)/2;   
-            var z = Math.sin(a)* (dm+laenge)/2;   
-            var y = i + 2;
-            //y = (y % (hoehe-3)) + 1.5;
-            //stellt sicher, dass die Äste gleichmäßig verteilt werden.
-            ast.rotateZ(Math.PI / 2);
-            ast.rotateX(a);
-            ast.position.set(x, y, z);
-            scene.add(ast);
-            
-            //Koordinaten des Asts speichern im Array "aeste
-            var koordinaten = new Object();
-            koordinaten.x = x;
-            koordinaten.y = y;
-            koordinaten.z = z;
-            koordinaten.i = i;
-            //kollisionErstellen(koordinaten);
-            
-            astposition[i] = new THREE.Vector3(x, y, z);
-            astabstand[i] = new THREE.Line3();
-        }
-        
         anzahlAeste = hoehe - 3;
     }
             
@@ -103,7 +72,7 @@
     
     scene.add( ball );
     scene.add( glob );
-    ball.add( fire );
+    //ball.add( fire );
     scene.add(cylinder);
     aesteErstellen();
 
