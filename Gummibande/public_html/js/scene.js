@@ -51,7 +51,7 @@
     text1.style.backgroundColor = "red";
     text1.style.color = "white";
     text1.innerHTML = "distanceToPoint: ?";
-    text1.style.top = 10 + 'px';
+    text1.style.top = 30 + 'px';
     document.body.appendChild(text1);
     
     var text2 = document.createElement('div');
@@ -61,7 +61,7 @@
     text2.style.backgroundColor = "blue";
     text2.style.color = "white";
     text2.innerHTML = "Score: 0";
-    text2.style.top = 30 + 'px';
+    text2.style.top = 50 + 'px';
     document.body.appendChild(text2);
     
     document.addEventListener("keydown", actionStart, false);
