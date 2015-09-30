@@ -36,4 +36,5 @@ var abstand = new THREE.Line3(ballposition, globposition);
 
 var astposition = new Array();
 var astabstand = new Array();
+var ast = 0;
 

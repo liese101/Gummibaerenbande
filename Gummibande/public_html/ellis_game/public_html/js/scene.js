@@ -95,14 +95,14 @@
     text2.style.height = 20;
     text2.style.backgroundColor = "grey";
     text2.innerHTML = "Score: 0";
-    text2.style.top = 80 + 'px';
+    text2.style.top = 0 + 'px';
     text2.style.left = (width/2 + 50) + 'px';
     document.body.appendChild(text2);
     
     var text3 = document.createElement('div');
     text3.style.position = 'absolute';
-    text3.style.width = 80;
-    text3.style.height = 20;
+    text3.style.width = 100;
+    text3.style.height = 100;
     text3.style.backgroundColor = "grey";
     text3.innerHTML = "nach oben!";
     text3.style.top = 150 + 'px';

@@ -53,20 +53,24 @@ var kollisionErstellen = function(koordinaten) {
 //Abstand Prüfen
 //
 var collect = function(){
-    for(i = 0; i < anzahlAeste; i++) {
-        if (abstand.distance() < (ballsize+globsize)){
+    if (abstand.distance() < (ballsize+globsize)){
             setGlob();
-        }
+    
     }
 };
 
 var collect2 = function(){
     for(i = 0; i < anzahlAeste; i++) {
-        if (astabstand[i].distance() < (ballsize+globsize)){
-            setGlob();
+        if (astabstand[i].distance() < ballsize){
+            astErwischt();
         }
         
     }
+};
+
+var astErwischt = function() {
+    ast += 1;
+    text3.innerHTML = "Äste erwischt: " + ast;
 };
 
 //
@@ -83,7 +87,7 @@ var positionSet = function(){
 //Funktioniert nicht D:
 var positionSet2 = function(){
     
-    ballposition.set(ball.position.x, ball.position.y, 0); 
+    ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
     for(i = 0; i < anzahlAeste; i++) {
         astabstand[i].set(ballposition, astposition[i]);
     } 
