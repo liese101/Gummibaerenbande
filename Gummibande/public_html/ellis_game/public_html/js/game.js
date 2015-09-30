@@ -61,16 +61,23 @@ var collect = function(){
 
 var collect2 = function(){
     for(i = 0; i < anzahlAeste; i++) {
-        if (astabstand[i].distance() < 3){
-            astErwischt();
+        if (astabstand[i].distance() < 3){ // hier stimmt was nicht
+            astGefunden();
+        } else {
+            keinAst();
         }
     }
 };
 
-var astErwischt = function() {
-    ast += 1;
-    text3.innerHTML = "Äste erwischt: " + ast;
-    score += 1;
+var astGefunden = function() {
+    text3.innerHTML = "Ast";
+    //var x = astposition[i].x;
+    //var y = astposition[i].y;
+    //var z = astposition[i].z;
+};
+
+var keinAst = function() {
+    text3.innerHTML = "kein Ast";
 };
 
 //
