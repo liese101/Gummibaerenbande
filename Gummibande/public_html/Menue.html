@@ -12,6 +12,10 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
          <script type="text/javascript" src="js/Menue.js"></script>
+          <script src="js/constants.js"></script>
+                <script src ="js/controls.js"></script>
+                <script src="js/game.js"></script>
+                <script src="js/scene.js"></script>
 
         <link href="files/menue_buttons.css" rel="stylesheet">
          <link href="files/animiert_favicon.ico" rel="icon" type="image/x-icon" />
@@ -39,12 +43,14 @@ and open the template in the editor.
         <h1>Bärenolympiade</h1>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
         <script src="js/Menue.js"></script>
+        <script type="text/javascript" src="game_dome.js"></script>
         <div id = "scene">
           <div class="buttons">
 
-        <a class="button red criss-cross"  href="button1" onclick = "loadGameFour()" >PONG</a>
-        <a class="button red criss-cross" href="#">Eiersuche</a>
-        <a class="button red criss-cross" href="#">Klettern</a>
+        <button class="button red criss-cross" onclick = "loadGameFour()" >PONG</button>
+        <button onclick ="loadGameFour()">PONG</button>
+        <button class="button red criss-cross">Eiersuche</button>
+        <button class="button red criss-cross">Klettern</button>
         
         
         <div class="box border1"></div>
