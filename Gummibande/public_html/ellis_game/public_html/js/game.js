@@ -61,16 +61,16 @@ var collect = function(){
 
 var collect2 = function(){
     for(i = 0; i < anzahlAeste; i++) {
-        if (astabstand[i].distance() < ballsize){
+        if (astabstand[i].distance() < 3){
             astErwischt();
         }
-        
     }
 };
 
 var astErwischt = function() {
     ast += 1;
     text3.innerHTML = "Äste erwischt: " + ast;
+    score += 1;
 };
 
 //
@@ -78,8 +78,8 @@ var astErwischt = function() {
 //
 var positionSet = function(){
     
-    ballposition.set(ball.position.x, ball.position.y, 0); 
-    globposition.set(glob.position.x, glob.position.y, 0);
+    ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
+    globposition.set(glob.position.x, glob.position.y, ball.position.z);
     abstand.set(ballposition, globposition);
     
 };
@@ -168,12 +168,14 @@ var render = function () {
     
     move();
     
-    positionSet();  
-    positionSet2();
-        
+    positionSet();
+    
     collect();
+    
+    positionSet2();
     collect2();
-
+    
+    
     renderer.render(scene, camera);
     
     
