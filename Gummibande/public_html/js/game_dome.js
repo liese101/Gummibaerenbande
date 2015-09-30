@@ -102,7 +102,7 @@ function movePuk(){
     if(pukgo){
     puk.position.x += Math.sin(-(puk.rotation.z)) * pukspeed;
     puk.position.y += Math.cos(-(puk.rotation.z)) * pukspeed;
-    puk.rotation.x, puk.rotation.y += 0.01;
+    puk.rotation.x, puk.rotation.y += 0.1;
     }
 }
 
