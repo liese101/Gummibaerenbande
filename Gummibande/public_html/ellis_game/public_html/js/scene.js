@@ -8,6 +8,7 @@
     var scene = new THREE.Scene(); // Scene erstellt
 //    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
     var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+    var camera2 = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( width, height );
@@ -78,6 +79,10 @@
     camera.lookAt(ballposition);            //zentriert auf den Player
     camera.rotation.x = Math.PI/12;       //fixe Rotation
 //    camera.rotation.y =
+
+    camera2.position.z = 10;
+    camera2.lookAt(globposition);            //zentriert auf den Player
+    camera2.rotation.x = Math.PI/12;       //fixe Rotation
     
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';

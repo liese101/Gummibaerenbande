@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 var THREE;
-var renderer, camera, scene;
+var renderer, camera, scene, camera2;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, reset;
@@ -115,6 +115,7 @@ var move = function(){
         ball.position.y = 0;
         ball.scale.set( 1, 1, 1);
         camera.position.set( 0, 0, 3);
+        camera2.position.set( 0, 20, 3);
     }
 };
 
@@ -136,7 +137,7 @@ var render = function () {
         
     collect();
 
-    renderer.render(scene, camera);
+    renderer.render(scene, camera, camera2);
     
     
 ///////////
