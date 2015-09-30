@@ -154,6 +154,7 @@ var render = function () {
     
 //    text1.innerHTML = "P1: " + moveu + " _ " + moved + " _ " + rolll + " _ " + rollr + " </br>P2: " + auf + " _ " + ab + " _ " + links + " _ " + rechts;
     text1.innerHTML = "pukrotation: " + puk.rotation.z;
+    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
     
 //    move();
 //    

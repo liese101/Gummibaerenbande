@@ -4,88 +4,70 @@
  * and open the template in the editor.
  */
 
-var fieldwidth, fieldheight, THREE, scene, pukposition, pukabstand, pp1, pp2, obj, belongs, pukgo;
+// sämtliche Variablen laden, um Fehlermeldungen zu vermeiden
+var fieldwidth, fieldheight, THREE, scene, pukposition, pukabstand, pp1, pp2, obj, belongs, pukgo, score1, score2, sc1, sc2, moveu, moved, rollr, rolll, auf, ab, links, rechts;
 
+// Geometries / Materials definieren
 var fieldgeo = new THREE.PlaneGeometry(17, 11);
 var fieldmap = new THREE.ImageUtils.loadTexture("files/field.png");
 var fieldmat = new THREE.MeshBasicMaterial({map:fieldmap});
 
 var pukgeometry = new THREE.SphereGeometry(0.5, 8, 8);
-//var pukmaterial = new THREE.MeshBasicMaterial({color: 0x0000ff});
-var spritemap = THREE.ImageUtils.loadTexture("files/ball.jpg");
-var pukmaterial = new THREE.MeshBasicMaterial({map: spritemap});
-
+var pukmap = THREE.ImageUtils.loadTexture("files/ball.jpg");
+var pukmaterial = new THREE.MeshBasicMaterial({map: pukmap});
 
 var p1geo = new THREE.BoxGeometry(0.35, 2,0.1);
-//var p1mat = new THREE.MeshBasicMaterial({color: 0x00ff00});
 var player1map = new THREE.ImageUtils.loadTexture("files/player1.png");
 var p1mat = new THREE.MeshBasicMaterial ({map:player1map, transparent: true});
+
 var p2geo = new THREE.BoxGeometry(0.35, 2,0.1);
-//var p2mat = new THREE.MeshBasicMaterial({color: 0xff0000});
 var player2map = new THREE.ImageUtils.loadTexture("files/player2.png");
 var p2mat = new THREE.MeshBasicMaterial ({map:player2map, transparent: true});
-var ppgeo = new THREE.SphereGeometry(0.20);
-var ppmat = new THREE.MeshBasicMaterial({color: 0x00ffff});
 
 var beargeo = new THREE.BoxGeometry(1, 1.6, 0.1);
 var bearmap = new THREE.ImageUtils.loadTexture("files/bear.png");
 var bearmat = new THREE.MeshBasicMaterial({map:bearmap});
 bearmat.transparent = true;
+
+//Meshs erstellen
+var field = new THREE.Mesh(fieldgeo, fieldmat);
+
+var puk = new THREE.Mesh(pukgeometry, pukmaterial);
+puk.rotation.z = Math.random()*1.5+1;
+
 var bear1 = new THREE.Mesh(beargeo, bearmat);
 var bear2 = new THREE.Mesh(beargeo, bearmat);
 
-var puk = new THREE.Mesh(pukgeometry, pukmaterial);
-//puk.rotation.z = Math.random()*1.5+1;
-puk.rotation.z = 0.87;
 var p1 = new THREE.Mesh(p1geo, p1mat);
 var p2 = new THREE.Mesh(p2geo, p2mat);
-var field = new THREE.Mesh(fieldgeo, fieldmat);
 
+
+// funktion, die Spiel aufruft, Variablen entsprechend ändert und Objekte der Szene hinzufügt
 function loadGameFour(){
+    
 clearScene();
-gameelli = false
-gamedome = true;
-scene.add(puk);
-scene.add(field);
 
-//for (var i = -1; i <= 1; i += 0.4){
-//    var pp1 = new THREE.Mesh(ppgeo, ppmat);
-//    var pp2 = new THREE.Mesh(ppgeo, ppmat);
-//    pp1.position.y = i;
-//    pp2.position.y = i;
-//    p1.add(pp1);
-//    p2.add(pp2);
-//}
+gameelli = false;
+gamedome = true;
+
+scene.add(field);
+scene.add(puk);
+
 bear1.position.set(-0.4, 0, 0);
 p1.add(bear1);
 p1.position.set(-fieldwidth+1, 0, 0);
 scene.add(p1);
+
 bear2.rotation.z = 3.1415;
 bear2.position.set(+0.4, 0, 0);
 p2.add(bear2);
 p2.position.set(fieldwidth-1, 0, 0);
 scene.add(p2);
+
+console.log("Game#4 erstellt")
 }
 
-function loadGameDome(){
-//    var x = -fieldwidth;
-//    var y = fieldheight;
-//
-//    for (var i = 0; i <= fieldwidth; i += 0.5){
-//        for (var j = 0; j <= 2*fieldwidth; j += 0.5){
-//            if((x === -fieldwidth || x === fieldwidth) || (y === -fieldheight || y === fieldheight)){
-//            borderpiece = new THREE.Mesh(piecegeometry, bordermaterial);
-//            borderpiece.position.x = x;
-//            borderpiece.position.y = y;
-//            border.add(borderpiece);
-//        }
-//            x += 0.5;
-//        }
-//        x = -8;
-//        y -= 0.5;
-//    }
-    
-};
+//Bewegung von Spieler 1 und 2
 function dMove(){
 //p1
     if(moveu||rolll)
@@ -100,6 +82,7 @@ function dMove(){
         p2.position.y -= 0.1;
 }
 
+//Bewegung / Rotation vom Ball, wenn "G" gedrückt wurde
 function movePuk(){
     if(pukgo){
     puk.position.x += Math.sin(-(puk.rotation.z)) * pukspeed;
@@ -107,33 +90,6 @@ function movePuk(){
     puk.rotation.x, puk.rotation.y += 0.1;
     }
 }
-
-//function checkPlayers(){
-//    if (puk.position.x < -fieldwidth+1.8){
-//        for( var i = p1.children.length - 1; i >= 0; i--) {
-//            obj = p1.children[i];
-//            pukabstand.set(puk.position, obj.position);
-////            console.log(obj + " --- " + pukabstand.distance);
-//        if(pukabstand.distance <= 0.5){
-//        puk.rotation.z = -(puk.rotation.z);  
-//        }
-//    }
-//    }
-//    if (puk.position.x > fieldwidth-1.8){
-//        for ( var i = p2.children.length -1; i >= 0; i--) {
-//            obj = p2.children[i];
-//            pukabstand.set(puk.position, obj.position);
-//            console.log(pukabstand.distance());
-//            if(pukabstand.distance <= 0.5){
-//                puk.rotation.z = -puk.rotation.z; 
-//            }
-//        }
-//    }
-//        
-////    if(pukabstand.distance <= 0.5){
-////        puk.rotation.z = -puk.rotation.z;  
-////    }
-//}
 
 //kontakt mit Spielern prüfen
 function checkPlayers(){
@@ -174,6 +130,7 @@ function checkBorder(){
         puk.rotation.z = -(puk.rotation.z+3.1415);
         puk.rotation.z %= 6.283;
     }
+    //Aus Links
     if (puk.position.x < -fieldwidth){
         belongs = true;
         puk.position.set(0,0,0);
@@ -181,8 +138,11 @@ function checkBorder(){
         pukspeed = 0.1;
         pukgo = false;
         sc2 += 1;
+        if(sc2 === 5){
+            // wechsel zum nächsten Spiel
+        }
     }
-                  
+    //Aus Rechts
     if(puk.position.x > fieldwidth) {
         belongs = false;
         puk.position.set(0,0,0);
@@ -190,10 +150,12 @@ function checkBorder(){
         pukspeed = 0.1;
         pukgo = false;
         sc1 += 1;
+        if(sc1 === 5){
+            // wechsel zum nächsten Spiel
+        }
     }
     
-
-    
+    //Verhindert, dass Spieler das Feld verlassen
     if (p1.position.y < -(fieldheight+0.5))
         p1.position.y += 0.11;
     if (p1.position.y > fieldheight+0.5)
