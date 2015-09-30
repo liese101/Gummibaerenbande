@@ -48,8 +48,8 @@
     text1.style.position = 'absolute';
     text1.style.width = window.innerWidth;
     text1.style.height = 20;
-    text1.style.backgroundColor = "red";
-    text1.style.color = "white";
+    text1.style.backgroundColor = "yellow";
+    text1.style.color = "black";
     text1.innerHTML = "distanceToPoint: ?";
     text1.style.top = 65 + 'px';
     document.body.appendChild(text1);
@@ -58,8 +58,8 @@
     text2.style.position = 'absolute';
     text2.style.width = window.innerWidth;
     text2.style.height = 20;
-    text2.style.backgroundColor = "blue";
-    text2.style.color = "white";
+    text2.style.backgroundColor = "yellow";
+    text2.style.color = "black";
     text2.innerHTML = "Score: 0";
     text2.style.top = 85 + 'px';
     document.body.appendChild(text2);
