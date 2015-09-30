@@ -115,6 +115,7 @@ var move = function(){
         ball.position.y = 0;
         ball.scale.set( 1, 1, 1);
         camera.position.set( 0, 0, 3);
+        camera2.position.set( 0, 20, 3);
     }
 };
 
