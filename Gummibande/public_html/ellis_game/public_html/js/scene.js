@@ -6,8 +6,8 @@
     var THREE;
 
     var scene = new THREE.Scene(); // Scene erstellt
-//    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
-    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
+//    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( width, height );
@@ -34,16 +34,45 @@
     var cylinder = new THREE.Mesh( geometry3, material3 );
     cylinder.position.set(0, hoehe/2, 0);
     
-    function aesteErstellen(){
+    function aesteErstellen(){                 
         for(i = 0; i < anzahlAeste; i++) {
+            var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
+            var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
+            var ast = new THREE.Mesh( geometry4, material4 );
+            var a = Math.random()*Math.PI*2;
+            var x = Math.cos(a) * ((dm+laenge)/2);   
+            var z = Math.sin(a) * ((dm+laenge)/2);   
+            var y = Math.random()* (hoehe/anzahlAeste) + i * (hoehe/anzahlAeste);
+            y = (y % (hoehe-3)) + 1.5;
+            //stellt sicher, dass die Äste gleichmäßig verteilt werden.
+            ast.rotateZ(Math.PI / 2);
+            ast.rotateX(a);
+            ast.position.set(x, y, -z);
+            scene.add(ast);
+            
+            //Koordinaten des Asts speichern im Array "aeste
+            var koordinaten = new Object();
+            koordinaten.x = x;
+            koordinaten.y = y;
+            koordinaten.z = z;
+            koordinaten.i = i;
+            //kollisionErstellen(koordinaten);
+            
+            astposition[i] = new THREE.Vector3(x, y, z);
+            astabstand[i] = new THREE.Line3();
+        }
+    }
+    
+    function aesteErstellen2(){             //NICHT VERWENDET!
+        for(i = 0; i < (hoehe - 3); i++) {
             var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
             var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
             var ast = new THREE.Mesh( geometry4, material4 );
             var a = Math.random()*Math.PI*2;
             var x = Math.cos(a)* (dm+laenge)/2;   
             var z = Math.sin(a)* (dm+laenge)/2;   
-            var y = Math.random()* (hoehe/anzahlAeste) + i * (hoehe/anzahlAeste);
-            y = (y % (hoehe-3)) + 1.5;
+            var y = i + 2;
+            //y = (y % (hoehe-3)) + 1.5;
             //stellt sicher, dass die Äste gleichmäßig verteilt werden.
             ast.rotateZ(Math.PI / 2);
             ast.rotateX(a);
@@ -61,6 +90,8 @@
             astposition[i] = new THREE.Vector3(x, y, z);
             astabstand[i] = new THREE.Line3();
         }
+        
+        anzahlAeste = hoehe - 3;
     }
             
             
@@ -93,8 +124,8 @@
     
     var text2 = document.createElement('div');
     text2.style.position = 'absolute';
-    text2.style.width = 60;
-    text2.style.height = 20;
+    text2.style.width = 600;
+    text2.style.height = 50;
     text2.style.backgroundColor = "grey";
     text2.innerHTML = "Score: 0";
     text2.style.top = 0 + 'px';

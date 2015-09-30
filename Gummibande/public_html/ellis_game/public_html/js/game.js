@@ -56,13 +56,23 @@ var collect = function(){
 };
 
 var collect2 = function(){
-    for(i = 0; i < anzahlAeste; i++) {
-        if (astabstand[i].distance() < 3){ // hier stimmt was nicht, möglicherweise liegts an der Schleife
+    //for(i = 0; i < anzahlAeste; i++) {
+        i = Math.round(ball.position.y);
+        
+        text2.innerHTML = "X:" + astposition[i].x/3 + " - " + ball.position.x + "<br>Y: "
+                + astposition[i].y + " - " + ball.position.y + "<br>Z: " + astposition[i].z/3 + " - " + ball.position.z;
+        
+        if(i > hoehe-1 || i < 2) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
+            keinAst();
+            
+        } else if (astabstand[i+2].distance() < 3){ 
             astGefunden();
+            
         } else {
             keinAst();
+            
         }
-    }
+    //}
 };
 
 var astGefunden = function() {
@@ -87,14 +97,22 @@ var positionSet = function(){
     
 };
 
-//Funktioniert nicht D:
+
 var positionSet2 = function(){
     
     ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
-    for(i = 0; i < anzahlAeste; i++) {      // hier stimmt was nicht, möglicherweise liegts an der Schleife
+    for(i = 0; i < anzahlAeste; i++) {
         astabstand[i].set(ballposition, astposition[i]);
     } 
 };
+
+//
+//Ausgabe der Positionen
+//
+var wo = function() {
+    text2.innerHTML = "X:" + ball.position.x + "<br>Y: " + ball.position.y + "<br>Z: " + ball.position.z;
+};
+
 
 //
 //Bewegung in rotierte Richtung und Rotation
@@ -116,9 +134,9 @@ var move = function(){
         if (moved) {
             if(ball.position.y >= 0) {
                 ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-            ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
-            camera.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-            camera.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+                ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+                camera.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
+                camera.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
             }
             
         }
@@ -137,16 +155,23 @@ var move = function(){
 //Rotation
     if (rolll === true) {
         ball.rotation.y -= rspeed;
-        ball.rotation.y %= 6.28;
-        //Kamera mitdrehen
+        ball.rotation.y %= Math.PI*2;
+                                                            //Kamera mitdrehen
+        ball.position.x = Math.cos(ball.rotation.y)* (dm+0.9)/2;   
+        ball.position.z = Math.sin(ball.rotation.y)* (dm+0.9)/2;
+            //y = (y % (hoehe-3)) + 1.5;
+            //stellt sicher, dass die Äste gleichmäßig verteilt werden.
+           
     }
 
     if (rollr === true) {
         ball.rotation.y += rspeed;
-        ball.rotation.y %= 6.28;
+        ball.rotation.y %= Math.PI*2;
+        ball.position.x = Math.cos(ball.rotation.y)* (dm+0.9)/2;   
+        ball.position.z = -Math.sin(ball.rotation.y)* (dm+0.9)/2;
         //Kamera mitdrehen
     }
-
+   
 //Reset
     if (reset) {
         ball.rotation.z = 0;
@@ -177,6 +202,8 @@ var render = function () {
     
     positionSet2();
     collect2();
+    
+    //wo();
     
     
     renderer.render(scene, camera);
