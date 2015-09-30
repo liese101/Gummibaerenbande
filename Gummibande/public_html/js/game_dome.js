@@ -6,14 +6,28 @@
 
 var fieldwidth, fieldheight, THREE, scene, pukposition, pukabstand, pp1, pp2, obj, belongs, pukgo;
 
-var pukgeometry = new THREE.SphereGeometry(0.24);
-var pukmaterial = new THREE.MeshBasicMaterial({color: 0x0000ff});
+var pukgeometry = new THREE.SphereGeometry(0.5, 8, 8);
+//var pukmaterial = new THREE.MeshBasicMaterial({color: 0x0000ff});
+var spritemap = THREE.ImageUtils.loadTexture("files/ball.jpg");
+var pukmaterial = new THREE.MeshBasicMaterial({map: spritemap});
+
+
 var p1geo = new THREE.BoxGeometry(0.35, 2,0.1);
-var p1mat = new THREE.MeshBasicMaterial({color: 0x00ff00});
+//var p1mat = new THREE.MeshBasicMaterial({color: 0x00ff00});
+var player1map = new THREE.ImageUtils.loadTexture("files/player1.png");
+var p1mat = new THREE.MeshBasicMaterial ({map:player1map});
 var p2geo = new THREE.BoxGeometry(0.35, 2,0.1);
-var p2mat = new THREE.MeshBasicMaterial({color: 0xff0000});
+//var p2mat = new THREE.MeshBasicMaterial({color: 0xff0000});
+var player2map = new THREE.ImageUtils.loadTexture("files/player2.png");
+var p2mat = new THREE.MeshBasicMaterial ({map:player2map});
 var ppgeo = new THREE.SphereGeometry(0.20);
 var ppmat = new THREE.MeshBasicMaterial({color: 0x00ffff});
+
+var beargeo = new THREE.BoxGeometry(0.5);
+var bearmap = new THREE.ImageUtils.loadTexture("files/bear.png");
+var bearmat = new THREE.MeshBasicMaterial({map:bearmap});
+var bear1 = new THREE.Mesh(beargeo, bearmat);
+var bear2 = new THREE.Mesh(beargeo, bearmat);
 
 var puk = new THREE.Mesh(pukgeometry, pukmaterial);
 puk.rotation.z = Math.random()*1.5+1;
@@ -32,9 +46,12 @@ scene.add(puk);
 //    p1.add(pp1);
 //    p2.add(pp2);
 //}
-
+bear1.position.set(-1, 0, 0);
+p1.add(bear1);
 p1.position.set(-fieldwidth+1, 0, 0);
 scene.add(p1);
+bear2.position.set(+1, 0, 0);
+p2.add(bear2);
 p2.position.set(fieldwidth-1, 0, 0);
 scene.add(p2);
 }
@@ -76,6 +93,7 @@ function movePuk(){
     if(pukgo){
     puk.position.x += Math.sin(-(puk.rotation.z)) * pukspeed;
     puk.position.y += Math.cos(-(puk.rotation.z)) * pukspeed;
+    puk.rotation.x, puk.rotation.y += 0.01;
     }
 }
 
