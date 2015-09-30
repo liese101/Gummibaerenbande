@@ -36,10 +36,9 @@
             var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
             var ast = new THREE.Mesh( geometry4, material4 );
             var a = Math.random()*Math.PI*2;
-            var x = Math.cos(a) * ((dm+laenge)/2);   
-            var z = Math.sin(a) * ((dm+laenge)/2);   
+            var x = Math.cos(a) * ((dm+laenge)/2);          //unbedingt prüfen, ob cos und sin
+            var z = Math.sin(a) * ((dm+laenge)/2);          //überhaupt stimmen
             var y = i + 2;
-            //stellt sicher, dass die Äste gleichmäßig verteilt werden.
             ast.rotateZ(Math.PI / 2);
             ast.rotateX(a);
             ast.position.set(x, y, -z);
@@ -47,13 +46,13 @@
             
             //Koordinaten des Asts speichern im Array "aeste
             var koordinaten = new Object();
-            koordinaten.x = x;
+            koordinaten.x = Math.cos(a);
             koordinaten.y = y;
-            koordinaten.z = z;
+            koordinaten.z = Math.sin(a);
             koordinaten.i = i;
             //kollisionErstellen(koordinaten);
             
-            astposition[i] = new THREE.Vector3(x, y, z);
+            astposition[i] = new THREE.Vector3(x, y, -z);
             astabstand[i] = new THREE.Line3();
         }
         anzahlAeste = hoehe - 3;
