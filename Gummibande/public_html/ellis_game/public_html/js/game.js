@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 var THREE;
-var renderer, camera, scene, camera2;
+var renderer, camera, scene;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, reset;
@@ -137,7 +137,7 @@ var render = function () {
         
     collect();
 
-    renderer.render(scene, camera, camera2);
+    renderer.render(scene, camera);
     
     
 ///////////
