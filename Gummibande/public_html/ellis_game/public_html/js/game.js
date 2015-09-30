@@ -37,15 +37,11 @@ var setGlob = function() {
 
 //
 //  Hier sollen die Kollisionserkennungen für die Äste entstehen...
+//  Funktion wird vorerst nicht mehr verwendet.
 //
 var kollisionErstellen = function(koordinaten) {
-    // koordinaten.x, koordinaten.y, koordinaten.z, koordinaten.i (i ist index)
     astposition[koordinaten.i] = new THREE.Vector3(koordinaten.x, koordinaten.y, koordinaten.z);
-    astabstand[koordinaten.i] = new THREE.Line3(ballposition, astposition[koordinaten.i]);
-    
-    //ast[koordinaten.i].x = koordinaten.x;
-    //ast[koordinaten.i].y = koordinaten.y;
-    //ast[koordinaten.i].z = koordinaten.z;
+    astabstand[koordinaten.i] = new THREE.Line3();
     
 };
 
@@ -61,7 +57,7 @@ var collect = function(){
 
 var collect2 = function(){
     for(i = 0; i < anzahlAeste; i++) {
-        if (astabstand[i].distance() < 3){ // hier stimmt was nicht
+        if (astabstand[i].distance() < 3){ // hier stimmt was nicht, möglicherweise liegts an der Schleife
             astGefunden();
         } else {
             keinAst();
@@ -95,7 +91,7 @@ var positionSet = function(){
 var positionSet2 = function(){
     
     ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
-    for(i = 0; i < anzahlAeste; i++) {
+    for(i = 0; i < anzahlAeste; i++) {      // hier stimmt was nicht, möglicherweise liegts an der Schleife
         astabstand[i].set(ballposition, astposition[i]);
     } 
 };

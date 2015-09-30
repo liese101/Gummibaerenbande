@@ -56,8 +56,10 @@
             koordinaten.y = y;
             koordinaten.z = z;
             koordinaten.i = i;
-            // aeste.push(koordinaten);
-            kollisionErstellen(koordinaten);
+            //kollisionErstellen(koordinaten);
+            
+            astposition[i] = new THREE.Vector3(x, y, z);
+            astabstand[i] = new THREE.Line3();
         }
     }
             
