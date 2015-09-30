@@ -4,19 +4,33 @@
  * and open the template in the editor.
  */
 
-var fieldwidth, fieldheight, THREE, scene, pukposition, pukabstand, pp1, pp2, obj, belongs;
+var fieldwidth, fieldheight, THREE, scene, pukposition, pukabstand, pp1, pp2, obj, belongs, pukgo;
 
-var pukgeometry = new THREE.SphereGeometry(0.24);
-var pukmaterial = new THREE.MeshBasicMaterial({color: 0x0000ff});
-var p1geo = new THREE.SphereGeometry(0.35);
-var p1mat = new THREE.MeshBasicMaterial({color: 0x00ff00});
-var p2geo = new THREE.SphereGeometry(0.35);
-var p2mat = new THREE.MeshBasicMaterial({color: 0xff0000});
+var pukgeometry = new THREE.SphereGeometry(0.5, 8, 8);
+//var pukmaterial = new THREE.MeshBasicMaterial({color: 0x0000ff});
+var spritemap = THREE.ImageUtils.loadTexture("files/ball.jpg");
+var pukmaterial = new THREE.MeshBasicMaterial({map: spritemap});
+
+
+var p1geo = new THREE.BoxGeometry(0.35, 2,0.1);
+//var p1mat = new THREE.MeshBasicMaterial({color: 0x00ff00});
+var player1map = new THREE.ImageUtils.loadTexture("files/player1.png");
+var p1mat = new THREE.MeshBasicMaterial ({map:player1map});
+var p2geo = new THREE.BoxGeometry(0.35, 2,0.1);
+//var p2mat = new THREE.MeshBasicMaterial({color: 0xff0000});
+var player2map = new THREE.ImageUtils.loadTexture("files/player2.png");
+var p2mat = new THREE.MeshBasicMaterial ({map:player2map});
 var ppgeo = new THREE.SphereGeometry(0.20);
 var ppmat = new THREE.MeshBasicMaterial({color: 0x00ffff});
 
+var beargeo = new THREE.BoxGeometry(0.5);
+var bearmap = new THREE.ImageUtils.loadTexture("files/bear.png");
+var bearmat = new THREE.MeshBasicMaterial({map:bearmap});
+var bear1 = new THREE.Mesh(beargeo, bearmat);
+var bear2 = new THREE.Mesh(beargeo, bearmat);
+
 var puk = new THREE.Mesh(pukgeometry, pukmaterial);
-puk.rotation.z = Math.random()*2+1.1415;
+puk.rotation.z = Math.random()*1.5+1;
 var p1 = new THREE.Mesh(p1geo, p1mat);
 var p2 = new THREE.Mesh(p2geo, p2mat);
 
@@ -24,17 +38,20 @@ function loadGameFour(){
 gamedome = true;
 scene.add(puk);
 
-for (var i = -1; i <= 1; i += 0.4){
-    var pp1 = new THREE.Mesh(ppgeo, ppmat);
-    var pp2 = new THREE.Mesh(ppgeo, ppmat);
-    pp1.position.y = i;
-    pp2.position.y = i;
-    p1.add(pp1);
-    p2.add(pp2);
-}
-
+//for (var i = -1; i <= 1; i += 0.4){
+//    var pp1 = new THREE.Mesh(ppgeo, ppmat);
+//    var pp2 = new THREE.Mesh(ppgeo, ppmat);
+//    pp1.position.y = i;
+//    pp2.position.y = i;
+//    p1.add(pp1);
+//    p2.add(pp2);
+//}
+bear1.position.set(-1, 0, 0);
+p1.add(bear1);
 p1.position.set(-fieldwidth+1, 0, 0);
 scene.add(p1);
+bear2.position.set(+1, 0, 0);
+p2.add(bear2);
 p2.position.set(fieldwidth-1, 0, 0);
 scene.add(p2);
 }
@@ -73,8 +90,11 @@ function dMove(){
 }
 
 function movePuk(){
+    if(pukgo){
     puk.position.x += Math.sin(-(puk.rotation.z)) * pukspeed;
     puk.position.y += Math.cos(-(puk.rotation.z)) * pukspeed;
+    puk.rotation.x, puk.rotation.y += 0.01;
+    }
 }
 
 //function checkPlayers(){
@@ -104,35 +124,40 @@ function movePuk(){
 ////    }
 //}
 
+//kontakt mit Spielern prüfen
 function checkPlayers(){
     if(belongs){
-        if(puk.position.x < -fieldwidth+1.4 && puk.position.x > -fieldwidth+1.3){
+        if(puk.position.x < -fieldwidth+1.4 && puk.position.x > -fieldwidth+1){
             if(puk.position.y < p1.position.y+1.3 && puk.position.y > p1.position.y){
-                puk.rotation.z = -(puk.rotation.z)+0.3;
+                puk.rotation.z = -(puk.rotation.z)+0.2;
                 belongs = false;
+                pukspeed *= 1.05;
             }
             if(puk.position.y > p1.position.y-1.3 && puk.position.y < p1.position.y){
-                puk.rotation.z = -(puk.rotation.z-0.3);
+                puk.rotation.z = -(puk.rotation.z)-0.2;
                 belongs = false;
+                pukspeed *= 1.05;
             }
         }
     }
     else{
-        if(puk.position.x < fieldwidth-1.3 && puk.position.x > fieldwidth-1.4){
+        if(puk.position.x < fieldwidth-1 && puk.position.x > fieldwidth-1.4){
             if(puk.position.y < p2.position.y+1.3 && puk.position.y > p2.position.y){
-                puk.rotation.z = -(puk.rotation.z)-0.3;
+                puk.rotation.z = -(puk.rotation.z)-0.2;
                 belongs = true;
+                pukspeed *= 1.05;
             }
             if(puk.position.y > p2.position.y-1.3 && puk.position.y < p2.position.y){
-                puk.rotation.z = -(puk.rotation.z)+0.3;
+                puk.rotation.z = -(puk.rotation.z)+0.2;
                 belongs = true;
+                pukspeed *= 1.05;
             }
         }
     }
     
 }
 
-
+//kontakt mit Rand / Aus prüfen
 function checkBorder(){
     if (puk.position.y < -fieldheight || puk.position.y > fieldheight){
         puk.rotation.z = -(puk.rotation.z+3.1415);
@@ -141,24 +166,28 @@ function checkBorder(){
     if (puk.position.x < -fieldwidth){
         belongs = true;
         puk.position.set(0,0,0);
-        puk.rotation.z = Math.random()*2+1.14;
+        puk.rotation.z = Math.random()*1.5+1;
+        pukspeed = 0.1;
+        pukgo = false;
     }
                   
     if(puk.position.x > fieldwidth) {
-//        puk.rotation.z = -(puk.rotation.z);
-//        puk.rotation.z %= 6.283;
         belongs = false;
         puk.position.set(0,0,0);
-        puk.rotation.z = Math.random()*-2-1.14;
+        puk.rotation.z = Math.random()*-1.5-1;
+        pukspeed = 0.1;
+        pukgo = false;
     }
     
-    if (p1.position.y < -fieldheight)
+
+    
+    if (p1.position.y < -(fieldheight+0.5))
         p1.position.y += 0.11;
-    if (p1.position.y > fieldheight)
+    if (p1.position.y > fieldheight+0.5)
         p1.position.y -= 0.11;
-    if (p2.position.y < -fieldheight)
+    if (p2.position.y < -(fieldheight+0.5))
         p2.position.y += 0.11;
-    if (p2.position.y > fieldheight)
+    if (p2.position.y > fieldheight+0.5)
         p2.position.y -= 0.11;
     
 }

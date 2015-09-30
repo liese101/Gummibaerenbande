@@ -14,11 +14,8 @@ var score;
 var text2, text1, text3;
 var currentscale;
 var follow = true;
-
-//  unbedingt nochmal nachschauen, wie Array in ja funktionieren!!!
-//  irgendwas mach ich echt falsch!
-var astposition = new Array();
-var astabstand = new Array();
+var ast = new Array(anzahlAeste);
+var astposition = new Array(anzahlAeste);
 
 //
 //Glob neu positionieren
@@ -36,7 +33,16 @@ var setGlob = function() {
     text2.innerHTML = "Score: " + score;
     text1.innerHTML = "distanceToPoint: " + abstand.distance();
     score += 1;
-    
+};
+
+//
+//  Hier sollen die Kollisionserkennungen für die Äste entstehen...
+//
+var kollisionErstellen = function(koordinaten) {
+    // koordinaten.x, koordinaten.y, koordinaten.z, koordinaten.i (i ist index)
+    ast[koordinaten.i].x = koordinaten.x;
+    ast[koordinaten.i].y = koordinaten.y;
+    ast[koordinaten.i].z = koordinaten.z;
     
 };
 
@@ -50,19 +56,7 @@ var collect = function(){
 };
 
 //
-//Kollision mit Ästen prüfen
-//
-//var kollision = function(){
-//    for(i = 0;i < anzahlAeste;i++){
-//       if (astabstand[i].distance() < (ballsize+0.25)){   //0.25 weil Ast 0.5 breit ist
-//        // tu was!
-//         }
-//    }
-//};
-
-//
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
-//      muss wahrscheinlich noch überarbeitet werden!!!
 //
 var positionSet = function(){
     
@@ -70,10 +64,15 @@ var positionSet = function(){
     globposition.set(glob.position.x, glob.position.y, 0);
     abstand.set(ballposition, globposition);
     
-//    for(i = 0;i < anzahlAeste;i++){
-//        astposition[i].set(aeste[i].koordinaten.x, aeste[i].koordinaten.y, aeste[i].koordinaten.z);
-//       astabstand[i].set(ballposition, astposition[i]);
-//    }
+};
+
+var positionSet2 = function(){
+    
+    ballposition.set(ball.position.x, ball.position.y, 0); 
+    for(i = 0; i < anzahlAeste; i++) {
+        astposition[i].set(ast[i].x, ast[i].y, ast[i].z);
+        abstand.set(ballposition, astposition[i]);
+    } 
 };
 
 //
@@ -117,11 +116,15 @@ var move = function(){
 //Rotation
     if (rolll === true) {
         ball.rotation.y -= rspeed;
-        ball.rotation.y %= 6.28;}
+        ball.rotation.y %= 6.28;
+        //Kamera mitdrehen
+    }
 
     if (rollr === true) {
         ball.rotation.y += rspeed;
-        ball.rotation.y %= 6.28;}
+        ball.rotation.y %= 6.28;
+        //Kamera mitdrehen
+    }
 
 //Reset
     if (reset) {
@@ -147,11 +150,10 @@ var render = function () {
     
     move();
     
-    positionSet();    
+    positionSet();  
+    //positionSet2();
         
     collect();
-    
-    //kollision();
 
     renderer.render(scene, camera);
     

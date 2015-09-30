@@ -15,11 +15,13 @@ var score = 0;
 
 var mspeed = 0.1;
 var rspeed = 0.1;
-var movel, mover, moveu, moved, rollr, rolll, reset, auf, ab, links, rechts = false;
+var movel, mover, moveu, moved, rollr, rolll, reset, auf, ab, links, rechts, pukgo = false;
 
 var ballsize = 0.1;
 var globsize = 0.075;
 var currentscale = 1;
+
+var score1, score2 = 0;
 
 
 //game_moni

@@ -6,20 +6,21 @@ and open the template in the editor.
 -->
 <html>
     <head>
-<<<<<<< HEAD
+
         <title>Menü</title>
-=======
-        <title>Hauptmenü</title>
->>>>>>> origin/master
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
+
          <script type="text/javascript" src="js/Menue.js"></script>
-=======
+          <script src="js/constants.js"></script>
+                <script src ="js/controls.js"></script>
+                <script src="js/game.js"></script>
+                <script src="js/scene.js"></script>
+
         <link href="files/menue_buttons.css" rel="stylesheet">
          <link href="files/animiert_favicon.ico" rel="icon" type="image/x-icon" />
          <script type="text/javascript" src="Menue.js"></script>
->>>>>>> origin/master
+         <script type="text/javascript" src="game_dome.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
                 <link href="files/animiert_favicon.ico" rel="icon" type="image/x-icon" />
                 <style>
@@ -30,16 +31,19 @@ and open the template in the editor.
                                  width: 600px; 
                                  height: 400px; 
                                  background-color: red;}
+                        .buttons { float: left;
+                                   margin: 70px; 
+                                   font-size: 12px;
+                                   
+                        }
+                        
 		</style>
     </head>
     <body>
         
         <h1>Bärenolympiade</h1>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.js"></script>
-        <script src="js/Menue.js"></script>
-<<<<<<< HEAD
-<<<<<<< HEAD
         <div id = "scene">
+<<<<<<< HEAD
                             <form name = "spiele" action="select.html"> 
                                 <select name="Spielauswahl" size="1"> 
                                     <option>PONG</option> 
@@ -58,12 +62,14 @@ and open the template in the editor.
         <p>Bärenolympiade</p>
         
         <div class="buttons">
+=======
+          <div class="buttons">
+>>>>>>> origin/master
 
-        <a class="button green criss-cross" href="#">Green Button</a><br>
+        <button class="button red criss-cross" onclick = "loadGameFour()" >PONG</button>
+        <button class="button red criss-cross">Eiersuche</button>
+        <button class="button red criss-cross">Klettern</button>
         
-        <a class="button" href="#">Green Button</a><br>
-        <a class="button green" href="#">Green Button</a><br>
-        <a class="button green criss-cross" href="#">Green Button</a><br>
         
         <div class="box border1"></div>
         <div class="box border2"></div>
@@ -72,7 +78,15 @@ and open the template in the editor.
         <div class="box shadow3"></div>
         <div class="box shadow4"></div>
         
-    </div>
->>>>>>> origin/master
+    </div>                
+        </div>
+        <div id ="spiele">Hier entsteht die Spieleanleitung</div>
+
+        <script>
+                        			render();
+		</script>
+
+        
+       
     </body>
 </html>

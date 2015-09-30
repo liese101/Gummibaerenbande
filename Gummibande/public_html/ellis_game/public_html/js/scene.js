@@ -55,7 +55,9 @@
             koordinaten.x = x;
             koordinaten.y = y;
             koordinaten.z = z;
-            aeste.push(koordinaten);
+            koordinaten.i = i;
+            // aeste.push(koordinaten);
+            kollisionErstellen(koordinaten);
         }
     }
             
@@ -74,9 +76,9 @@
 
     camera.position.z = 10;
     camera.lookAt(ballposition);            //zentriert auf den Player
-    camera.rotation.x = Math.PI/12;       //fixe Rotation
+//    camera.rotation.x = Math.PI/12;       //fixe Rotation
 //    camera.rotation.y =
-    
+
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
     text1.style.width = 500;
