@@ -40,6 +40,7 @@ var setGlob = function() {
 //
 var kollisionErstellen = function(koordinaten) {
     // koordinaten.x, koordinaten.y, koordinaten.z, koordinaten.i (i ist index)
+    ast[koordinaten.i] = new Object();
     ast[koordinaten.i].x = koordinaten.x;
     ast[koordinaten.i].y = koordinaten.y;
     ast[koordinaten.i].z = koordinaten.z;
@@ -151,7 +152,7 @@ var render = function () {
     move();
     
     positionSet();  
-    //positionSet2();
+    positionSet2();
         
     collect();
 
