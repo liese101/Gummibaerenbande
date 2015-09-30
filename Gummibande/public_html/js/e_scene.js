@@ -6,15 +6,13 @@
     var THREE;
 
     var scene = new THREE.Scene(); // Scene erstellt
-//    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
-    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
+//    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
     
-//    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
-//    loader.load('files/models/bear2.json', addModel);
     
     var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
     spotLight.castShadow = true;
@@ -25,8 +23,6 @@
     var geometry2 = new THREE.SphereGeometry( globsize );
     var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
-    var spritemap = THREE.ImageUtils.loadTexture("files/test_sprite.png");
-    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
     
     //Baum
     var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe, 32 );
@@ -34,43 +30,40 @@
     var cylinder = new THREE.Mesh( geometry3, material3 );
     cylinder.position.set(0, hoehe/2, 0);
     
-    function aesteErstellen(){
-        for(i = 0; i < anzahlAeste; i++) {
+    function aesteErstellen(){                 
+        for(i = 0; i < hoehe-3; i++) {
             var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
             var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
             var ast = new THREE.Mesh( geometry4, material4 );
             var a = Math.random()*Math.PI*2;
-            var x = Math.cos(a)* (dm+laenge)/2;   
-            var z = Math.sin(a)* (dm+laenge)/2;   
-            var y = Math.random()* (hoehe/anzahlAeste) + i * (hoehe/anzahlAeste);
-            y = (y % (hoehe-3)) + 1.5;
-            //stellt sicher, dass die Äste gleichmäßig verteilt werden.
+            var x = Math.cos(a) * ((dm+laenge)/2);          //unbedingt prüfen, ob cos und sin
+            var z = Math.sin(a) * ((dm+laenge)/2);          //überhaupt stimmen
+            var y = i + 2;
             ast.rotateZ(Math.PI / 2);
             ast.rotateX(a);
-            ast.position.set(x, y, z);
+            ast.position.set(x, y, -z);
             scene.add(ast);
             
             //Koordinaten des Asts speichern im Array "aeste
             var koordinaten = new Object();
-            koordinaten.x = x;
+            koordinaten.x = Math.cos(a);
             koordinaten.y = y;
-            koordinaten.z = z;
+            koordinaten.z = Math.sin(a);
             koordinaten.i = i;
-            // aeste.push(koordinaten);
-            kollisionErstellen(koordinaten);
+            //kollisionErstellen(koordinaten);
+            
+            astposition[i] = new THREE.Vector3(x, y, -z);
+            astabstand[i] = new THREE.Line3();
         }
+        anzahlAeste = hoehe - 3;
     }
             
             
     var ball = new THREE.Mesh( geometry1, material1 );
     var glob = new THREE.Mesh( geometry2, material2 );
-    var fire = new THREE.Sprite (spriteMaterial);
-    fire.transparent = true;
-    fire.position.z = 1;
     
     scene.add( ball );
     scene.add( glob );
-    ball.add( fire );
     scene.add(cylinder);
     aesteErstellen();
 
@@ -91,8 +84,8 @@
     
     var text2 = document.createElement('div');
     text2.style.position = 'absolute';
-    text2.style.width = 60;
-    text2.style.height = 20;
+    text2.style.width = 600;
+    text2.style.height = 50;
     text2.style.backgroundColor = "grey";
     text2.innerHTML = "Score: 0";
     text2.style.top = 0 + 'px';
@@ -111,13 +104,6 @@
     
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
-    
-//    function addModel( geometry,  materials ){
-//        var material = new THREE.MeshFaceMaterial( materials );
-//        bear_1 = new THREE.Mesh( geometry, material );
-//        scene.add( bear_1 );
-//        bear_1.position.z = -20;
-//    }
     
     function clearScene() {
         var i;

@@ -23,12 +23,6 @@ var actionStart = function (event) {
         case "K":
             reset = true;
             break;
-        case "C":
-            if(follow)
-                follow = false;
-            else
-                follow = true;
-            break;
         case "1":
             clearScene();
             break;
@@ -53,12 +47,6 @@ var actionStop = function (event) {
             break;
         case "A":
             rolll = false;
-            break;
-        case "Q":
-            movel = false;
-            break;
-        case "E":
-            mover = false;
             break;
         case "K":
             reset = false;

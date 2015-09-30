@@ -8,12 +8,11 @@ var renderer, camera, scene;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, reset;
-var glob, ball, globsize, ballsize;     //glob=ziel, ball=bär
+var glob, ball, globsize, ballsize;     //glob=Honigtopf, ball=Bär
 var ballposition, globposition, abstand;
 var score;
 var text2, text1, text3;
 var currentscale;
-var follow = true;
 var ast = new Array(anzahlAeste);
 var astposition = new Array(anzahlAeste);
 
@@ -36,41 +35,34 @@ var setGlob = function() {
 };
 
 //
-//  Hier sollen die Kollisionserkennungen für die Äste entstehen...
-//
-var kollisionErstellen = function(koordinaten) {
-    // koordinaten.x, koordinaten.y, koordinaten.z, koordinaten.i (i ist index)
-    astposition[koordinaten.i] = new THREE.Vector3(koordinaten.x, koordinaten.y, koordinaten.z);
-    astabstand[koordinaten.i] = new THREE.Line3(ballposition, astposition[koordinaten.i]);
-    
-    //ast[koordinaten.i].x = koordinaten.x;
-    //ast[koordinaten.i].y = koordinaten.y;
-    //ast[koordinaten.i].z = koordinaten.z;
-    
-};
-
-//
 //Abstand Prüfen
 //
 var collect = function(){
     if (abstand.distance() < (ballsize+globsize)){
             setGlob();
-    
     }
 };
 
 var collect2 = function(){
-    for(i = 0; i < anzahlAeste; i++) {
-        if (astabstand[i].distance() < 3){
-            astErwischt();
-        }
+    i = Math.round(ball.position.y);
+    if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
+        keinAst();
+    } else if (astabstand[i-2].distance() < 2.2){ 
+        astGefunden();   
+    } else {
+        keinAst();
     }
 };
 
-var astErwischt = function() {
-    ast += 1;
-    text3.innerHTML = "Äste erwischt: " + ast;
-    score += 1;
+var astGefunden = function() {
+    text3.innerHTML = "Ast";
+    //var x = astposition[i].x;
+    //var y = astposition[i].y;
+    //var z = astposition[i].z;
+};
+
+var keinAst = function() {
+    text3.innerHTML = "kein Ast";
 };
 
 //
@@ -84,7 +76,6 @@ var positionSet = function(){
     
 };
 
-//Funktioniert nicht D:
 var positionSet2 = function(){
     
     ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
@@ -99,7 +90,7 @@ var positionSet2 = function(){
 var move = function(){
 
 //Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
-    if(follow) {
+    
         if (moveu) {
             if(ball.position.y <= hoehe) {
                 ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
@@ -113,58 +104,48 @@ var move = function(){
         if (moved) {
             if(ball.position.y >= 0) {
                 ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-            ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
-            camera.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-            camera.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+                ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
+                camera.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
+                camera.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
             }
             
         }
-    }
-    else{     
-        if (moveu) {
-            ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
-            ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
-        }
-
-        if (moved) {
-            ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-            ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
-        }
-    }
+    
 //Rotation
     if (rolll === true) {
-        ball.rotation.y -= rspeed;
-        ball.rotation.y %= 6.28;
-        //Kamera mitdrehen
+        ball.rotation.y += rspeed;
+        ball.rotation.y %= Math.PI*2;
+                                                            //Kamera mitdrehen
+        ball.position.x = Math.cos(ball.rotation.y)* dm;
+        ball.position.z = Math.sin(ball.rotation.y)* dm;
+            //y = (y % (hoehe-3)) + 1.5;
+            //stellt sicher, dass die Äste gleichmäßig verteilt werden.
+           
     }
 
     if (rollr === true) {
-        ball.rotation.y += rspeed;
-        ball.rotation.y %= 6.28;
+        ball.rotation.y -= rspeed;
+        ball.rotation.y %= Math.PI*2;
+        ball.position.x = Math.cos(ball.rotation.y)* dm;   
+        ball.position.z = Math.sin(ball.rotation.y)* dm;
         //Kamera mitdrehen
     }
-
+   
 //Reset
     if (reset) {
         ball.rotation.z = 0;
         ball.position.x = 0;
         ball.position.y = 0;
         ball.scale.set( 1, 1, 1);
-        camera.position.set( 0, 0, 3);
+        camera.position.set( 0, 0, 10);
     }
 };
-
-
-
-
 
 //#######//
 //Rendern//
 //#######//
 var render = function () {
     requestAnimationFrame( render );
-    
-    //text1.innerHTML = puk.rotation.z + " ___ " + border.children.length;
     
     move();
     
@@ -173,17 +154,8 @@ var render = function () {
     collect();
     
     positionSet2();
+    
     collect2();
     
-    
     renderer.render(scene, camera);
-    
-    
-///////////
-//    glob.position.x = 5.8;
-//    glob.position.y = -3.9;
-//    ball.position.x = 5;
-//    ball.position.y += 0.1;
-    
-    
 };
