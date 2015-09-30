@@ -5,14 +5,18 @@
  */
 
     var geometry1 = new THREE.SphereGeometry( ballsize );
+    var geometry3 = new THREE.SphereGeometry(ballzize);
     var geometry2 = new THREE.SphereGeometry( globsize );
-    var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
-    var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
+    var material1 = new THREE.MeshBasicMaterial( {color: red});
+    var material2 = new THREE.MeshBasicMaterial( {color: blue});
+    var matreial3 = new THREE.MeshBasicMaterial({color: yellow});
     
     var ball = new THREE.Mesh( geometry1, material1 );
+    var ball2 = new THREE.Mesh( geometry3, material3 );
     var glob = new THREE.Mesh( geometry2, material2 );
      
     scene.add( ball );
+    scene.add( ball2 );
     scene.add( glob );
     
     var THREE;
@@ -34,7 +38,7 @@ var wachsen = function(x) {
             ballsize *= x;
             currentscale *= x;
             ball.scale.set( currentscale, currentscale, currentscale);
-            ball2.scale.set( currentscale, currentscale, currentscale);
+            
 };
 
 var wachsen2 = function(x) {
@@ -255,6 +259,12 @@ var move = function(){
         camera.position.set( 0, 0, 3);
     }
 };
+}
+
+function loadGameTwo(){
+gamemoni = true;
+scene.add(glob);
+}
 
 
 //#######//
@@ -278,5 +288,4 @@ var render = function () {
     collect();
 
 
-}
 }
