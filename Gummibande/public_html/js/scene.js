@@ -60,7 +60,7 @@
     text2.style.height = 20;
     text2.style.backgroundColor = "yellow";
     text2.style.color = "black";
-    text2.innerHTML = "Score: 0";
+    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
     text2.style.top = 85 + 'px';
     document.body.appendChild(text2);
     
@@ -80,4 +80,5 @@
              obj = scene.children[i];
              scene.remove(obj);
         }
+        console.log("Scene cleart");
     }

@@ -42,6 +42,8 @@ var p2 = new THREE.Mesh(p2geo, p2mat);
 var field = new THREE.Mesh(fieldgeo, fieldmat);
 
 function loadGameFour(){
+clearScene();
+gameelli = false
 gamedome = true;
 scene.add(puk);
 scene.add(field);
@@ -178,6 +180,7 @@ function checkBorder(){
         puk.rotation.z = Math.random()*1.5+1;
         pukspeed = 0.1;
         pukgo = false;
+        sc2 += 1;
     }
                   
     if(puk.position.x > fieldwidth) {
@@ -186,6 +189,7 @@ function checkBorder(){
         puk.rotation.z = Math.random()*-1.5-1;
         pukspeed = 0.1;
         pukgo = false;
+        sc1 += 1;
     }
     
 
