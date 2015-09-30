@@ -76,7 +76,7 @@
 
     camera.position.z = 10;
     camera.lookAt(ballposition);            //zentriert auf den Player
-    camera.rotation.x = Math.PI/12;       //fixe Rotation
+//    camera.rotation.x = Math.PI/12;       //fixe Rotation
 //    camera.rotation.y =
 
     var text1 = document.createElement('div');
