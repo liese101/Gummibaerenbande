@@ -152,7 +152,8 @@ var follow = true;
 var render = function () {
     requestAnimationFrame( render );
     
-    text1.innerHTML = "P1: " + moveu + " _ " + moved + " _ " + rolll + " _ " + rollr + " </br>P2: " + auf + " _ " + ab + " _ " + links + " _ " + rechts;
+//    text1.innerHTML = "P1: " + moveu + " _ " + moved + " _ " + rolll + " _ " + rollr + " </br>P2: " + auf + " _ " + ab + " _ " + links + " _ " + rechts;
+    text1.innerHTML = "pukrotation: " + puk.rotation.z;
     
 //    move();
 //    
@@ -166,6 +167,7 @@ var render = function () {
     if (gamedome === true){
     movePuk();
     checkBorder();
+    checkPlayers();
     dMove();
     }
 

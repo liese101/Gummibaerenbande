@@ -20,23 +20,8 @@ var actionStart = function (event) {
         case "A":
             rolll = true;
             break;
-        case "Q":
-            movel = true;
-            break;
-        case "E":
-            mover = true;
-            break;
-        case "I":
-            auf = true;
-            break;
         case "K":
-            ab = true;  
-            break;
-        case "J":
-            links = true;
-            break;
-        case "L":
-            rechts = true;
+            reset = true;
             break;
         case "C":
             if(follow)
@@ -44,18 +29,9 @@ var actionStart = function (event) {
             else
                 follow = true;
             break;
-        case "G":
-            pukgo = true;
-            break;
         case "1":
             clearScene();
-            gamedome = false;
-            gamemoni = false;
-            gameclaudi = false;
-            gameelli = false;
             break;
-        case "4":
-            loadGameFour();
         default:
             break; 
 
@@ -84,17 +60,8 @@ var actionStop = function (event) {
         case "E":
             mover = false;
             break;
-        case "I":
-            auf = false;
-            break;
         case "K":
-            ab = false;  
-            break;
-        case "J":
-            links = false;
-            break;
-        case "L":
-            rechts = false;
+            reset = false;
             break;
         default:
             break; 

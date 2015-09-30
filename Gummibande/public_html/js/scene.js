@@ -6,11 +6,11 @@
     var THREE;
 
     var scene = new THREE.Scene(); // Scene erstellt
-//    var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
-    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
+//    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
-    renderer.setSize( width, height );
+    renderer.setSize( window.innerWidth, window.innerHeight*0.9 );
     document.body.appendChild( renderer.domElement );
     
 //    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
@@ -39,29 +39,29 @@
 //    scene.add( glob );
 //   ball.add( fire );
 
-    camera.position.z = 3;
+    camera.position.z = 6;
     camera.lookAt(ballposition);            //zentriert auf den Player
 //    camera.rotation.x = Math.PI/12;       //fixe Rotation
 //    camera.rotation.y =
     
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
-    text1.style.width = 500;
+    text1.style.width = window.innerWidth;
     text1.style.height = 20;
-    text1.style.backgroundColor = "grey";
+    text1.style.backgroundColor = "red";
+    text1.style.color = "white";
     text1.innerHTML = "distanceToPoint: ?";
-    text1.style.top = 60 + 'px';
-    text1.style.left = 20 + 'px';
+    text1.style.top = 10 + 'px';
     document.body.appendChild(text1);
     
     var text2 = document.createElement('div');
     text2.style.position = 'absolute';
-    text2.style.width = 60;
+    text2.style.width = window.innerWidth;
     text2.style.height = 20;
-    text2.style.backgroundColor = "grey";
+    text2.style.backgroundColor = "blue";
+    text2.style.color = "white";
     text2.innerHTML = "Score: 0";
-    text2.style.top = 80 + 'px';
-    text2.style.left = (width/2 + 50) + 'px';
+    text2.style.top = 30 + 'px';
     document.body.appendChild(text2);
     
     document.addEventListener("keydown", actionStart, false);
