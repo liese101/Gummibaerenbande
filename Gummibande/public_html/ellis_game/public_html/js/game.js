@@ -14,6 +14,8 @@ var score;
 var text2, text1, text3;
 var currentscale;
 var follow = true;
+var ast = new Array(anzahlAeste);
+var astposition = new Array(anzahlAeste);
 
 //
 //Glob neu positionieren
@@ -36,9 +38,12 @@ var setGlob = function() {
 //
 //  Hier sollen die Kollisionserkennungen für die Äste entstehen...
 //
-
 var kollisionErstellen = function(koordinaten) {
     // koordinaten.x, koordinaten.y, koordinaten.z, koordinaten.i (i ist index)
+    ast[koordinaten.i].x = koordinaten.x;
+    ast[koordinaten.i].y = koordinaten.y;
+    ast[koordinaten.i].z = koordinaten.z;
+    
 };
 
 //
@@ -59,6 +64,15 @@ var positionSet = function(){
     globposition.set(glob.position.x, glob.position.y, 0);
     abstand.set(ballposition, globposition);
     
+};
+
+var positionSet2 = function(){
+    
+    ballposition.set(ball.position.x, ball.position.y, 0); 
+    for(i = 0; i < anzahlAeste; i++) {
+        astposition[i].set(ast[i].x, ast[i].y, ast[i].z);
+        abstand.set(ballposition, astposition[i]);
+    } 
 };
 
 //
@@ -102,11 +116,15 @@ var move = function(){
 //Rotation
     if (rolll === true) {
         ball.rotation.y -= rspeed;
-        ball.rotation.y %= 6.28;}
+        ball.rotation.y %= 6.28;
+        //Kamera mitdrehen
+    }
 
     if (rollr === true) {
         ball.rotation.y += rspeed;
-        ball.rotation.y %= 6.28;}
+        ball.rotation.y %= 6.28;
+        //Kamera mitdrehen
+    }
 
 //Reset
     if (reset) {
@@ -115,7 +133,6 @@ var move = function(){
         ball.position.y = 0;
         ball.scale.set( 1, 1, 1);
         camera.position.set( 0, 0, 3);
-        camera2.position.set( 0, 20, 3);
     }
 };
 
@@ -133,7 +150,8 @@ var render = function () {
     
     move();
     
-    positionSet();    
+    positionSet();  
+    //positionSet2();
         
     collect();
 

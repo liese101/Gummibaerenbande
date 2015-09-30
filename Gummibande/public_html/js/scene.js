@@ -6,8 +6,8 @@
     var THREE;
 
     var scene = new THREE.Scene(); // Scene erstellt
-    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
-//    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+//    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
+    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( window.innerWidth, window.innerHeight*0.9 );
