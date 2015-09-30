@@ -21,6 +21,8 @@ var ballsize = 0.1;
 var globsize = 0.075;
 var currentscale = 1;
 
+var score1, score2 = 0;
+
 
 //game_moni
 var gamemoni = false;

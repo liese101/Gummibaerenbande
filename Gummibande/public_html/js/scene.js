@@ -10,7 +10,7 @@
 //    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setSize( window.innerWidth, window.innerHeight*0.9 );
     document.body.appendChild( renderer.domElement );
     
 //    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
