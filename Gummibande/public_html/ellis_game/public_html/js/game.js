@@ -8,12 +8,11 @@ var renderer, camera, scene;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, reset;
-var glob, ball, globsize, ballsize;     //glob=ziel, ball=bär
+var glob, ball, globsize, ballsize;     //glob=Honigtopf, ball=Bär
 var ballposition, globposition, abstand;
 var score;
 var text2, text1, text3;
 var currentscale;
-var follow = true;
 var ast = new Array(anzahlAeste);
 var astposition = new Array(anzahlAeste);
 
@@ -36,16 +35,6 @@ var setGlob = function() {
 };
 
 //
-//  Hier sollen die Kollisionserkennungen für die Äste entstehen...
-//  Funktion wird vorerst nicht mehr verwendet.
-//
-var kollisionErstellen = function(koordinaten) {
-    astposition[koordinaten.i] = new THREE.Vector3(koordinaten.x, koordinaten.y, koordinaten.z);
-    astabstand[koordinaten.i] = new THREE.Line3();
-    
-};
-
-//
 //Abstand Prüfen
 //
 var collect = function(){
@@ -65,7 +54,7 @@ var collect2 = function(){
             astGefunden();   
         } else {
             keinAst();
-            text2.innerHTML = astabstand[i-2].distance();
+            //text1.innerHTML = "Abstand zum Ast: " + abstand[i-2].distance();
             //text2.innerHTML = "X:" + astposition[i-2].x/((dm+laenge)/2) + " - " + ball.position.x
             //        + "<br>Z: " + astposition[i-2].z/((dm+laenge)/2) + " - " + ball.position.z;   
         }
@@ -103,12 +92,6 @@ var positionSet2 = function(){
     } 
 };
 
-//
-//Ausgabe der Positionen
-//
-var wo = function() {
-    text2.innerHTML = "X:" + ball.position.x + "<br>Y: " + ball.position.y + "<br>Z: " + ball.position.z;
-};
 
 
 //
@@ -117,7 +100,7 @@ var wo = function() {
 var move = function(){
 
 //Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
-    if(follow) {
+    
         if (moveu) {
             if(ball.position.y <= hoehe) {
                 ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
@@ -137,18 +120,7 @@ var move = function(){
             }
             
         }
-    }
-    else{     
-        if (moveu) {
-            ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
-            ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
-        }
-
-        if (moved) {
-            ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-            ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
-        }
-    }
+    
 //Rotation
     if (rolll === true) {
         ball.rotation.y += rspeed;
@@ -175,7 +147,7 @@ var move = function(){
         ball.position.x = 0;
         ball.position.y = 0;
         ball.scale.set( 1, 1, 1);
-        camera.position.set( 0, 0, 3);
+        camera.position.set( 0, 0, 10);
     }
 };
 
@@ -198,9 +170,8 @@ var render = function () {
     collect();
     
     positionSet2();
-    collect2();
     
-    //wo();
+    collect2();
     
     
     renderer.render(scene, camera);

@@ -13,8 +13,6 @@
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
     
-//    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
-//    loader.load('files/models/bear2.json', addModel);
     
     var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
     spotLight.castShadow = true;
@@ -25,8 +23,6 @@
     var geometry2 = new THREE.SphereGeometry( globsize );
     var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
-    var spritemap = THREE.ImageUtils.loadTexture("files/test_sprite.png");
-    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
     
     //Baum
     var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe, 32 );
@@ -66,13 +62,9 @@
             
     var ball = new THREE.Mesh( geometry1, material1 );
     var glob = new THREE.Mesh( geometry2, material2 );
-    var fire = new THREE.Sprite (spriteMaterial);
-    fire.transparent = true;
-    fire.position.z = 1;
     
     scene.add( ball );
     scene.add( glob );
-    //ball.add( fire );
     scene.add(cylinder);
     aesteErstellen();
 
@@ -113,13 +105,6 @@
     
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
-    
-//    function addModel( geometry,  materials ){
-//        var material = new THREE.MeshFaceMaterial( materials );
-//        bear_1 = new THREE.Mesh( geometry, material );
-//        scene.add( bear_1 );
-//        bear_1.position.z = -20;
-//    }
     
     function clearScene() {
         var i;
