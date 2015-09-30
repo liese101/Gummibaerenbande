@@ -44,21 +44,14 @@ var collect = function(){
 };
 
 var collect2 = function(){
-    //for(i = 0; i < anzahlAeste; i++) {
-        i = Math.round(ball.position.y);
-        
-        
-        if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
-            keinAst();
-        } else if (astabstand[i-2].distance() < 2.2){ 
-            astGefunden();   
-        } else {
-            keinAst();
-            //text1.innerHTML = "Abstand zum Ast: " + abstand[i-2].distance();
-            //text2.innerHTML = "X:" + astposition[i-2].x/((dm+laenge)/2) + " - " + ball.position.x
-            //        + "<br>Z: " + astposition[i-2].z/((dm+laenge)/2) + " - " + ball.position.z;   
-        }
-    //}
+    i = Math.round(ball.position.y);
+    if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
+        keinAst();
+    } else if (astabstand[i-2].distance() < 2.2){ 
+        astGefunden();   
+    } else {
+        keinAst();
+    }
 };
 
 var astGefunden = function() {
@@ -83,7 +76,6 @@ var positionSet = function(){
     
 };
 
-
 var positionSet2 = function(){
     
     ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
@@ -91,8 +83,6 @@ var positionSet2 = function(){
         astabstand[i].set(ballposition, astposition[i]);
     } 
 };
-
-
 
 //
 //Bewegung in rotierte Richtung und Rotation
@@ -151,17 +141,11 @@ var move = function(){
     }
 };
 
-
-
-
-
 //#######//
 //Rendern//
 //#######//
 var render = function () {
     requestAnimationFrame( render );
-    
-    //text1.innerHTML = puk.rotation.z + " ___ " + border.children.length;
     
     move();
     
@@ -173,15 +157,5 @@ var render = function () {
     
     collect2();
     
-    
     renderer.render(scene, camera);
-    
-    
-///////////
-//    glob.position.x = 5.8;
-//    glob.position.y = -3.9;
-//    ball.position.x = 5;
-//    ball.position.y += 0.1;
-    
-    
 };
