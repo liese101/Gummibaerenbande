@@ -13,15 +13,31 @@ var posx = 100;
 var posy = 100;
 var score = 0;
 
-var pukspeed = 0.1;
 var mspeed = 0.1;
 var rspeed = 0.1;
-var movel, mover, moveu, moved, rollr, rolll, reset = false;
+var movel, mover, moveu, moved, rollr, rolll, reset, auf, ab, links, rechts = false;
 
 var ballsize = 0.1;
 var globsize = 0.075;
 var currentscale = 1;
 
+
+//game_moni
+var gamemoni = false;
+
+//game_claudi
+var gameclaudi = false;
+
+//game_elli
+var gameelli = false;
+
+//game_dome
+var pukspeed = 0.1;
+var fieldwidth = 7;
+var fieldheight = 4;
+var pukposition = new THREE.Vector3(0, 0, 0);
+var pukabstand = new THREE.Line3();
+var gamedome = false;
 
 var ballposition = new THREE.Vector3(0, 0, 0);
 //var globposition = new THREE.Vector3(Math.random()*11 - 5.5, Math.random()*7 - 3.5, 0);
