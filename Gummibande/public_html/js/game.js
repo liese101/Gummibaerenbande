@@ -156,16 +156,16 @@ var render = function () {
     text1.innerHTML = "pukrotation: " + puk.rotation.z;
     text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
     
-//    move();
-//    
-//    repeatBorder();
-//    
-//    positionSet();    
-//        
-//    collect();
+//game_moni
+    if (gamemoni){
+    move();
+    moveTwo();
+    }
+    
+
     
     //game_dome
-    if (gamedome === true){
+    if (gamedome){
     movePuk();
     checkBorder();
     checkPlayers();

@@ -21,19 +21,19 @@
 //    spotLight.position.set (20, 35, 40);
 //    scene.add(spotLight);
 
-    var geometry1 = new THREE.SphereGeometry( ballsize );
-    var geometry2 = new THREE.SphereGeometry( globsize );
-    var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
-    var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
-    var spritemap = THREE.ImageUtils.loadTexture("files/test_sprite.png");
-    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
-    
-    
-    var ball = new THREE.Mesh( geometry1, material1 );
-    var glob = new THREE.Mesh( geometry2, material2 );
-    var fire = new THREE.Sprite (spriteMaterial);
-    fire.transparent = true;
-    fire.position.z = 1;
+//    var geometry1 = new THREE.SphereGeometry( ballsize );
+//    var geometry2 = new THREE.SphereGeometry( globsize );
+//    var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
+//    var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
+//    var spritemap = THREE.ImageUtils.loadTexture("files/test_sprite.png");
+//    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
+//    
+//    
+//    var ball = new THREE.Mesh( geometry1, material1 );
+//    var glob = new THREE.Mesh( geometry2, material2 );
+//    var fire = new THREE.Sprite (spriteMaterial);
+//    fire.transparent = true;
+//    fire.position.z = 1;
     
 //    scene.add( ball );
 //    scene.add( glob );
