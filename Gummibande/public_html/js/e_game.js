@@ -96,7 +96,7 @@ var astGefunden = function() {
         scoreAnzeigen();
     }
     if(rollr) {
-         baer.rotation.y += rspeed;
+        baer.rotation.y += rspeed;
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;
         baer.position.z = Math.sin(baer.rotation.y)* dm;
@@ -149,7 +149,7 @@ var move = function(){
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;
         baer.position.z = Math.sin(baer.rotation.y)* dm;
-        //camera.rotation.y = -(baer.rotation.y);
+        //baer.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
     }
 
     if (rollr) {
@@ -157,7 +157,7 @@ var move = function(){
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
         baer.position.z = Math.sin(baer.rotation.y)* dm;
-        //camera.rotation.y = -(baer.rotation.y);
+        //baer.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
     }
    
 //Reset
