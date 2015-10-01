@@ -5,6 +5,8 @@
  */
     var THREE;
     var ballposition;
+    var abstand1;
+    var abstand2; 
 
     var scene = new THREE.Scene(); // Scene erstellt
 //    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
@@ -41,7 +43,7 @@
 //   ball.add( fire );
 
     camera.position.z = 6;
-    camera.lookAt(ballposition);
+    //camera.lookAt(0, 0, 0);
 //    camera.lookAt(ballposition2);//zentriert auf den Player
 //    camera.rotation.x = Math.PI/12;       //fixe Rotation
 //    camera.rotation.y =

@@ -7,7 +7,7 @@ var THREE;
 var renderer, camera, scene;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
-var rollr, rolll, moveu, moved, mover, movel, reset;
+var rollr, rolll, moveu, moved, mover, movel, auf, ab, links, rechts, reset;
 var globsize, ballsize;
 var ball1position, ball2position, globposition, abstand1, abstand2;
 var score;
@@ -180,6 +180,7 @@ var move = function(){
 };
 
 function loadGameTwo(){
+    clearScene();
     gamedome = false;
     gamemoni = true;
     scene.add(glob);
