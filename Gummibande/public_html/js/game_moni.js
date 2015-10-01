@@ -25,12 +25,17 @@ var follow = true;
     var material2 = new THREE.MeshBasicMaterial( {color: 0x0000ff});
     var material3 = new THREE.MeshBasicMaterial({color: 0x00ff00});
     var material4 = new THREE.MeshBasicMaterial({color: 0x00ffff});
+    
+    var groundgeo = new THREE.PlaneGeometry(16, 7);
+    var groundmap = new THREE.ImageUtils.loadTexture("files/field.png");
+    var groundmat = new THREE.MeshBasicMaterial({map:groundmap});
 
     var ball1 = new THREE.Mesh( geometry1, material1 );
     var ball2 = new THREE.Mesh( geometry3, material3 );
     var glob = new THREE.Mesh( geometry2, material2 );
     var r1 = new THREE.Mesh ( geometry4, material4);
     var r2 = new THREE.Mesh ( geometry4, material4);
+    var ground = THREE.Mesh (groundgeo, groundmat);
     
     ball1.position.x = -1;
     ball2.position.x = 1;
@@ -197,18 +202,18 @@ function globPlace(){
 
 function spring(){
     
-    if(r1.position.y >= 3.5 || r1.position.y < 2.5)
+    if(r1.position.z >= 1 || r1.position.z < 2.5)
     {
         rspeed1 *= -1; 
     }
     
-    if(r2.position.y >=3.5 || r2.position.y < 2.5)
+    if(r2.position.z >= 1 || r2.position.z < 2.5)
     {
         rspeed2 *= -1;
     }
     
-    r1.position.y += rspeed1*(22 - abstand1.distance());
-    r2.position.y += rspeed2*(22 - abstand2.distance());
+    r1.position.z += rspeed1*(22 - abstand1.distance());
+    r2.position.z += rspeed2*(22 - abstand2.distance());
     
     
 }
@@ -222,6 +227,7 @@ function loadGameTwo(){
     scene.add(ball2);
     scene.add(r1);
     scene.add(r2);
+    scene.add(ground);
     globPlace();
     console.log("Game#2 erstellt");
 }
