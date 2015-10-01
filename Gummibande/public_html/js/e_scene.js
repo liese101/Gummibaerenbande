@@ -19,8 +19,8 @@
     spotLight.position.set (20, 35, 40);
     scene.add(spotLight);
 
-    var geometry1 = new THREE.SphereGeometry( ballsize );
-    var geometry2 = new THREE.SphereGeometry( globsize );
+    var geometry1 = new THREE.SphereGeometry( baersize );
+    var geometry2 = new THREE.SphereGeometry( topfsize );
     var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
     
@@ -35,42 +35,34 @@
             var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
             var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
             var ast = new THREE.Mesh( geometry4, material4 );
+            
+            //Berechnung der Positionen auf X- und Z-Achse
             var a = Math.random()*Math.PI*2;
-            var x = Math.cos(a) * ((dm+laenge)/2);          //unbedingt prüfen, ob cos und sin
-            var z = Math.sin(a) * ((dm+laenge)/2);          //überhaupt stimmen
+            var x = Math.cos(a) * ((dm+laenge)/2);
+            var z = Math.sin(a) * ((dm+laenge)/2);
             var y = i + 2;
+            
+            //Rotation und Verschiebung
             ast.rotateZ(Math.PI / 2);
             ast.rotateX(a);
             ast.position.set(x, y, -z);
             scene.add(ast);
             
-            //Koordinaten des Asts speichern im Array "aeste
-            var koordinaten = new Object();
-            koordinaten.x = Math.cos(a);
-            koordinaten.y = y;
-            koordinaten.z = Math.sin(a);
-            koordinaten.i = i;
-            //kollisionErstellen(koordinaten);
-            
+            //Speichern der Positionen und ziehen der Linie zwischen Ast und Bär
             astposition[i] = new THREE.Vector3(x, y, -z);
             astabstand[i] = new THREE.Line3();
         }
-        anzahlAeste = hoehe - 3;
-    }
+    }       
             
-            
-    var ball = new THREE.Mesh( geometry1, material1 );
-    var glob = new THREE.Mesh( geometry2, material2 );
-    
-    scene.add( ball );
-    scene.add( glob );
+    var baer = new THREE.Mesh( geometry1, material1 );
+    var topf = new THREE.Mesh( geometry2, material2 );
+    scene.add( baer );
+    scene.add( topf );
     scene.add(cylinder);
     aesteErstellen();
 
     camera.position.z = 10;
-    camera.lookAt(ballposition);            //zentriert auf den Player
-//    camera.rotation.x = Math.PI/12;       //fixe Rotation
-//    camera.rotation.y =
+    camera.lookAt(baerposition);
 
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
@@ -94,8 +86,8 @@
     
     var text3 = document.createElement('div');
     text3.style.position = 'absolute';
-    text3.style.width = 100;
-    text3.style.height = 100;
+    text3.style.width = 60;
+    text3.style.height = 20;
     text3.style.backgroundColor = "grey";
     text3.innerHTML = "nach oben!";
     text3.style.top = 150 + 'px';

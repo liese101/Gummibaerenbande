@@ -6,27 +6,27 @@
 var THREE;
 var renderer, camera, scene;
 var actionStart, actionStop;
-var size, growth, rspeed, mspeed;
+var rspeed, mspeed;
 var rollr, rolll, moveu, moved, reset;
-var glob, ball, globsize, ballsize;     //glob=Honigtopf, ball=Bär
-var ballposition, globposition, abstand;
+var topf, baer, topfsize, baersize;
+var baerposition, topfposition, abstand;
 var score;
 var text2, text1, text3;
 var currentscale;
-var ast = new Array(anzahlAeste);
-var astposition = new Array(anzahlAeste);
+var ast = new Array(hoehe);
+var astposition = new Array(hoehe);
 
 //
-//Glob neu positionieren
+//Honigtopf neu positionieren
 //
-var setGlob = function() {
-    glob.position.x = 0;
-    if (glob.position.y === 20){
-        glob.position.y = 0;
+var setTopf = function() {
+    topf.position.x = 0;
+    if (topf.position.y === 20){
+        topf.position.y = 0;
         text3.innerHTML = "nach unten!";
     }
-    else if (glob.position.y === 0){
-        glob.position.y = 20;
+    else if (topf.position.y === 0){
+        topf.position.y = 20;
         text3.innerHTML = "nach oben!";
     }
     text2.innerHTML = "Score: " + score;
@@ -35,16 +35,14 @@ var setGlob = function() {
 };
 
 //
-//Abstand Prüfen
+//Abstand Prüfen (Bär und Honigtopf, Bär und Äste)
 //
 var collect = function(){
-    if (abstand.distance() < (ballsize+globsize)){
-            setGlob();
+    if (abstand.distance() < (baersize+topfsize)){
+            setTopf();
     }
-};
-
-var collect2 = function(){
-    i = Math.round(ball.position.y);
+    
+    i = Math.round(baer.position.y);
     if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
         keinAst();
     } else if (astabstand[i-2].distance() < 2.2){ 
@@ -54,11 +52,11 @@ var collect2 = function(){
     }
 };
 
+//
+//Funktionen zur Behandlung der Kollisionen Bär/Äste
+//
 var astGefunden = function() {
     text3.innerHTML = "Ast";
-    //var x = astposition[i].x;
-    //var y = astposition[i].y;
-    //var z = astposition[i].z;
 };
 
 var keinAst = function() {
@@ -69,18 +67,13 @@ var keinAst = function() {
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
 //
 var positionSet = function(){
+    baerposition.set(baer.position.x, baer.position.y, baer.position.z); 
+    topfposition.set(topf.position.x, topf.position.y, topf.position.z);
+    abstand.set(baerposition, topfposition);
     
-    ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
-    globposition.set(glob.position.x, glob.position.y, ball.position.z);
-    abstand.set(ballposition, globposition);
-    
-};
-
-var positionSet2 = function(){
-    
-    ballposition.set(ball.position.x, ball.position.y, ball.position.z); 
-    for(i = 0; i < anzahlAeste; i++) {
-        astabstand[i].set(ballposition, astposition[i]);
+    baerposition.set(baer.position.x, baer.position.y, baer.position.z); 
+    for(i = 0; i < hoehe-3; i++) {
+        astabstand[i].set(baerposition, astposition[i]);
     } 
 };
 
@@ -90,53 +83,45 @@ var positionSet2 = function(){
 var move = function(){
 
 //Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
-    
-        if (moveu) {
-            if(ball.position.y <= hoehe) {
-                ball.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
-                ball.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
-                camera.position.x += Math.sin(-(ball.rotation.z)) * mspeed;
-                camera.position.y += Math.cos(-(ball.rotation.z)) * mspeed;
-            }
-            
-        }
+    if (moveu) {
+        if(baer.position.y <= hoehe) {
+            baer.position.x += Math.sin(-(baer.rotation.z)) * mspeed;
+            baer.position.y += Math.cos(-(baer.rotation.z)) * mspeed;
+            camera.position.x += Math.sin(-(baer.rotation.z)) * mspeed;
+            camera.position.y += Math.cos(-(baer.rotation.z)) * mspeed;
+        }       
+    }
 
-        if (moved) {
-            if(ball.position.y >= 0) {
-                ball.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-                ball.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
-                camera.position.x -= Math.sin(-(ball.rotation.z)) * mspeed;
-                camera.position.y -= Math.cos(-(ball.rotation.z)) * mspeed;
-            }
-            
+    if (moved) {
+        if(baer.position.y >= 0) {
+            baer.position.x -= Math.sin(-(baer.rotation.z)) * mspeed;
+            baer.position.y -= Math.cos(-(baer.rotation.z)) * mspeed;
+            camera.position.x -= Math.sin(-(baer.rotation.z)) * mspeed;
+            camera.position.y -= Math.cos(-(baer.rotation.z)) * mspeed;
         }
+    }
     
 //Rotation
     if (rolll === true) {
-        ball.rotation.y += rspeed;
-        ball.rotation.y %= Math.PI*2;
-                                                            //Kamera mitdrehen
-        ball.position.x = Math.cos(ball.rotation.y)* dm;
-        ball.position.z = Math.sin(ball.rotation.y)* dm;
-            //y = (y % (hoehe-3)) + 1.5;
-            //stellt sicher, dass die Äste gleichmäßig verteilt werden.
-           
+        baer.rotation.y += rspeed;
+        baer.rotation.y %= Math.PI*2;
+        baer.position.x = Math.cos(baer.rotation.y)* dm;
+        baer.position.z = Math.sin(baer.rotation.y)* dm;  
     }
 
     if (rollr === true) {
-        ball.rotation.y -= rspeed;
-        ball.rotation.y %= Math.PI*2;
-        ball.position.x = Math.cos(ball.rotation.y)* dm;   
-        ball.position.z = Math.sin(ball.rotation.y)* dm;
-        //Kamera mitdrehen
+        baer.rotation.y -= rspeed;
+        baer.rotation.y %= Math.PI*2;
+        baer.position.x = Math.cos(baer.rotation.y)* dm;   
+        baer.position.z = Math.sin(baer.rotation.y)* dm;
     }
    
 //Reset
     if (reset) {
-        ball.rotation.z = 0;
-        ball.position.x = 0;
-        ball.position.y = 0;
-        ball.scale.set( 1, 1, 1);
+        baer.rotation.z = 0;
+        baer.position.x = 0;
+        baer.position.y = 0;
+        baer.scale.set( 1, 1, 1);
         camera.position.set( 0, 0, 10);
     }
 };
@@ -152,10 +137,6 @@ var render = function () {
     positionSet();
     
     collect();
-    
-    positionSet2();
-    
-    collect2();
     
     renderer.render(scene, camera);
 };

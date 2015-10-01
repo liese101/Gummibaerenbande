@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 var width = 600;
 var height = 400;
 
@@ -17,22 +16,19 @@ var mspeed = 0.1;
 var rspeed = 0.1;
 var moveu, moved, rollr, rolll, reset = false;
 
-var ballsize = 0.5;
-var globsize = 0.5;
+var baersize = 0.5;
+var topfsize = 0.5;
 var currentscale = 1;
 
 // Variablen für den Baum
-var anzahlAeste;            //Anzahl der Äste
 var hoehe = 20;             //Höhe des Baums
 var dm = 1;                 //Durchmesser des Baums
 var laenge = 5;             //Länge der Äste
 var aeste = new Array();    //speichert Koordinaten der Äste
 
-
-var ballposition = new THREE.Vector3(0, 0, 0);
-//var globposition = new THREE.Vector3(Math.random()*11 - 5.5, Math.random()*7 - 3.5, 0);
-var globposition = new THREE.Vector3(0, 0, 0);
-var abstand = new THREE.Line3(ballposition, globposition);
-
+// Variablen, die für die Kollisionserkennung benötigt werden.
+var baerposition = new THREE.Vector3(0, 0, 0);
+var topfposition = new THREE.Vector3(0, 0, 0);
+var abstand = new THREE.Line3(baerposition, topfposition);
 var astposition = new Array();
 var astabstand = new Array();
