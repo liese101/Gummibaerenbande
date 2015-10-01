@@ -95,7 +95,7 @@ function movePuk(){
 //kontakt mit Spielern prüfen
 function checkPlayers(){
     if(belongs){
-        if(puk.position.x < -fieldwidth+1.4 && puk.position.x > -fieldwidth+1){
+        if(puk.position.x < -fieldwidth+1.4 && puk.position.x > -fieldwidth+0.5){
             if(puk.position.y < p1.position.y+1.3 && puk.position.y > p1.position.y){
                 puk.rotation.z = -(puk.rotation.z)+0.05;
                 belongs = false;
@@ -109,7 +109,7 @@ function checkPlayers(){
         }
     }
     else{
-        if(puk.position.x < fieldwidth-1 && puk.position.x > fieldwidth-1.4){
+        if(puk.position.x < fieldwidth-0.5 && puk.position.x > fieldwidth-1.4){
             if(puk.position.y < p2.position.y+1.3 && puk.position.y > p2.position.y){
                 puk.rotation.z = -(puk.rotation.z)-0.05;
                 belongs = true;

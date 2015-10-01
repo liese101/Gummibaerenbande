@@ -21,12 +21,12 @@ var follow = true;
     var geometry3 = new THREE.SphereGeometry( ballsize );
     var geometry2 = new THREE.SphereGeometry( globsize );
     var geometry4 = new THREE.SphereGeometry( radarsize);
-    var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
+    var material1 = new THREE.MeshBasicMaterial( {transparent: true, opacity: 0});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x0000ff});
-    var material3 = new THREE.MeshBasicMaterial({color: 0x00ff00});
+    var material3 = new THREE.MeshBasicMaterial({transparent: true, opacity: 0});
     var material4 = new THREE.MeshBasicMaterial({color: 0x00ffff});
     var bearmap = new THREE.ImageUtils.loadTexture("files/bear.png");
-    var bearmat = new THREE.MeshBasicMaterial({map:bearmap});
+    var bearmat = new THREE.MeshBasicMaterial({map:bearmap, transparent:true});
     var beargeo = new THREE.BoxGeometry(1, 1.6, 0.1);
     
     var radarmap = new THREE.ImageUtils.loadTexture("files/punkt.png");
@@ -168,23 +168,30 @@ function globPlace(){
     glob.position.set(globposition);   
 }
 
-function spring(){
+//function spring(){
+//    
+//    if(r1.position.z >= -0.5 || r1.position.z < -1.5)
+//    {
+//        rspeed1 *= -1; 
+//    }
+//    
+//    if(r2.position.z >= -0.5 || r2.position.z < -1.5)
+//    {
+//        rspeed2 *= -1;
+//    }
+//    
+//    r1.position.z += 2*rspeed1*(22 - abstand1.distance());
+//    r2.position.z += 2*rspeed2*(22 - abstand2.distance());    
+//}
+
+function radar(){
+    r1.scale.x=(1+(13-abstand1.distance()))/3;  //HIER die schleife statt r1
+    r1.scale.y=(1+(13-abstand1.distance()))/3;  
     
-    if(r1.position.z >= -0.5 || r1.position.z < -1.5)
-    {
-        rspeed1 *= -1; 
-    }
-    
-    if(r2.position.z >= -0.5 || r2.position.z < -1.5)
-    {
-        rspeed2 *= -1;
-    }
-    
-    r1.position.z += 2*rspeed1*(22 - abstand1.distance());
-    r2.position.z += 2*rspeed2*(22 - abstand2.distance());
-    
-    
+    r2.scale.x=3-(abstand2.distance()/3);       // statt r2
+    r2.scale.y=3-(abstand2.distance()/3);
 }
+
 
 function loadGameTwo(){
     clearScene();
@@ -193,8 +200,10 @@ function loadGameTwo(){
     scene.add(glob);
     scene.add(ball1);
     ball1.add(bearp1);
+    ball1.add( ); // die schleife
     scene.add(ball2);
     ball2.add(bearp2);
+    ball2.add( ); // die schleife
     scene.add(r1);
     scene.add(r2);
     scene.add(ground);
