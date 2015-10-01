@@ -23,11 +23,11 @@ var baersize = 0.5;
 var topfsize = 0.8;
 var score1 = 0;
 var score2 = 0;
-spieler = 1;
+var spieler = 1;
 var topfGesammelt = false;
 
 // Variablen für den Baum
-var hoehe = 20;            //Höhe des Baums
+var hoehe = 50;            //Höhe des Baums
 var dm = 1;                 //Durchmesser des Baums
 var laenge = 5;             //Länge der Äste
 var aeste = new Array();    //speichert Koordinaten der Äste

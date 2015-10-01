@@ -11,7 +11,7 @@ var rollr, rolll, moveu, moved, reset;
 var topf, baer, topfsize, baersize;
 var baerposition, topfposition, abstand;
 var score;
-var text2, text1, text3;
+var text2, text1;
 var currentscale;
 var hoehe, dm;
 var ast = new Array(hoehe);
@@ -117,11 +117,6 @@ var positionSet = function(){
     for(i = 0; i < hoehe-3; i++) {
         astabstand[i].set(baerposition, astposition[i]);
     }
-   
-   // Nur zur Überprüfung, wird nicht gebraucht.
-    text2.innerHTML = "Ball Rotation: " + baer.rotation.y + "<br>X: " + baer.position.x + "<br> Z: " + baer.position.z
-                    + "<br>Kamera Rotation: " + camera.rotation.y
-                    + "<br>X: " + camera.position.x + "<br>Z: " + camera.position.z;
 };
 
 //
@@ -182,7 +177,7 @@ var kameraBewegen = function() {
 };
 
 var scoreAnzeigen = function() {
-    text3.innerHTML = "Punkte: " + Math.round(score);
+    text2.innerHTML = "Punkte: " + Math.round(score);
     text1.innerHTML = "Spieler: " + spieler + " spielt.";
 };
 
