@@ -25,8 +25,11 @@ var follow = true;
     var material2 = new THREE.MeshBasicMaterial( {color: 0x0000ff});
     var material3 = new THREE.MeshBasicMaterial({color: 0x00ff00});
     var material4 = new THREE.MeshBasicMaterial({color: 0x00ffff});
+    var bearmap = new THREE.ImageUtils.loadTexture("files/bear.png");
+    var bearmat = new THREE.MeshBasicMaterial({map:bearmap});
+    var beargeo = new THREE.BoxGeometry(1, 1.6, 0.1);
     
-    var groundgeo = new THREE.PlaneGeometry(16, 7);
+    var groundgeo = new THREE.PlaneGeometry(17, 11);
     var groundmap = new THREE.ImageUtils.loadTexture("files/field.png");
     var groundmat = new THREE.MeshBasicMaterial({map:groundmap});
 
@@ -35,7 +38,11 @@ var follow = true;
     var glob = new THREE.Mesh( geometry2, material2 );
     var r1 = new THREE.Mesh ( geometry4, material4);
     var r2 = new THREE.Mesh ( geometry4, material4);
-    var ground = THREE.Mesh (groundgeo, groundmat);
+    var ground = new THREE.Mesh (groundgeo, groundmat);
+    var bearp1 = new THREE.Mesh (beargeo, bearmat);
+    var bearp2 = new THREE.Mesh (beargeo, bearmat);
+    bear1.rotation.z = 3.1415/2;
+    bear2.rotation.z = 3.1415/2;
     
     ball1.position.x = -1;
     ball2.position.x = 1;
@@ -43,38 +50,11 @@ var follow = true;
     r1.position.y = 3;
     r2.position.x = 7.99;
     r2.position.y = 3;
+    r1.position.z = -1;
+    r2.position.z = -1;
+    glob.position.set(0,0,0);
      
     
-
-
-
-//Ball wachsen Lassen
-
-var wachsen = function(x) {
-            ballsize *= x;
-            currentscale *= x;
-            ball1.scale.set( currentscale, currentscale, currentscale);
-            
-};
-
-var wachsen2 = function(x) {
-            ballsize *= x;
-            currentscale *= x;
-            ball2.scale.set( currentscale, currentscale, currentscale);
-};
-
-
-//Glob neu positionieren
-
-var moveGlob = function() {
-    glob.position.x = Math.random()*11 - 5.5;
-    glob.position.y = Math.random()*7 - 3.5;
-    text2.innerHTML = "Score: " + score;
-    text1.innerHTML = "distanceToPoint: " + abstand.distance();
-    score += 1;
-};
-
-
 //Abstand Prüfen
 
 var collect = function(){
@@ -97,15 +77,12 @@ var abstandCheck = function(){
     ball2position.set(ball2.position.x, ball2.position.y, 0);
     
     abstand1.set(ball1position, globposition);
-    abstand2.set(ball2position, globposition);
-    
-    
-    
+    abstand2.set(ball2position, globposition);   
 };
 
 
 
-//Nach dem Rand wiederholen
+//Am Rand stoppen
 
 var testBorder = function(){
     
@@ -130,51 +107,16 @@ var testBorder = function(){
 
 //Bewegung in rotierte Richtung und Rotation
 
-var move = function(){
+var move = function(){ 
+    if (moveu) {
+        ball1.position.x += Math.sin(-(ball1.rotation.z)) * mspeed;
+        ball1.position.y += Math.cos(-(ball1.rotation.z)) * mspeed;
+    }
 
-  
-        if (moveu) {
-            ball1.position.x += Math.sin(-(ball1.rotation.z)) * mspeed;
-            ball1.position.y += Math.cos(-(ball1.rotation.z)) * mspeed;
-        }
-
-        if (moved) {
-            ball1.position.x -= Math.sin(-(ball1.rotation.z)) * mspeed;
-            ball1.position.y -= Math.cos(-(ball1.rotation.z)) * mspeed;
-        }
-
-//        if (movel) {
-//            ball1.position.x -= Math.cos((ball1.rotation.z)) * mspeed;
-//            ball1.position.y -= Math.sin((ball1.rotation.z)) * mspeed;
-//        }
-//
-//        if (mover) {
-//            ball1.position.x += Math.cos((ball1.rotation.z)) * mspeed;
-//            ball1.position.y += Math.sin((ball1.rotation.z)) * mspeed;
-//        }
-        };
-    var moveTwo = function(){
-
-        if (auf) {
-            ball2.position.x += Math.sin(-(ball2.rotation.z)) * mspeed;
-            ball2.position.y += Math.cos(-(ball2.rotation.z)) * mspeed;
-        }
-
-        if (ab) {
-            ball2.position.x -= Math.sin(-(ball2.rotation.z)) * mspeed;
-            ball2.position.y -= Math.cos(-(ball2.rotation.z)) * mspeed;
-        }
-
-//        if (links) {
-//            ball2.position.x -= Math.cos((ball2.rotation.z)) * mspeed;
-//            ball2.position.y -= Math.sin((ball2.rotation.z)) * mspeed;
-//        }
-//
-//        if (rechts) {
-//            ball2.position.x += Math.cos((ball2.rotation.z)) * mspeed;
-//            ball2.position.y += Math.sin((ball2.rotation.z)) * mspeed;
-//        }
-//Rotation
+    if (moved) {
+        ball1.position.x -= Math.sin(-(ball1.rotation.z)) * mspeed;
+        ball1.position.y -= Math.cos(-(ball1.rotation.z)) * mspeed;
+    }
     if (rollr === true) {
         ball1.rotation.z -= rspeed;
         ball1.rotation.z %= 6.28;}
@@ -182,6 +124,21 @@ var move = function(){
     if (rolll === true) {
         ball1.rotation.z += rspeed;
         ball1.rotation.z %= 6.28;}
+};
+var moveTwo = function(){
+
+    if (auf) {
+        ball2.position.x += Math.sin(-(ball2.rotation.z)) * mspeed;
+        ball2.position.y += Math.cos(-(ball2.rotation.z)) * mspeed;
+    }
+
+    if (ab) {
+        ball2.position.x -= Math.sin(-(ball2.rotation.z)) * mspeed;
+        ball2.position.y -= Math.cos(-(ball2.rotation.z)) * mspeed;
+    }
+    
+//Rotation
+
     
     //Rotation2
     if (rechts === true) {
@@ -202,18 +159,18 @@ function globPlace(){
 
 function spring(){
     
-    if(r1.position.z >= 1 || r1.position.z < 2.5)
+    if(r1.position.z >= -0.5 || r1.position.z < -1.5)
     {
         rspeed1 *= -1; 
     }
     
-    if(r2.position.z >= 1 || r2.position.z < 2.5)
+    if(r2.position.z >= -0.5 || r2.position.z < -1.5)
     {
         rspeed2 *= -1;
     }
     
-    r1.position.z += rspeed1*(22 - abstand1.distance());
-    r2.position.z += rspeed2*(22 - abstand2.distance());
+    r1.position.z += 2*rspeed1*(22 - abstand1.distance());
+    r2.position.z += 2*rspeed2*(22 - abstand2.distance());
     
     
 }
@@ -224,10 +181,13 @@ function loadGameTwo(){
     gamemoni = true;
     scene.add(glob);
     scene.add(ball1);
+    ball1.add(bear1);
     scene.add(ball2);
+    ball2.add(bear2);
     scene.add(r1);
     scene.add(r2);
     scene.add(ground);
+    ground.position.z = -1;
     globPlace();
     console.log("Game#2 erstellt");
 }
