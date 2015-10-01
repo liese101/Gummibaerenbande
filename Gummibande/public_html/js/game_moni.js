@@ -29,20 +29,25 @@ var follow = true;
     var bearmat = new THREE.MeshBasicMaterial({map:bearmap});
     var beargeo = new THREE.BoxGeometry(1, 1.6, 0.1);
     
+    var radarmap = new THREE.ImageUtils.loadTexture("files/punkt.png");
+    var radarmat = new THREE.MeshBasicMaterial({map:radarmap, transparent: true});
+    var radargeo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
+    
     var groundgeo = new THREE.PlaneGeometry(17, 11);
-    var groundmap = new THREE.ImageUtils.loadTexture("files/field.png");
+    var groundmap = new THREE.ImageUtils.loadTexture("files/gras.jpg");
     var groundmat = new THREE.MeshBasicMaterial({map:groundmap});
 
     var ball1 = new THREE.Mesh( geometry1, material1 );
     var ball2 = new THREE.Mesh( geometry3, material3 );
     var glob = new THREE.Mesh( geometry2, material2 );
-    var r1 = new THREE.Mesh ( geometry4, material4);
-    var r2 = new THREE.Mesh ( geometry4, material4);
+    var r1 = new THREE.Mesh ( radargeo, radarmat);
+    var r2 = new THREE.Mesh ( radargeo, radarmat);
     var ground = new THREE.Mesh (groundgeo, groundmat);
     var bearp1 = new THREE.Mesh (beargeo, bearmat);
     var bearp2 = new THREE.Mesh (beargeo, bearmat);
     bearp1.rotation.z = 3.1415/2;
     bearp2.rotation.z = 3.1415/2;
+    
     
     ball1.position.x = -1;
     ball2.position.x = 1;
