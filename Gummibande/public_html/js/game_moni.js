@@ -193,11 +193,11 @@ function globPlace(){
 //}
 
 function radar(){ //Vergrößerung der Schleife wenn der Abstand zum Ziel (Glob) geringer ist.
-    schleife1.scale.x=(1+(13-abstand1.distance()))/3;  //HIER die schleife statt r1
-    schleife2.scale.y=(1+(13-abstand1.distance()))/3;  
+    schleife1.scale.x=1+(13-abstand1.distance())/3;  //HIER die schleife statt r1
+    schleife1.scale.y=1+(13-abstand1.distance())/3;  
     
-    schleife2.scale.x=3-(abstand2.distance()/3);       // statt r2
-    schleife2.scale.y=3-(abstand2.distance()/3);
+    schleife2.scale.x=1+((13-abstand2.distance())/3);       // statt r2
+    schleife2.scale.y=1+((13-abstand2.distance())/3);
 }
 
 
