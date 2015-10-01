@@ -13,27 +13,33 @@
     renderer.setSize( width, height );
     document.body.appendChild( renderer.domElement );
     
-    
     var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
     spotLight.castShadow = true;
     spotLight.position.set (20, 35, 40);
     scene.add(spotLight);
-
+    
+    var plane = new THREE.PlaneGeometry(100, 100);
+    var bodenmat = new THREE.MeshBasicMaterial( {color: 0xffffff});
+    var boden = new THREE.Mesh(plane, bodenmat);
+    boden.rotation.x = -Math.PI/2;
+    boden.position.y -= 0.1;
+    scene.add(boden);
+    
     var geometry1 = new THREE.SphereGeometry( baersize );
     var geometry2 = new THREE.SphereGeometry( topfsize );
     var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x00ff00});
     
     //Baum
-    var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe, 32 );
-    var material3 = new THREE.MeshBasicMaterial( {color: 0xffccdd} );
+    var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
+    var material3 = new THREE.MeshBasicMaterial( {color: 0x372518} );
     var stamm = new THREE.Mesh( geometry3, material3 );
-    stamm.position.set(0, hoehe/2, 0);
+    stamm.position.set(0, hoehe/2-1, 0);
     
     function aesteErstellen(){                 
         for(i = 0; i < hoehe-3; i++) {
             var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
-            var material4 = new THREE.MeshBasicMaterial( {color: 0xffcc00} );
+            var material4 = new THREE.MeshBasicMaterial( {color: 0x553A26} );
             var ast = new THREE.Mesh( geometry4, material4 );
             
             //Berechnung der Positionen auf X- und Z-Achse
@@ -67,22 +73,22 @@
 
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
-    text1.style.width = 500;
+    text1.style.width = 200;
     text1.style.height = 20;
     text1.style.backgroundColor = "grey";
     text1.innerHTML = "distanceToPoint: ?";
-    text1.style.top = 60 + 'px';
+    text1.style.top = 10 + 'px';
     text1.style.left = 20 + 'px';
     document.body.appendChild(text1);
     
     var text2 = document.createElement('div');
     text2.style.position = 'absolute';
-    text2.style.width = 600;
-    text2.style.height = 100;
+    text2.style.width = 200;
+    text2.style.height = 150;
     text2.style.backgroundColor = "grey";
     text2.innerHTML = "Positionsüberprüfung erscheint hier.";
-    text2.style.top = 0 + 'px';
-    text2.style.left = 800 + 'px';
+    text2.style.top = 10 + 'px';
+    text2.style.left = 1100 + 'px';
     document.body.appendChild(text2);
     
     var text3 = document.createElement('div');
@@ -90,9 +96,9 @@
     text3.style.width = 200;
     text3.style.height = 20;
     text3.style.backgroundColor = "grey";
-    text3.innerHTML = "Punkte: " + score;
-    text3.style.top = 120 + 'px';
-    text3.style.left = 150 + 'px';
+    text3.innerHTML = "Punkte: " + Math.round(score);
+    text3.style.top = 40 + 'px';
+    text3.style.left = 20 + 'px';
     document.body.appendChild(text3);
     
     document.addEventListener("keydown", actionStart, false);

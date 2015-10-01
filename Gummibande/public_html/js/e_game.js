@@ -42,7 +42,7 @@ var collect = function(){
     }
     
     i = Math.round(baer.position.y);
-    if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
+    if(i < 1.5 || i > hoehe - 1.5) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
         // ungültige Indexe werden abgefangen
     } else if (astabstand[i-2].distance() < 2.2){ 
         astGefunden();   
@@ -58,12 +58,12 @@ var astGefunden = function() {
     if(moveu) {
         baer.position.y -= 0.1;
         score -= 0.1;
-        text3.innerHTML = "Punkte: " + score;
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
     if(moved) {
         baer.position.y += 0.1;
         score -= 0.1;
-        text3.innerHTML = "Punkte: " + score;
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
     if(rolll) {
         baer.rotation.y -= rspeed;
@@ -71,7 +71,7 @@ var astGefunden = function() {
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
         baer.position.z = Math.sin(baer.rotation.y)* dm;
         score -= 0.1;
-        text3.innerHTML = "Punkte: " + score;
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
     if(rollr) {
          baer.rotation.y += rspeed;
@@ -79,7 +79,7 @@ var astGefunden = function() {
         baer.position.x = Math.cos(baer.rotation.y)* dm;
         baer.position.z = Math.sin(baer.rotation.y)* dm;
         score -= 0.1;
-        text3.innerHTML = "Punkte: " + score;
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
 };
 
@@ -95,7 +95,8 @@ var positionSet = function(){
     for(i = 0; i < hoehe-3; i++) {
         astabstand[i].set(baerposition, astposition[i]);
     }
-    
+   
+   // Nur zur Überprüfung, wird nicht gebraucht.
     text2.innerHTML = "Ball Rotation: " + baer.rotation.y + "<br>X: " + baer.position.x + "<br> Z: " + baer.position.z
                     + "<br>Kamera Rotation: " + camera.rotation.y
                     + "<br>X: " + camera.position.x + "<br>Z: " + camera.position.z;
@@ -154,7 +155,6 @@ var move = function(){
 
 var kameraBewegen = function() {
     camera.position.y = baer.position.y;
-    //camera.position.set(0, 0, 0)
     camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
     camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
 };
