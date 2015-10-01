@@ -47,12 +47,8 @@ var actionStart = function (event) {
         case "G":
             pukgo = true;
             break;
-        case "1":
-            clearScene();
-            gamedome = false;
-            gamemoni = false;
-            gameclaudi = false;
-            gameelli = false;
+        case "2":
+            loadGameTwo();
             break;
         case "4":
             loadGameFour();

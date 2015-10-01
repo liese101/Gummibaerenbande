@@ -47,6 +47,7 @@ function loadGameFour(){
     
 clearScene();
 
+gamemoni = false;
 gameelli = false;
 gamedome = true;
 
