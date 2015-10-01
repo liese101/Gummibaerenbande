@@ -5,8 +5,8 @@
  */
 
 
-var width = 600;
-var height = 400;
+var width = window.innerWidth;
+var height = window.innerHeight;
 
 var FONT = "bold 20px sans-serif";
 var posx = 100;

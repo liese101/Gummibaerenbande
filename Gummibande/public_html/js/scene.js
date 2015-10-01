@@ -7,10 +7,10 @@
 
     var scene = new THREE.Scene(); // Scene erstellt
 //    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
-    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+    var camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
-    renderer.setSize( window.innerWidth, window.innerHeight*0.9 );
+    renderer.setSize( window.innerWidth, window.innerHeight*0.80 );
     document.body.appendChild( renderer.domElement );
     
 //    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
@@ -81,4 +81,8 @@
              scene.remove(obj);
         }
         console.log("Scene cleart");
+    }
+    
+    function endGame() {
+        
     }
