@@ -1,15 +1,16 @@
-var scene = new THREE.scene();
+//var scene = new THREE.scene();
 
 //kamera
-var aspect_ratio = window.innerWidth / window.innerHeighth;
-var camera = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 10000);
-camera.position.z = 500;
-//scene.add(camera);
+//var aspect_ratio = window.innerWidth / window.innerHeighth;
+//var camera = new THREE.PerspectiveCamera(75, aspect_ratio, 1, 10000);
+//camera.position.z = 500;
+////scene.add(camera);
 
 //kamerasicht auf den bildschirm bringen
-var renderer = new THREE.CanvasRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+//var renderer = new THREE.CanvasRenderer();
+//renderer.setSize(window.innerWidth, window.innerHeight);
+//document.body.appendChild(renderer.domElement);
+
 
 //verbotene bereiche sammeln
 var not_allowed = [];
@@ -17,7 +18,6 @@ var not_allowed = [];
 //marker für objekte
 var marker = new THREE.Object3D();
 scene.add(marker);
-
 
 //avatar-platzhalter erstellen
 var cover = new THREE.MeshDepthMaterial();
@@ -57,6 +57,7 @@ marker.add(camera);
 //3D-Uhr als Timer für Animation
 var clock = new THREE.clock(true);
 function animate() {
+    
     requestAnimationFrame(animate);
     walk();
     acrobatics();
@@ -139,6 +140,8 @@ function spinAvatar(direction) {
     start();
 }
 
+
+
 //testwald erstellen
 makeTreeAt(500, 0);
 makeTreeAt(-500, 0);
@@ -189,11 +192,19 @@ function detectCollisions() {
     return false;
 }
 
+//entscheidung, was passiert, wenn der avatar an eine grenze stößt
+avatar.addEventListener('collision', function(object) {
+    if (object.isGoal) gameOver();
+});
+
+
+
 //tasten funtionen zuweisen
 document.addEventListener('keydown', function(event) {
     var code = event.keyCode;
     //Pfeil links
     if (code === 37) {
+        //move(-50);
         marker.position.x = marker.position.x-5;
         is_moving_left = true;
     }
@@ -204,6 +215,7 @@ document.addEventListener('keydown', function(event) {
     }
     //Pfeil rechts
     if (code === 39) {
+        //move(50);
         marker.position.x = marker.position.x-5;
         is_moving_right = true;
     }
@@ -236,9 +248,6 @@ document.addEventListener('keyup', function(event) {
     if (code === 39) is_moving_right = false;
     if (code === 40) is_moving_back = false;
 });
-
-
-
 
 
 
