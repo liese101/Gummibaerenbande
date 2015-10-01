@@ -52,6 +52,7 @@ var spielerwechsel = function() {
         spieler = 2;
         score = score2;
         scoreAnzeigen();
+        
     }
 };
 
@@ -161,12 +162,15 @@ var move = function(){
     }
    
 //Reset
-    if (reset) {
-        baer.rotation.z = 1;
+    if (reset) {                                    //muss noch gemacht werden!
+        baer.rotation.y = 0;
         baer.position.x = 1;
         baer.position.y = 0;
-        baer.scale.set( 1, 1, 1);
+        baer.position.z = 0;
         camera.position.set( 0, 0, 10);
+        camera.position.y = baer.position.y;
+        camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
+        camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
     }
 };
 

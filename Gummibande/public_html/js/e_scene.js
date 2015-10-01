@@ -26,15 +26,12 @@
     
     var geometry1 = new THREE.SphereGeometry( 0.1 );
     var geometry2 = new THREE.SphereGeometry( topfsize );
-    var baertextur = THREE.ImageUtils.loadTexture("files/kletterbaer.JPG");
-    var material1 = new THREE.MeshBasicMaterial({map: baertextur});
-    //material1 = new THREE.MeshNormalMaterial( { transparent: true, opacity: 0 } );
+    var material1 = new THREE.MeshBasicMaterial( {color: 0x123456} );
     var topftextur = THREE.ImageUtils.loadTexture("files/honigtopf.JPG");
     var material2 = new THREE.MeshBasicMaterial({map: topftextur});
     
     //Baum
     var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
-    var material3 = new THREE.MeshBasicMaterial( {color: 0x372518} );
     var holz = THREE.ImageUtils.loadTexture("files/holz.JPG");
     var holzmaterial = new THREE.MeshBasicMaterial({map: holz});
     var stamm = new THREE.Mesh( geometry3, holzmaterial );
