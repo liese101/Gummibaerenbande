@@ -66,7 +66,7 @@ var collision = function(){
     i = Math.round(baer.position.y);
     if(i < 1.5 || i > hoehe - 1.5) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
         // ungültige Indexe werden abgefangen
-    } else if (astabstand[i-2].distance() < 2.2){ 
+    } else if (astabstand[i-2].distance() < 2.3){ 
         astGefunden();   
     } else {
         // hier passiert nichts

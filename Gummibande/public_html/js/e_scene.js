@@ -24,10 +24,11 @@
     boden.position.y -= 0.1;
     scene.add(boden);
     
-    var geometry1 = new THREE.SphereGeometry( baersize );
+    var geometry1 = new THREE.SphereGeometry( 0.1 );
     var geometry2 = new THREE.SphereGeometry( topfsize );
     var baertextur = THREE.ImageUtils.loadTexture("files/kletterbaer.JPG");
     var material1 = new THREE.MeshBasicMaterial({map: baertextur});
+    //material1 = new THREE.MeshNormalMaterial( { transparent: true, opacity: 0 } );
     var topftextur = THREE.ImageUtils.loadTexture("files/honigtopf.JPG");
     var material2 = new THREE.MeshBasicMaterial({map: topftextur});
     
@@ -68,6 +69,16 @@
     scene.add( topf );
     scene.add( stamm );
     aesteErstellen();
+    
+    //Sprite für den Bären
+    var spritemap = THREE.ImageUtils.loadTexture("files/kletterbaer.png");
+    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
+    var fire = new THREE.Sprite (spriteMaterial);
+    fire.transparent = true;
+    fire.position.x = baer.position.x;
+    fire.position.y = baer.position.y;
+    fire.position.z = baer.position.z;
+    baer.add( fire );
     
     topf.position.y = hoehe;
     baer.position.x = dm;
