@@ -61,10 +61,16 @@ var collect = function(){
     if (abstand1.distance() < (ballsize+globsize)){
         globPlace();
         sc1 += 1;
+        if(sc1 === 5){
+            // wechsel zum nächsten Spiel
+        }
     }
     if( abstand2.distance() < (ballsize+globsize)){
         globPlace();
         sc2 += 1;
+        if(sc2 === 5){
+            // wechsel zum nächsten Spiel
+        }
     }
 };
 
