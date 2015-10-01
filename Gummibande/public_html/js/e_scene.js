@@ -7,7 +7,7 @@
 
     var scene = new THREE.Scene(); // Scene erstellt
     var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
-//    var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
+    //var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( width, height );
@@ -60,9 +60,10 @@
     scene.add( topf );
     scene.add(cylinder);
     aesteErstellen();
-
+    
+    
     camera.position.z = 10;
-    camera.lookAt(baerposition);
+    //camera.lookAt(baerposition);
 
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
@@ -77,11 +78,11 @@
     var text2 = document.createElement('div');
     text2.style.position = 'absolute';
     text2.style.width = 600;
-    text2.style.height = 50;
+    text2.style.height = 100;
     text2.style.backgroundColor = "grey";
     text2.innerHTML = "Score: 0";
     text2.style.top = 0 + 'px';
-    text2.style.left = (width/2 + 50) + 'px';
+    text2.style.left = 800 + 'px';
     document.body.appendChild(text2);
     
     var text3 = document.createElement('div');

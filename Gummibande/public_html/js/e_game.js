@@ -16,17 +16,22 @@ var currentscale;
 var ast = new Array(hoehe);
 var astposition = new Array(hoehe);
 
+var loadGameThree = function() {
+    clearScene();
+    //und so weiter
+};
+
 //
 //Honigtopf neu positionieren
 //
 var setTopf = function() {
     topf.position.x = 0;
-    if (topf.position.y === 20){
+    if (topf.position.y === hoehe){
         topf.position.y = 0;
         text3.innerHTML = "nach unten!";
     }
     else if (topf.position.y === 0){
-        topf.position.y = 20;
+        topf.position.y = hoehe;
         text3.innerHTML = "nach oben!";
     }
     text2.innerHTML = "Score: " + score;
@@ -74,7 +79,11 @@ var positionSet = function(){
     baerposition.set(baer.position.x, baer.position.y, baer.position.z); 
     for(i = 0; i < hoehe-3; i++) {
         astabstand[i].set(baerposition, astposition[i]);
-    } 
+    }
+    
+    text2.innerHTML = "Ball Rotation: " + baer.rotation.y + "<br>X: " + baer.position.x + "<br> Z: " + baer.position.z
+                    + "<br>Kamera Rotation: " + camera.rotation.y
+                    + "<br>X: " + camera.position.x + "<br>Z: " + camera.position.z;
 };
 
 //
@@ -106,7 +115,8 @@ var move = function(){
         baer.rotation.y += rspeed;
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;
-        baer.position.z = Math.sin(baer.rotation.y)* dm;  
+        baer.position.z = Math.sin(baer.rotation.y)* dm;
+        //camera.rotation.y = -(baer.rotation.y);
     }
 
     if (rollr === true) {
@@ -114,16 +124,22 @@ var move = function(){
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
         baer.position.z = Math.sin(baer.rotation.y)* dm;
+        //camera.rotation.y = -(baer.rotation.y);
     }
    
 //Reset
     if (reset) {
-        baer.rotation.z = 0;
-        baer.position.x = 0;
+        baer.rotation.z = 1;
+        baer.position.x = 1;
         baer.position.y = 0;
         baer.scale.set( 1, 1, 1);
         camera.position.set( 0, 0, 10);
     }
+};
+
+var kameraDrehen = function() {
+    camera.rotation.y = -(baer.rotation.y);
+    camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
 };
 
 //#######//
@@ -133,6 +149,8 @@ var render = function () {
     requestAnimationFrame( render );
     
     move();
+    
+    //kameraDrehen();
     
     positionSet();
     
