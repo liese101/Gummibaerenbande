@@ -10,7 +10,7 @@ var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, mover, movel, auf, ab, links, rechts, reset;
 var globsize;
 var ballsize;
-var ball1position, ball2position, globposition, abstand1, abstand2, radarsize, radarposition;
+var ball1position, ball2position, globposition, abstand1, abstand2, schleifensize, radarposition;
 var score;
 var text2, text1;
 var currentscale;
@@ -20,7 +20,7 @@ var follow = true;
     var geometry1 = new THREE.SphereGeometry( ballsize );
     var geometry3 = new THREE.SphereGeometry( ballsize );
     var geometry2 = new THREE.SphereGeometry( globsize );
-    var geometry4 = new THREE.SphereGeometry( radarsize);
+    var geometry4 = new THREE.SphereGeometry( schleifensize);
     var material1 = new THREE.MeshBasicMaterial( {transparent: true, opacity: 0});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x0000ff});
     var material3 = new THREE.MeshBasicMaterial({transparent: true, opacity: 0});
@@ -33,6 +33,14 @@ var follow = true;
     var radarmat = new THREE.MeshBasicMaterial({map:radarmap, transparent: true});
     var radargeo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
     
+    var schleife1map = new THREE.ImageUtils.loadTexture("files/schleife1.png");
+    var schleife1mat = new THREE.MeshBasicMaterial({map:schleife1map, transparent: true});
+    var schleife1geo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
+    
+    var schleife2map = new THREE.ImageUtils.loadTexture("files/schleife2.png");
+    var schleife2mat = new THREE.MeshBasicMaterial({map:schleife2map, transparent: true});
+    var schleife2geo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
+    
     var groundgeo = new THREE.PlaneGeometry(17, 11);
     var groundmap = new THREE.ImageUtils.loadTexture("files/gras.jpg");
     var groundmat = new THREE.MeshBasicMaterial({map:groundmap});
@@ -40,8 +48,8 @@ var follow = true;
     var ball1 = new THREE.Mesh( geometry1, material1 );
     var ball2 = new THREE.Mesh( geometry3, material3 );
     var glob = new THREE.Mesh( geometry2, material2 );
-    var r1 = new THREE.Mesh ( radargeo, radarmat);
-    var r2 = new THREE.Mesh ( radargeo, radarmat);
+    var schleife1 = new THREE.Mesh ( schleife1geo, schleife1mat);
+    var schleife2 = new THREE.Mesh ( schleife2geo, schleife2mat);
     var ground = new THREE.Mesh (groundgeo, groundmat);
     var bearp1 = new THREE.Mesh (beargeo, bearmat);
     var bearp2 = new THREE.Mesh (beargeo, bearmat);
@@ -51,12 +59,12 @@ var follow = true;
     
     ball1.position.x = -1;
     ball2.position.x = 1;
-    r1.position.x = - 7.99;
-    r1.position.y = 3;
-    r2.position.x = 7.99;
-    r2.position.y = 3;
-    r1.position.z = -1;
-    r2.position.z = -1;
+//    r1.position.x = - 7.99;
+//    r1.position.y = 3;
+//    r2.position.x = 7.99;
+//    r2.position.y = 3;
+//    r1.position.z = -1;
+//    r2.position.z = -1;
     glob.position.set(0,0,0);
      
     
@@ -184,12 +192,12 @@ function globPlace(){
 //    r2.position.z += 2*rspeed2*(22 - abstand2.distance());    
 //}
 
-function radar(){
-    r1.scale.x=(1+(13-abstand1.distance()))/3;  //HIER die schleife statt r1
-    r1.scale.y=(1+(13-abstand1.distance()))/3;  
+function radar(){ //Vergrößerung der Schleife wenn der Abstand zum Ziel (Glob) geringer ist.
+    schleife1.scale.x=(1+(13-abstand1.distance()))/3;  //HIER die schleife statt r1
+    schleife2.scale.y=(1+(13-abstand1.distance()))/3;  
     
-    r2.scale.x=3-(abstand2.distance()/3);       // statt r2
-    r2.scale.y=3-(abstand2.distance()/3);
+    schleife2.scale.x=3-(abstand2.distance()/3);       // statt r2
+    schleife2.scale.y=3-(abstand2.distance()/3);
 }
 
 
@@ -200,12 +208,12 @@ function loadGameTwo(){
     scene.add(glob);
     scene.add(ball1);
     ball1.add(bearp1);
-    ball1.add( ); // die schleife
+    ball1.add( schleife1 ); // die schleife
     scene.add(ball2);
     ball2.add(bearp2);
-    ball2.add( ); // die schleife
-    scene.add(r1);
-    scene.add(r2);
+    ball2.add (schleife2 ); // die schleife
+//    scene.add(r1);
+//    scene.add(r2);
     scene.add(ground);
     ground.position.z = -1;
     globPlace();
