@@ -7,7 +7,6 @@
 
     var scene = new THREE.Scene(); // Scene erstellt
     var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
-    var camera2 = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
     //var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
@@ -70,7 +69,6 @@
     
     baer.position.x = dm;
     camera.position.z = 10;
-    camera2.position.z = 1;
     //camera.lookAt(baerposition);
 
     var text1 = document.createElement('div');
@@ -78,7 +76,7 @@
     text1.style.width = 200;
     text1.style.height = 20;
     text1.style.backgroundColor = "grey";
-    text1.innerHTML = "distanceToPoint: ?";
+    text1.innerHTML = "Spieler: " + spieler + " spielt.";
     text1.style.top = 10 + 'px';
     text1.style.left = 20 + 'px';
     document.body.appendChild(text1);
@@ -105,6 +103,7 @@
     
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
+    
     
     function clearScene() {
         var i;

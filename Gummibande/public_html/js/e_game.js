@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 var THREE;
-var renderer, camera, camera2, scene;
+var renderer, camera, scene;
 var actionStart, actionStop;
 var rspeed, mspeed;
 var rollr, rolll, moveu, moved, reset;
@@ -13,46 +13,49 @@ var baerposition, topfposition, abstand;
 var score;
 var text2, text1, text3;
 var currentscale;
+var hoehe, dm;
 var ast = new Array(hoehe);
 var astposition = new Array(hoehe);
+var astabstand;
+var spieler, score1, score2;
+var topfGesammelt;
+
 
 var loadGameThree = function() {
     clearScene();
     //und so weiter
 };
 
-var play = function() {             //noch nicht fertig
-    var fertig = 0;
-    var player = 0;
-    if(fertig < 2) {
-        player = 1;
-        text1.innerHTML = "Spieler " + player + " spielt.";
-        score1 = score;
-    } else if(fertig < 4) {
-        player = 2;
-        text1.innerHTML = "Spieler " + player + " spielt.";
-        score2 = score;
-    }
-};
-
 //
 //Honigtopf neu positionieren
 //
 var setTopf = function() {
+        // Topf ist oben, und wird erreicht.
     if (topf.position.y === hoehe){
+        topfGesammelt = true;
         topf.position.y = 0;
-        fertig++;
     }
-    else if (topf.position.y === 0){
+        // Topf ist unten, und wird erreicht.
+    else if (topf.position.y === 0 && topfGesammelt){
+        spielerwechsel();
         topf.position.y = hoehe;
-        fertig++;
+    }
+};
+
+var spielerwechsel = function() {
+    if(spieler === 2){
+        spieler = 1;
+        score = score1;
+    }else{
+        spieler = 2;
+        score = score2;
     }
 };
 
 //
 //Abstand Prüfen (Bär und Honigtopf, Bär und Äste)
 //
-var collect = function(){
+var collision = function(){
     if (abstand.distance() < (baersize+topfsize)){
             setTopf();
     }
@@ -177,6 +180,7 @@ var kameraBewegen = function() {
 
 var scoreAnzeigen = function() {
     text3.innerHTML = "Punkte: " + Math.round(score);
+    text1.innerHTML = "Spieler: " + spieler + " spielt.";
 };
 
 //#######//
@@ -185,15 +189,13 @@ var scoreAnzeigen = function() {
 var render = function () {
     requestAnimationFrame( render );
     
-    play();
-    
     move();
     
     kameraBewegen();
     
     positionSet();
     
-    collect();
+    collision();
     
     renderer.render(scene, camera);
 };
