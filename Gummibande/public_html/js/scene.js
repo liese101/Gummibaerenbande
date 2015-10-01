@@ -16,8 +16,8 @@
     renderer.setSize( window.innerWidth, window.innerHeight*0.80 );
     document.body.appendChild( renderer.domElement );
     
-//    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
-//    loader.load('files/models/bear2.json', addModel);
+    loader = new THREE.JSONLoader(); //laden von modellen aus blender 
+    loader.load('files/models/bear2.json', addModel);
 //    
 //    var spotLight = new THREE.SpotLight(0xffffff); //Scenenlicht erstellt
 //    spotLight.castShadow = true;
@@ -71,12 +71,31 @@
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
     
-//    function addModel( geometry,  materials ){
-//        var material = new THREE.MeshFaceMaterial( materials );
-//        bear_1 = new THREE.Mesh( geometry, material );
-//        scene.add( bear_1 );
-//        bear_1.position.z = -20;
-//    }
+    function addModel( geometry,  materials ){
+        var material = new THREE.MeshFaceMaterial( materials );
+        bear_1 = new THREE.Mesh( geometry, material );
+        bear_1.scale.set(0.4, 0.4, 0.4);
+
+        bear_2 = new THREE.Mesh( geometry, material );
+        bear_2.scale.set(0.4, 0.4, 0.4);
+        
+        bear_3 = new THREE.Mesh( geometry, material );
+        bear_3.scale.set(0.4, 0.4, 0.4);
+        bear_3.rotation.z = -3.1415/2;
+        bear_3.position.x = -0.5;
+        
+        bear_4 = new THREE.Mesh( geometry, material );
+        bear_4.scale.set(0.4, 0.4, 0.4);
+        bear_4.rotation.z = 3.1415/2;
+        bear_4.position.x = 0.5
+        
+        
+        
+        ball1.add(bear_1);
+        ball2.add(bear_2);
+        p1.add(bear_3);
+        p2.add(bear_4);
+    }
     
     function clearScene() {
         var i;
