@@ -75,8 +75,8 @@ var collect = function(){
 
 var abstandCheck = function(){
     
-    ball1position.Vector3((ball1.position.x, ball1.position.y, ball1.position.z), (glob.position.x, glob.position.y, glob.position.z));
-    ball2position.Vector3((ball2.position.x, ball2.position.y, ball2.position.z), (glob.position.x, glob.position.y, glob.position.z));
+    ball1position.set(ball1.position.x, ball1.position.y, 0);
+    ball2position.set(ball2.position.x, ball2.position.y, 0);
     abstand1.set(ball1position, globposition);
     abstand2.set(ball2position, globposition);
     
@@ -140,22 +140,22 @@ var move = function(){
         };
     var moveTwo = function(){
 
-        if (moveu) {
+        if (auf) {
             ball2.position.x += Math.sin(-(ball2.rotation.z)) * mspeed;
             ball2.position.y += Math.cos(-(ball2.rotation.z)) * mspeed;
         }
 
-        if (moved) {
+        if (ab) {
             ball2.position.x -= Math.sin(-(ball2.rotation.z)) * mspeed;
             ball2.position.y -= Math.cos(-(ball2.rotation.z)) * mspeed;
         }
 
-        if (movel) {
+        if (links) {
             ball2.position.x -= Math.cos((ball2.rotation.z)) * mspeed;
             ball2.position.y -= Math.sin((ball2.rotation.z)) * mspeed;
         }
 
-        if (mover) {
+        if (rechts) {
             ball2.position.x += Math.cos((ball2.rotation.z)) * mspeed;
             ball2.position.y += Math.sin((ball2.rotation.z)) * mspeed;
         }

@@ -51,12 +51,14 @@ var follow = true;
 //
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
 //
-//var positionSet = function(){
-//    
-//    ballposition.set(ball.position.x, ball.position.y, 0); 
-//    globposition.set(glob.position.x, glob.position.y, 0);
-//    abstand.set(ballposition, globposition);
-//};
+var positionSet = function(){
+    
+    ball1position.set(ball1.position.x, ball1.position.y, 0);
+    ball2position.set(ball2.position.x, ball2.position.y, 0);
+    globposition.set(glob.position.x, glob.position.y, 0);
+    abstand1.set(ball1position, globposition);
+    abstand2.set(ball2position, globposition);
+};
 
 //
 //Nach dem Rand wiederholen
@@ -158,8 +160,9 @@ var render = function () {
 //    text1.innerHTML = "P1: " + moveu + " _ " + moved + " _ " + rolll + " _ " + rollr + " </br>P2: " + auf + " _ " + ab + " _ " + links + " _ " + rechts;
 //    text1.innerHTML = "pukrotation: " + puk.rotation.z;
 //    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
-    text1.innerHTML = "Abstand1: " + abstand1.distance();
-    text2.innerHTML = "Abstand2: " + abstand2.distance();
+//    text1.innerHTML = "Abstand1: " + abstand1.distance();
+//    text2.innerHTML = "Abstand2: " + abstand2.distance();
+    positionSet();
     
 //game_moni
     if (gamemoni){
