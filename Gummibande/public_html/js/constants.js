@@ -12,15 +12,18 @@ var FONT = "bold 20px sans-serif";
 var posx = 100;
 var posy = 100;
 var score = 0;
+var rspeed = 0.1;
+var radarsize = 0.05;
 
 var mspeed = 0.1;
-var rspeed = 0.1;
+var rspeed1 = 0.005;
+var rspeed2 = 0.005;
 var movel, mover, moveu, moved, rollr, rolll, reset, auf, ab, links, rechts, pukgo = false;
 
 var ball1, ball2, glob;
 
-var ballsize = 0.1;
-var globsize = 0.075;
+var ballsize = 0.2;
+var globsize = 0.5;
 var currentscale = 1;
 
 var score1, score2 = 0;

@@ -8,27 +8,36 @@ var renderer, camera, scene;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, mover, movel, auf, ab, links, rechts, reset;
-var globsize, ballsize;
-var ball1position, ball2position, globposition, abstand1, abstand2;
+var globsize;
+var ballsize;
+var ball1position, ball2position, globposition, abstand1, abstand2, radarsize, radarposition;
 var score;
 var text2, text1;
 var currentscale;
+var sc1 , sc2;
 var follow = true;
 
     var geometry1 = new THREE.SphereGeometry( ballsize );
     var geometry3 = new THREE.SphereGeometry( ballsize );
     var geometry2 = new THREE.SphereGeometry( globsize );
+    var geometry4 = new THREE.SphereGeometry( radarsize);
     var material1 = new THREE.MeshBasicMaterial( {color: 0xff0000});
     var material2 = new THREE.MeshBasicMaterial( {color: 0x0000ff});
     var material3 = new THREE.MeshBasicMaterial({color: 0x00ff00});
-    
+    var material4 = new THREE.MeshBasicMaterial({color: 0x00ffff});
+
     var ball1 = new THREE.Mesh( geometry1, material1 );
     var ball2 = new THREE.Mesh( geometry3, material3 );
     var glob = new THREE.Mesh( geometry2, material2 );
+    var r1 = new THREE.Mesh ( geometry4, material4);
+    var r2 = new THREE.Mesh ( geometry4, material4);
     
-    ball1.position.x = 1;
-    ball2.position.x = 2;
-    glob.position.x = 3;
+    ball1.position.x = -1;
+    ball2.position.x = 1;
+    r1.position.x = - 7.99;
+    r1.position.y = 3;
+    r2.position.x = 7.99;
+    r2.position.y = 3;
      
     
 
@@ -64,9 +73,13 @@ var moveGlob = function() {
 //Abstand Prüfen
 
 var collect = function(){
-    if (abstand.distance() < (ballsize+globsize)){
-        moveGlob();
-        wachsen(1.1);
+    if (abstand1.distance() < (ballsize+globsize)){
+        globPlace();
+        sc1 += 1;
+    }
+    if( abstand2.distance() < (ballsize+globsize)){
+        globPlace();
+        sc2 += 1;
     }
 };
 
@@ -77,6 +90,7 @@ var abstandCheck = function(){
     
     ball1position.set(ball1.position.x, ball1.position.y, 0);
     ball2position.set(ball2.position.x, ball2.position.y, 0);
+    
     abstand1.set(ball1position, globposition);
     abstand2.set(ball2position, globposition);
     
@@ -88,28 +102,24 @@ var abstandCheck = function(){
 
 //Nach dem Rand wiederholen
 
-var repeatBorder = function(){
+var testBorder = function(){
     
-    if (ball1.position.x > 5.8){
-        ball1.position.x = -5.7;}
-    if (ball1.position.x < -5.8){
-        ball1.position.x = 5.7;}
-    if (ball1.position.y > 3.9){
-        ball1.position.y = -3.8;}
-    if (ball1.position.y < -3.9){
-        ball1.position.y = 3.8;}
-};
-
-var repeatBorder2 = function(){
-    
-    if (ball2.position.x > 5.8){
-        ball2.position.x = -5.7;}
-    if (ball2.position.x < -5.8){
-        ball2.position.x = 5.7;}
-    if (ball2.position.y > 3.9){
-        ball2.position.y = -3.8;}
-    if (ball2.position.y < -3.9){
-        ball2.position.y = 3.8;}
+    if (ball1.position.x < -8){
+        ball1.position.x = -7.99;}
+    if (ball1.position.x > 8){
+        ball1.position.x = 7.99;}
+    if (ball1.position.y > 3.5){
+        ball1.position.y = 3.49;}
+    if (ball1.position.y < -3.5){
+        ball1.position.y = -3.49;}
+    if  (ball2.position.x < -8){
+        ball2.position.x = -7.99;}
+    if (ball2.position.x > 8){
+        ball2.position.x = 7.99;}
+    if (ball2.position.y > 3.5){
+        ball2.position.y = 3.49;}
+    if (ball2.position.y < -3.5){
+        ball2.position.y = -3.49;}
 };
 
 
@@ -128,15 +138,15 @@ var move = function(){
             ball1.position.y -= Math.cos(-(ball1.rotation.z)) * mspeed;
         }
 
-        if (movel) {
-            ball1.position.x -= Math.cos((ball1.rotation.z)) * mspeed;
-            ball1.position.y -= Math.sin((ball1.rotation.z)) * mspeed;
-        }
-
-        if (mover) {
-            ball1.position.x += Math.cos((ball1.rotation.z)) * mspeed;
-            ball1.position.y += Math.sin((ball1.rotation.z)) * mspeed;
-        }
+//        if (movel) {
+//            ball1.position.x -= Math.cos((ball1.rotation.z)) * mspeed;
+//            ball1.position.y -= Math.sin((ball1.rotation.z)) * mspeed;
+//        }
+//
+//        if (mover) {
+//            ball1.position.x += Math.cos((ball1.rotation.z)) * mspeed;
+//            ball1.position.y += Math.sin((ball1.rotation.z)) * mspeed;
+//        }
         };
     var moveTwo = function(){
 
@@ -150,15 +160,15 @@ var move = function(){
             ball2.position.y -= Math.cos(-(ball2.rotation.z)) * mspeed;
         }
 
-        if (links) {
-            ball2.position.x -= Math.cos((ball2.rotation.z)) * mspeed;
-            ball2.position.y -= Math.sin((ball2.rotation.z)) * mspeed;
-        }
-
-        if (rechts) {
-            ball2.position.x += Math.cos((ball2.rotation.z)) * mspeed;
-            ball2.position.y += Math.sin((ball2.rotation.z)) * mspeed;
-        }
+//        if (links) {
+//            ball2.position.x -= Math.cos((ball2.rotation.z)) * mspeed;
+//            ball2.position.y -= Math.sin((ball2.rotation.z)) * mspeed;
+//        }
+//
+//        if (rechts) {
+//            ball2.position.x += Math.cos((ball2.rotation.z)) * mspeed;
+//            ball2.position.y += Math.sin((ball2.rotation.z)) * mspeed;
+//        }
 //Rotation
     if (rollr === true) {
         ball1.rotation.z -= rspeed;
@@ -169,15 +179,39 @@ var move = function(){
         ball1.rotation.z %= 6.28;}
     
     //Rotation2
-    if (rollr === true) {
+    if (rechts === true) {
         ball2.rotation.z -= rspeed;
         ball2.rotation.z %= 6.28;}
 
-    if (rolll === true) {
+    if (links === true) {
         ball2.rotation.z += rspeed;
         ball2.rotation.z %= 6.28;}
 
 };
+
+function globPlace(){
+    
+    globposition.set(Math.random()*16-8, Math.random()*7-3.5, 0);
+    glob.position.set(globposition);   
+}
+
+function spring(){
+    
+    if(r1.position.y >= 3.5 || r1.position.y < 2.5)
+    {
+        rspeed1 *= -1; 
+    }
+    
+    if(r2.position.y >=3.5 || r2.position.y < 2.5)
+    {
+        rspeed2 *= -1;
+    }
+    
+    r1.position.y += rspeed1*(22 - abstand1.distance());
+    r2.position.y += rspeed2*(22 - abstand2.distance());
+    
+    
+}
 
 function loadGameTwo(){
     clearScene();
@@ -186,5 +220,8 @@ function loadGameTwo(){
     scene.add(glob);
     scene.add(ball1);
     scene.add(ball2);
+    scene.add(r1);
+    scene.add(r2);
+    globPlace();
     console.log("Game#2 erstellt");
 }
