@@ -29,17 +29,17 @@ var follow = true;
     var bearmat = new THREE.MeshBasicMaterial({map:bearmap, transparent:true});
     var beargeo = new THREE.BoxGeometry(1, 1.6, 0.1);
     
-    var radarmap = new THREE.ImageUtils.loadTexture("files/punkt.png");
-    var radarmat = new THREE.MeshBasicMaterial({map:radarmap, transparent: true});
-    var radargeo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
+//    var radarmap = new THREE.ImageUtils.loadTexture("files/punkt.png");
+//    var radarmat = new THREE.MeshBasicMaterial({map:radarmap, transparent: true});
+//    var radargeo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
     
     var schleife1map = new THREE.ImageUtils.loadTexture("files/schleife1.png");
     var schleife1mat = new THREE.MeshBasicMaterial({map:schleife1map, transparent: true});
-    var schleife1geo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
+    var schleife1geo = new THREE.BoxGeometry(0.3, 0.3, 0.2);
     
     var schleife2map = new THREE.ImageUtils.loadTexture("files/schleife2.png");
     var schleife2mat = new THREE.MeshBasicMaterial({map:schleife2map, transparent: true});
-    var schleife2geo = new THREE.BoxGeometry(0.5, 0.5, 0.1);
+    var schleife2geo = new THREE.BoxGeometry(0.3, 0.3, 0.1);
     
     var groundgeo = new THREE.PlaneGeometry(17, 11);
     var groundmap = new THREE.ImageUtils.loadTexture("files/gras.jpg");
