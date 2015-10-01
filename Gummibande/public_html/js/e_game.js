@@ -25,18 +25,12 @@ var loadGameThree = function() {
 //Honigtopf neu positionieren
 //
 var setTopf = function() {
-    topf.position.x = 0;
     if (topf.position.y === hoehe){
         topf.position.y = 0;
-        text3.innerHTML = "nach unten!";
     }
     else if (topf.position.y === 0){
         topf.position.y = hoehe;
-        text3.innerHTML = "nach oben!";
     }
-    text2.innerHTML = "Score: " + score;
-    text1.innerHTML = "distanceToPoint: " + abstand.distance();
-    score += 1;
 };
 
 //
@@ -49,11 +43,11 @@ var collect = function(){
     
     i = Math.round(baer.position.y);
     if(i < 2 || i > hoehe - 1) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
-        keinAst();
+        // ungültige Indexe werden abgefangen
     } else if (astabstand[i-2].distance() < 2.2){ 
         astGefunden();   
     } else {
-        keinAst();
+        // hier passiert nichts
     }
 };
 
@@ -61,11 +55,32 @@ var collect = function(){
 //Funktionen zur Behandlung der Kollisionen Bär/Äste
 //
 var astGefunden = function() {
-    text3.innerHTML = "Ast";
-};
-
-var keinAst = function() {
-    text3.innerHTML = "kein Ast";
+    if(moveu) {
+        baer.position.y -= 0.1;
+        score -= 0.1;
+        text3.innerHTML = "Punkte: " + score;
+    }
+    if(moved) {
+        baer.position.y += 0.1;
+        score -= 0.1;
+        text3.innerHTML = "Punkte: " + score;
+    }
+    if(rolll) {
+        baer.rotation.y -= rspeed;
+        baer.rotation.y %= Math.PI*2;
+        baer.position.x = Math.cos(baer.rotation.y)* dm;   
+        baer.position.z = Math.sin(baer.rotation.y)* dm;
+        score -= 0.1;
+        text3.innerHTML = "Punkte: " + score;
+    }
+    if(rollr) {
+         baer.rotation.y += rspeed;
+        baer.rotation.y %= Math.PI*2;
+        baer.position.x = Math.cos(baer.rotation.y)* dm;
+        baer.position.z = Math.sin(baer.rotation.y)* dm;
+        score -= 0.1;
+        text3.innerHTML = "Punkte: " + score;
+    }
 };
 
 //
@@ -111,7 +126,7 @@ var move = function(){
     }
     
 //Rotation
-    if (rolll === true) {
+    if (rolll) {
         baer.rotation.y += rspeed;
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;
@@ -119,7 +134,7 @@ var move = function(){
         //camera.rotation.y = -(baer.rotation.y);
     }
 
-    if (rollr === true) {
+    if (rollr) {
         baer.rotation.y -= rspeed;
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
@@ -137,8 +152,10 @@ var move = function(){
     }
 };
 
-var kameraDrehen = function() {
-    camera.rotation.y = -(baer.rotation.y);
+var kameraBewegen = function() {
+    camera.position.y = baer.position.y;
+    //camera.position.set(0, 0, 0)
+    camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
     camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
 };
 
@@ -150,7 +167,7 @@ var render = function () {
     
     move();
     
-    //kameraDrehen();
+    kameraBewegen();
     
     positionSet();
     

@@ -27,8 +27,8 @@
     //Baum
     var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe, 32 );
     var material3 = new THREE.MeshBasicMaterial( {color: 0xffccdd} );
-    var cylinder = new THREE.Mesh( geometry3, material3 );
-    cylinder.position.set(0, hoehe/2, 0);
+    var stamm = new THREE.Mesh( geometry3, material3 );
+    stamm.position.set(0, hoehe/2, 0);
     
     function aesteErstellen(){                 
         for(i = 0; i < hoehe-3; i++) {
@@ -58,10 +58,10 @@
     var topf = new THREE.Mesh( geometry2, material2 );
     scene.add( baer );
     scene.add( topf );
-    scene.add(cylinder);
+    scene.add( stamm );
     aesteErstellen();
     
-    
+    baer.position.x = dm;
     camera.position.z = 10;
     //camera.lookAt(baerposition);
 
@@ -80,18 +80,18 @@
     text2.style.width = 600;
     text2.style.height = 100;
     text2.style.backgroundColor = "grey";
-    text2.innerHTML = "Score: 0";
+    text2.innerHTML = "Positionsüberprüfung erscheint hier.";
     text2.style.top = 0 + 'px';
     text2.style.left = 800 + 'px';
     document.body.appendChild(text2);
     
     var text3 = document.createElement('div');
     text3.style.position = 'absolute';
-    text3.style.width = 60;
+    text3.style.width = 200;
     text3.style.height = 20;
     text3.style.backgroundColor = "grey";
-    text3.innerHTML = "nach oben!";
-    text3.style.top = 150 + 'px';
+    text3.innerHTML = "Punkte: " + score;
+    text3.style.top = 120 + 'px';
     text3.style.left = 150 + 'px';
     document.body.appendChild(text3);
     
