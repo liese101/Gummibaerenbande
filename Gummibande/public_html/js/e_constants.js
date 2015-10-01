@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-var width = window.innerWidth;
+var width = window.innerWidth/2;
 var height = window.innerHeight;
 
 var FONT = "bold 20px sans-serif";
@@ -19,7 +19,8 @@ var moveu, moved, rollr, rolll, reset = false;
 
 var baersize = 0.5;
 var topfsize = 0.8;
-var currentscale = 1;
+var score1 = 0;
+var score2 = 0;
 
 // Variablen für den Baum
 var hoehe = 100;             //Höhe des Baums

@@ -21,31 +21,15 @@ var loadGameThree = function() {
     //und so weiter
 };
 
-var play = function() {             //noch nicht fertig
-    var fertig = 0;
-    var player = 0;
-    if(fertig < 2) {
-        player = 1;
-        text1.innerHTML = "Spieler " + player + " spielt.";
-        score1 = score;
-    } else if(fertig < 4) {
-        player = 2;
-        text1.innerHTML = "Spieler " + player + " spielt.";
-        score2 = score;
-    }
-};
-
 //
 //Honigtopf neu positionieren
 //
 var setTopf = function() {
     if (topf.position.y === hoehe){
         topf.position.y = 0;
-        fertig++;
     }
     else if (topf.position.y === 0){
         topf.position.y = hoehe;
-        fertig++;
     }
 };
 
@@ -74,12 +58,12 @@ var astGefunden = function() {
     if(moveu) {
         baer.position.y -= 0.1;
         score -= 0.1;
-        scoreAnzeigen();
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
     if(moved) {
         baer.position.y += 0.1;
         score -= 0.1;
-        scoreAnzeigen();
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
     if(rolll) {
         baer.rotation.y -= rspeed;
@@ -87,7 +71,7 @@ var astGefunden = function() {
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
         baer.position.z = Math.sin(baer.rotation.y)* dm;
         score -= 0.1;
-        scoreAnzeigen();
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
     if(rollr) {
          baer.rotation.y += rspeed;
@@ -95,7 +79,7 @@ var astGefunden = function() {
         baer.position.x = Math.cos(baer.rotation.y)* dm;
         baer.position.z = Math.sin(baer.rotation.y)* dm;
         score -= 0.1;
-        scoreAnzeigen();
+        text3.innerHTML = "Punkte: " + Math.round(score);
     }
 };
 
@@ -175,17 +159,11 @@ var kameraBewegen = function() {
     camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
 };
 
-var scoreAnzeigen = function() {
-    text3.innerHTML = "Punkte: " + Math.round(score);
-};
-
 //#######//
 //Rendern//
 //#######//
-var render = function () {
+var render2 = function () {
     requestAnimationFrame( render );
-    
-    play();
     
     move();
     
@@ -195,5 +173,5 @@ var render = function () {
     
     collect();
     
-    renderer.render(scene, camera);
+    renderer.render(scene, camera2);
 };

@@ -7,6 +7,7 @@
 
     var scene = new THREE.Scene(); // Scene erstellt
     var camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 ); //Kamera erstellt
+    var camera2 = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
     //var camera = new THREE.OrthographicCamera( width / - 80, width / 80, height / 80, height / - 80, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
@@ -34,7 +35,7 @@
     var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
     var material3 = new THREE.MeshBasicMaterial( {color: 0x372518} );
     var stamm = new THREE.Mesh( geometry3, material3 );
-    stamm.position.set(0, hoehe/2-1, 0);
+    stamm.position.set(0, hoehe/2-0.5, 0);
     
     function aesteErstellen(){                 
         for(i = 0; i < hoehe-3; i++) {
@@ -69,6 +70,7 @@
     
     baer.position.x = dm;
     camera.position.z = 10;
+    camera2.position.z = 1;
     //camera.lookAt(baerposition);
 
     var text1 = document.createElement('div');
