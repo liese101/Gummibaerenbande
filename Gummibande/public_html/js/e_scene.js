@@ -33,14 +33,20 @@
     //Baum
     var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
     var material3 = new THREE.MeshBasicMaterial( {color: 0x372518} );
-    var stamm = new THREE.Mesh( geometry3, material3 );
+    //var material3 = THREE.ImageUtils.loadTexture( "files/holz.JPG" );
+    //var stamm = new THREE.Mesh( geometry3, material3 );
+    var holz = THREE.ImageUtils.loadTexture("files/holz.JPG");
+    var holzmaterial = new THREE.MeshBasicMaterial({map: holz});
+    var stamm = new THREE.Mesh( geometry3, holzmaterial );
     stamm.position.set(0, hoehe/2-0.5, 0);
+    
+    
     
     function aesteErstellen(){                 
         for(i = 0; i < hoehe-3; i++) {
             var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
-            var material4 = new THREE.MeshBasicMaterial( {color: 0x553A26} );
-            var ast = new THREE.Mesh( geometry4, material4 );
+            //var material4 = new THREE.MeshBasicMaterial( {color: 0x553A26} );
+            var ast = new THREE.Mesh( geometry4, holzmaterial );
             
             //Berechnung der Positionen auf X- und Z-Achse
             var a = Math.random()*Math.PI*2;
