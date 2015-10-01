@@ -41,8 +41,8 @@ var follow = true;
     var ground = new THREE.Mesh (groundgeo, groundmat);
     var bearp1 = new THREE.Mesh (beargeo, bearmat);
     var bearp2 = new THREE.Mesh (beargeo, bearmat);
-    bear1.rotation.z = 3.1415/2;
-    bear2.rotation.z = 3.1415/2;
+    bearp1.rotation.z = 3.1415/2;
+    bearp2.rotation.z = 3.1415/2;
     
     ball1.position.x = -1;
     ball2.position.x = 1;
@@ -181,9 +181,9 @@ function loadGameTwo(){
     gamemoni = true;
     scene.add(glob);
     scene.add(ball1);
-    ball1.add(bear1);
+    ball1.add(bearp1);
     scene.add(ball2);
-    ball2.add(bear2);
+    ball2.add(bearp2);
     scene.add(r1);
     scene.add(r2);
     scene.add(ground);
