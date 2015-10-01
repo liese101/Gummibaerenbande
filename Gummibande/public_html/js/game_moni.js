@@ -55,6 +55,8 @@ var follow = true;
     var bearp2 = new THREE.Mesh (beargeo, bearmat);
     bearp1.rotation.z = 3.1415/2;
     bearp2.rotation.z = 3.1415/2;
+    schleife1.position.z = 1.7;
+    schleife2.position.z = 1.7;
     
     
     ball1.position.x = -1;
