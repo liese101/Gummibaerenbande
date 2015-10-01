@@ -67,6 +67,7 @@
     scene.add( stamm );
     aesteErstellen();
     
+    topf.position.y = hoehe;
     baer.position.x = dm;
     camera.position.z = 10;
     //camera.lookAt(baerposition);
