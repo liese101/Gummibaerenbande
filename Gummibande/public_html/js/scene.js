@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
     var THREE;
+    var ballposition;
 
     var scene = new THREE.Scene(); // Scene erstellt
 //    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
@@ -40,7 +41,8 @@
 //   ball.add( fire );
 
     camera.position.z = 6;
-    camera.lookAt(ballposition);            //zentriert auf den Player
+    camera.lookAt(ballposition);
+//    camera.lookAt(ballposition2);//zentriert auf den Player
 //    camera.rotation.x = Math.PI/12;       //fixe Rotation
 //    camera.rotation.y =
     
@@ -50,7 +52,7 @@
     text1.style.height = 20;
     text1.style.backgroundColor = "yellow";
     text1.style.color = "black";
-    text1.innerHTML = "distanceToPoint: ?";
+    text1.innerHTML = "Abstand1: " + abstand1.distance;
     text1.style.top = 65 + 'px';
     document.body.appendChild(text1);
     
@@ -60,7 +62,7 @@
     text2.style.height = 20;
     text2.style.backgroundColor = "yellow";
     text2.style.color = "black";
-    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
+    text2.innerHTML = "Abstand2: " + abstand2.distance;
     text2.style.top = 85 + 'px';
     document.body.appendChild(text2);
     

@@ -17,6 +17,8 @@ var mspeed = 0.1;
 var rspeed = 0.1;
 var movel, mover, moveu, moved, rollr, rolll, reset, auf, ab, links, rechts, pukgo = false;
 
+var ball1, ball2, glob;
+
 var ballsize = 0.1;
 var globsize = 0.075;
 var currentscale = 1;
@@ -44,8 +46,11 @@ var pukabstand = new THREE.Line3();
 var gamedome = false;
 var belongs = true;
 
-var ballposition = new THREE.Vector3(0, 0, 0);
+var ball1position = new THREE.Vector3(0, 0, 0);
+var ball2position = new THREE.Vector3(0, 0, 0);
 //var globposition = new THREE.Vector3(Math.random()*11 - 5.5, Math.random()*7 - 3.5, 0);
 var globposition = new THREE.Vector3(0, 0, 0);
-var abstand = new THREE.Line3(ballposition, globposition);
+var abstand1 = new THREE.Line3(ball1position, globposition);//((ball1.position.x, ball1.position.y, ball1.position.z), (glob.position.x, glob.position.y, glob.position.z));
+var abstand2 = new THREE.Line3(ball2position, globposition);//((ball2.position.x, ball2.position.y, ball2.position.z), (glob.position.x, glob.position.y, glob.position.z));
+
 

@@ -8,8 +8,8 @@ var renderer, camera, scene;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, mover, movel, reset;
-var glob, ball1, ball2, globsize, ballsize;
-var ballposition, globposition, abstand;
+var globsize, ballsize;
+var ball1position, ball2position, globposition, abstand1, abstand2;
 var score;
 var text2, text1;
 var currentscale;
@@ -73,19 +73,17 @@ var collect = function(){
 
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
 
-var positionSet = function(){
+var abstandCheck = function(){
     
-    ballposition.set(ball1.position.x, ball1.position.y, 0);
-    globposition.set(glob.position.x, glob.position.y, 0);
-    abstand.set(ballposition, globposition);
+    ball1position.Vector3((ball1.position.x, ball1.position.y, ball1.position.z), (glob.position.x, glob.position.y, glob.position.z));
+    ball2position.Vector3((ball2.position.x, ball2.position.y, ball2.position.z), (glob.position.x, glob.position.y, glob.position.z));
+    abstand1.set(ball1position, globposition);
+    abstand2.set(ball2position, globposition);
+    
+    
+    
 };
 
-var positionSet2 = function(){
-    
-    ballposition.set(ball2.position.x, ball1.position.y, 0);
-    globposition.set(glob.position.x, glob.position.y, 0);
-    abstand.set(ballposition, globposition);
-};
 
 
 //Nach dem Rand wiederholen

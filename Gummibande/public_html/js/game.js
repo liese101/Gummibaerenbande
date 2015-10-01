@@ -9,9 +9,12 @@ var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, mover, movel, reset;
 var glob, ball, globsize, ballsize;
-var ballposition, globposition, abstand;
+var ball1position, ball2position, globposition;
+var abstand1;
+var abstand2;
 var score;
-var text2, text1;
+var text1;
+var text2;
 var currentscale;
 var follow = true;
 
@@ -153,13 +156,16 @@ var render = function () {
     requestAnimationFrame( render );
     
 //    text1.innerHTML = "P1: " + moveu + " _ " + moved + " _ " + rolll + " _ " + rollr + " </br>P2: " + auf + " _ " + ab + " _ " + links + " _ " + rechts;
-    text1.innerHTML = "pukrotation: " + puk.rotation.z;
-    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
+//    text1.innerHTML = "pukrotation: " + puk.rotation.z;
+//    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
+    text1.innerHTML = "Abstand1: " + abstand1.distance();
+    text2.innerHTML = "Abstand2: " + abstand2.distance();
     
 //game_moni
     if (gamemoni){
     move();
     moveTwo();
+    abstandCheck();
     }
     
 
