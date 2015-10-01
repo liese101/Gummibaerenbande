@@ -39,6 +39,7 @@ var setTopf = function() {
     else if (topf.position.y === 0 && topfGesammelt){
         spielerwechsel();
         topf.position.y = hoehe;
+        topfGesammelt = false;
     }
 };
 
@@ -46,9 +47,11 @@ var spielerwechsel = function() {
     if(spieler === 2){
         spieler = 1;
         score = score1;
+        scoreAnzeigen();
     }else{
         spieler = 2;
         score = score2;
+        scoreAnzeigen();
     }
 };
 
