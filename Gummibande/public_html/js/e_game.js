@@ -72,7 +72,6 @@ var zeitstrafe = 0;
     var baerbild = new THREE.Sprite (spriteMaterial);
     baerbild.transparent = true;
     
-    
     textplayer = document.createElement('div');
     textplayer.style.position = 'absolute';
     textplayer.style.width = 200;
