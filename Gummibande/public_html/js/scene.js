@@ -66,8 +66,7 @@
     text2.style.color = "black";
     text2.innerHTML = "Abstand2: " + abstand2.distance;
     text2.style.top = 85 + 'px';
-    document.body.appendChild(text2);
-    
+    document.body.appendChild(text2); 
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
     
