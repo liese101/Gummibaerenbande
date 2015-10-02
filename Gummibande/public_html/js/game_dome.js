@@ -41,6 +41,8 @@ var bear2 = new THREE.Mesh(beargeo, bearmat);
 var p1 = new THREE.Mesh(p1geo, p1mat);
 var p2 = new THREE.Mesh(p2geo, p2mat);
 
+var camera;
+
 
 // funktion, die Spiel aufruft, Variablen entsprechend ändert und Objekte der Szene hinzufügt
 function loadGameFour(){
@@ -70,6 +72,12 @@ bear2.position.set(+0.4, 0, 0);
 p2.add(bear2);
 p2.position.set(fieldwidth-1, 0, 0);
 scene.add(p2);
+
+camera.add(hintergrund_sound_d);
+camera.add(bande_sound);
+camera.add(spieler_sound);
+camera.add(aus_sound);
+
 
 console.log("Game#4 erstellt");
 }
@@ -123,9 +131,6 @@ function checkPlayers(){
                 puk.rotation.z = -(puk.rotation.z)+0.05;
                 belongs = false;
                 pukspeed *= 1.05;
-        spieler_sound = new THREE.Audio(listener);
-        spieler_sound.load("files/klack.ogg");
-        spieler_sound.autoplay = true;
             }
             if(puk.position.y > p1.position.y-1.3 && puk.position.y < p1.position.y){
                 puk.rotation.z = -(puk.rotation.z)-0.05;
@@ -146,7 +151,11 @@ function checkPlayers(){
                 belongs = true;
                 pukspeed *= 1.05;
             }
+
         }
+                spieler_sound = new THREE.Audio(listener);
+        spieler_sound.load("files/trommel höher.ogg");
+        spieler_sound.autoplay = true;
     }
     
 }

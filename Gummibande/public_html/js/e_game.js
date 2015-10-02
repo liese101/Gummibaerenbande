@@ -131,6 +131,7 @@ camera.add(listener);
 console.log("Audiolistener added");
 //audio
 
+//hintergrundgeräusche
 hintergrund_sound_e = new THREE.Audio(listener);
 hintergrund_sound_e.load("files/wind_forest.ogg");
 hintergrund_sound_e.autoplay = true;
