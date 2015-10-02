@@ -34,7 +34,7 @@ var ende_sound;
     
     var geometry1 = new THREE.SphereGeometry( 0.1 );
     var geometry2 = new THREE.SphereGeometry( topfsize );
-    var material1 = new THREE.MeshBasicMaterial( {color: 0x123456} );
+    var material1 = new THREE.MeshBasicMaterial( {color: 0x251d08} );
     var topftextur = THREE.ImageUtils.loadTexture("files/honigtopf.JPG");
     var material2 = new THREE.MeshBasicMaterial({map: topftextur});
     
@@ -187,7 +187,7 @@ var spielerwechsel = function() {
         spielerwechsel_sound.autoplay = true;
         spieler = 2;
         textplayer.innerHTML = "Spieler 2 spielt.";
-        //text3.style.opacity = 1;
+        text3.style.opacity = 1;
         //Spieler 2 beginnt...
         
     }else if(spieler === 2){
