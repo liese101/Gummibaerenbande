@@ -47,6 +47,8 @@ function loadGameFour(){
     
 clearScene();
 
+text3.style.opacity = 1;
+
 sc1 = 0;
 sc2 = 0;
 gamemoni = false;

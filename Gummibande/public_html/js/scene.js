@@ -87,12 +87,6 @@ Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst o
     text3.style.left = ((width/2)-200) + "px";
     document.body.appendChild(text3);
     text3.style.opacity = 0;
-    if(info) {
-        text3.style.opacity = 1;
-    } else {
-        text3.style.opacity = 0;
-    }
-    
     
     function clearScene() {
         var i;
@@ -108,7 +102,7 @@ Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst o
     //Transperant machen
     textplayer.style.opacity = 0;
     text4.style.opacity = 0;
-    info = false;
+    text3.style.opacity = 0;
     
         console.log("Scene cleart");
     }

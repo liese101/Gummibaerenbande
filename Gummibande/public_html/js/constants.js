@@ -31,9 +31,6 @@ var score2 = 0;
 var sc1 = 0;
 var sc2 = 0;
 
-var info = false;   //gibt an, ob Info zum Spielstart gezeigt werden soll.
-
-
 //game_moni
 var gamemoni = false;
 
@@ -65,7 +62,7 @@ var abstand2 = new THREE.Line3(ball2position, globposition);//((ball2.position.x
 var spieler = 1;                                //Spieler 1 beginnt (darf nicht geändert werden)
 var topfGesammelt = false;                      //variable die überprüft, ob der Honigtopf eingesammelt wurde (darf nicht geändert werden)
 // Variablen für den Baum
-var hoehe = 50;                                 //Höhe des Baums
+var hoehe = 10;                                 //Höhe des Baums
 var dm = 1;                                     //Durchmesser des Baums
 var laenge = 5;                                 //Länge der Äste
 var aeste = new Array();                        //speichert Koordinaten der Äste

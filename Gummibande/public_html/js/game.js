@@ -17,7 +17,6 @@ var abstand2;
 var score;
 var text1;
 var text2;
-var text3;
 var currentscale;
 var follow = true;
 
@@ -151,7 +150,6 @@ var follow = true;
 //    }
 //};
 
-
 //#######//
 //Rendern//
 //#######//
@@ -163,6 +161,7 @@ var render = function () {
 //    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
     text1.innerHTML = " Score Spieler 1 // " + "Aktuell: " + sc1 + " // Gesamt: " + (score1 + sc1);
     text2.innerHTML = "  Score Spieler 2 // " + "Aktuell: " + sc2 + " // Gesamt: " + (score2 + sc2);
+    
     
 //game_moni
     if (gamemoni){

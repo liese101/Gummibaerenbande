@@ -11,7 +11,7 @@ var rollr, rolll, moveu, moved, reset;
 var topf, baer, topfsize, baersize;
 var baerposition, topfposition, abstand;
 var score = 0;
-var textscore, textplayer;
+var textplayer;
 var currentscale;
 var hoehe, dm;
 var ast = new Array(hoehe);
@@ -84,27 +84,14 @@ var zeitlaeuft;
     document.body.appendChild(textplayer);
     textplayer.style.opacity = 0;
     
-    textscore = document.createElement('div');
-    textscore.style.position = 'absolute';
-    textscore.style.width = 200;
-    textscore.style.height = 20;
-    textscore.style.backgroundColor = "grey";
-    textscore.innerHTML = "Punkte: " + Math.round(score);
-    textscore.style.top = 180 + 'px';
-    textscore.style.left = 20 + 'px';
-    document.body.appendChild(textscore);
-    textscore.style.opacity = 0;
-    if(gameelli) {
-        textscore.style.opacity = 1;
-    } else {
-        textscore.style.opacity = 0;
-    }
+    
 
 function loadGameThree(){
     
 clearScene();
 
-textscore.style.opacity = 1;
+text3.style.opacity = 1;
+
 textplayer.style.opacity = 1;
 
 gamemoni = false;
@@ -128,6 +115,7 @@ camera.position.set(0, 10, 0);
 
 zeitlaeuft = false;
 
+
 console.log("Game#3 erstellt");
 }
 
@@ -138,7 +126,6 @@ var setTopf = function() {
         // Topf ist oben, und wird erreicht.
     if (topf.position.y === hoehe){
         topfGesammelt = true;
-        scoreAnzeigen();
         topf.position.y = 0;
     }
         // Topf ist unten, und wird erreicht.
@@ -173,6 +160,7 @@ var spielerwechsel = function() {
         zeitstrafe = 0;
         spieler = 2;
         scoreAnzeigen();
+        text3.style.opacity = 1;
         //Spieler 2 beginnt...
         
     }else if(spieler === 2){
@@ -214,7 +202,7 @@ var scoreberechnen = function() {
         sc = 0;
     }
     return sc;
-}
+};
 
 //
 //Abstand Prüfen (Bär und Honigtopf, Bär und Äste)
@@ -241,12 +229,10 @@ var astGefunden = function() {
     if(moveu) {
         baer.position.y -= 0.1;
         score -= 0.1;
-        scoreAnzeigen();
     }
     if(moved) {
         baer.position.y += 0.1;
         score -= 0.1;
-        scoreAnzeigen();
     }
     if(rolll) {
         baer.rotation.y -= rspeed;
@@ -254,7 +240,6 @@ var astGefunden = function() {
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
         baer.position.z = Math.sin(baer.rotation.y)* dm;
         score -= 0.1;
-        scoreAnzeigen();
     }
     if(rollr) {
         baer.rotation.y += rspeed;
@@ -262,7 +247,6 @@ var astGefunden = function() {
         baer.position.x = Math.cos(baer.rotation.y)* dm;
         baer.position.z = Math.sin(baer.rotation.y)* dm;
         score -= 0.1;
-        scoreAnzeigen();
     }
 };
 
@@ -340,26 +324,3 @@ var kameraBewegen = function() {
     camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
     camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
 };
-
-var scoreAnzeigen = function() {
-    //textscore.innerHTML = "Punkte: " + Math.round(score);
-    textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
-};
-
-//#######//
-//Rendern//
-//#######//
-//var render = function () {
-//    requestAnimationFrame( render );
-    
-//    e_move();
-    
-//    kameraBewegen();
-    
-//    e_positionSet();
-    
-//    collision();
-    
-//    renderer.render(scene, camera);
-//};
-
