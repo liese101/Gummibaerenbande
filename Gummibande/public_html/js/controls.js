@@ -50,6 +50,9 @@ var actionStart = function (event) {
         case "2":
             loadGameTwo();
             break;
+        case "3":
+            loadGameThree();
+            break;
         case "4":
             loadGameFour();
         default:
