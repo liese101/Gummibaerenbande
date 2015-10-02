@@ -47,6 +47,9 @@ var actionStart = function (event) {
         case "G":
             pukgo = true;
             break;
+        case "1":
+            loadAnleitung();
+            break;
         case "2":
             loadGameTwo();
             break;
