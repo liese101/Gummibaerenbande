@@ -123,9 +123,9 @@ stamm.position.set(0, hoehe/2-0.5, 0);
 topf.position.set = (0, hoehe, 0);
 baer.position.set(dm, 0, 0);
 camera.position.set(0, 10, 0);
-baerbild.position.x = baer.position.x;
+//baerbild.position.x = baer.position.x;
 baerbild.position.y = baer.position.y;
-baerbild.position.z = baer.position.z;
+//baerbild.position.z = baer.position.z;
 
 console.log("Game#3 erstellt")
 }
@@ -151,14 +151,14 @@ var setTopf = function() {
 
 var spielerwechsel = function() {
     if(spieler === 2){
-        score2 = score;
+        sc2 += Math.round(score);
         spieler = 1;
-        score = score1;
+        score = sc1;
         scoreAnzeigen();
     }else{
-        score1 = score;
+        sc1 += Math.round(score);
         spieler = 2;
-        score = score2;
+        score = sc2;
         scoreAnzeigen();
     }
 };
