@@ -11,6 +11,7 @@ var rollr, rolll, moveu, moved, reset;
 var topf, baer, topfsize, baersize;
 var baerposition, topfposition, abstand;
 var score = 0;
+var score1, score2;
 var textplayer;
 var currentscale;
 var hoehe, dm;
@@ -25,6 +26,10 @@ var zeitlaeuft;
 var hintergrund_sound_e;
 var eingesammelt_sound_e;
 var ende_sound;
+var p1win, p2win, gleich;
+var text3;
+var width, height;
+var laenge;
 
 // Objekte der Spielszene erstellen
     //Boden
@@ -41,7 +46,7 @@ var ende_sound;
     var material2 = new THREE.MeshBasicMaterial({map: topftextur});
     
     //Baum mit Durchmesser dm
-    var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
+    var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe , 32 );
     var holz = THREE.ImageUtils.loadTexture("files/holz.JPG");
     var holzmaterial = new THREE.MeshBasicMaterial({map: holz});
     var stamm = new THREE.Mesh( geometry3, holzmaterial );
@@ -109,6 +114,12 @@ textplayer.style.opacity = 1;
 //Kamera in perspektivische Kamera ändern
 camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
 
+//Objekte positionieren
+boden.rotation.x = -Math.PI/2;
+stamm.position.set(0, hoehe/2-0.5, 0);
+topf.position.set(0, hoehe, 0);
+baer.position.set(dm, 0.5, 0);
+camera.position.set(0, 3.5, 10);
 
 //Objekte zur Szene hinzufüegen
 scene.add( boden );
@@ -117,15 +128,6 @@ scene.add( topf );
 scene.add( stamm );
 aesteErstellen();
 baer.add( baerbild );
-
-//Objekte positionieren
-boden.rotation.x = -Math.PI/2;
-stamm.position.set(0, hoehe/2-0.5, 0);
-topf.position.set = (0, hoehe+topszize, 0);
-baer.position.set(0, 0, dm);
-baer.rotation.y = 0;
-camera.position.set(0, 0, 10);
-camera.rotation.y = 0;
 
 //Zeitmessung ausschalten (startet erst bei Beginn des Spiels)
 zeitlaeuft = false;
@@ -138,7 +140,7 @@ camera.add(ende_sound);
 
 //Ausgabe in der Konsole
 console.log("Game#3 erstellt");
-}
+};
 
 //audiolistener und sound initialisieren
 var listener = new THREE.AudioListener();
