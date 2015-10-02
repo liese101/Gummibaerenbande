@@ -143,12 +143,7 @@ function checkBorder(){
         pukspeed = 0.1;
         pukgo = false;
         sc2 += 1;
-        if(sc2 === 5){
-            checkWinner();
-            score2 = sc2;
-            sc2 = 0;
-            scene.add(p2win);
-        }
+        checkWinner();
     }
     //Aus Rechts
     if(puk.position.x > fieldwidth) {
@@ -158,11 +153,7 @@ function checkBorder(){
         pukspeed = 0.1;
         pukgo = false;
         sc1 += 1;
-        if(sc1 === 5){
-            score1 = sc1;
-            sc1 = 0;
-            scene.add(p1win);
-        }
+        checkWinner();
     }
     
     //Verhindert, dass Spieler das Feld verlassen

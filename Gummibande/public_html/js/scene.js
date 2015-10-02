@@ -118,18 +118,18 @@ function loadAnleitung(){
 
 function checkWinner(){
     if (sc1===5){
-        score1 = sc1;
+        score1 += sc1;
         sc1 = 0;
-        score2 = sc2;
+        score2 += sc2;
         sc2 = 0;
         scene.add(p1win);
         
     }
     if (sc2===5){
         scene.add(p2win);
-        score1 = sc1;
+        score1 += sc1;
         sc1 = 0;
-        score2 = sc2;
+        score2 += sc2;
         sc2 = 0;
     }
 }
