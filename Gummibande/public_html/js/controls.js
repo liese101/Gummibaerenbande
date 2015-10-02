@@ -46,6 +46,7 @@ var actionStart = function (event) {
             break;
         case "G":
             pukgo = true;
+            zeitlaeuft = true;
             break;
         case "1":
             loadAnleitung();

@@ -21,6 +21,7 @@ var spieler;
 var topfGesammelt;
 var score1 = 0, score2 = 0;
 var zeitstrafe = 0;
+var zeitlaeuft;
 
 // Szene (alles, was das Spiel braucht)
     var plane_e = new THREE.PlaneGeometry(50, 50);
@@ -125,6 +126,8 @@ topf.position.set = (0, hoehe, 0);
 baer.position.set(dm, 0, 0);
 camera.position.set(0, 10, 0);
 
+zeitlaeuft = false;
+
 console.log("Game#3 erstellt");
 }
 
@@ -149,16 +152,22 @@ var setTopf = function() {
 };
 
 var zeit = function() {
-    zeitstrafe += 0.01;
-    if (spieler === 1){
-        sc1 = scoreberechnen();
-    }else if(spieler === 2){
-        sc2 = scoreberechnen();
+    
+    if (zeitlaeuft) {
+        zeitstrafe += 0.01;
+        if (spieler === 1){
+            sc1 = scoreberechnen();
+        }else if(spieler === 2){
+            sc2 = scoreberechnen();
+        }
     }
+    
 };
 
 var spielerwechsel = function() {
     if (spieler === 1){
+        
+        zeitlaeuft = false;
         score1 = scoreberechnen();
         sc1 += score1;
         score = 0;
@@ -168,6 +177,8 @@ var spielerwechsel = function() {
         //Spieler 2 beginnt...
         
     }else if(spieler === 2){
+        
+        zeitlaeuft = false;
         score2 = scoreberechnen();
         sc2 += score2;
         scoreAnzeigen();
@@ -257,7 +268,7 @@ var e_positionSet = function(){
 var e_move = function(){
 
 //Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
-    if (moveu) {
+    if (moveu && zeitlaeuft) {
         if(baer.position.y <= hoehe) {
             baer.position.x += Math.sin(-(baer.rotation.z)) * mspeed;
             baer.position.y += Math.cos(-(baer.rotation.z)) * mspeed;
@@ -266,7 +277,7 @@ var e_move = function(){
         }       
     }
 
-    if (moved) {
+    if (moved && zeitlaeuft) {
         if(baer.position.y >= 0) {
             baer.position.x -= Math.sin(-(baer.rotation.z)) * mspeed;
             baer.position.y -= Math.cos(-(baer.rotation.z)) * mspeed;
@@ -276,7 +287,7 @@ var e_move = function(){
     }
     
 //Rotation
-    if (rolll) {
+    if (rolll && zeitlaeuft) {
         baer.rotation.y += rspeed;
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;
@@ -284,7 +295,7 @@ var e_move = function(){
         //baer.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
     }
 
-    if (rollr) {
+    if (rollr && zeitlaeuft) {
         baer.rotation.y -= rspeed;
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
@@ -294,6 +305,7 @@ var e_move = function(){
    
 //Reset
     if (reset) {                                    //muss noch gemacht werden!
+        zeitlaueft = false;
         baer.rotation.y = 0;
         baer.position.x = 1;
         baer.position.y = 0;
