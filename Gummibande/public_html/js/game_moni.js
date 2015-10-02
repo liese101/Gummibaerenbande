@@ -82,27 +82,12 @@ var collect = function(){
     if (abstand1.distance() < (ballsize+globsize)){
         globPlace();
         sc1 += 1;
-        if(sc1 === 5){
-            score1 = sc1;
-            sc1 = 0;
-            
-            eingesammelt_sound = new THREE.Audio(listener);
-            eingesammelt_sound.loadGameTwo("files/hummel.ogg");
-            eingesammelt_sound.autoplay = true;
-            eingesammelt_sound.setLoop(false);
-            camera.add(eingesammelt_sound);
-
-            scene.add(p1win);
-        }
+        checkWinner();
     }
     if( abstand2.distance() < (ballsize+globsize)){
         globPlace();
         sc2 += 1;
-        if(sc2 === 5){
-            score2 = sc2;
-            sc2 = 0;
-            scene.add(p2win);
-        }
+        checkWinner();
         }
     };
 

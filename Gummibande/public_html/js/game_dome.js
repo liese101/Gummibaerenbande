@@ -55,6 +55,8 @@ gamemoni = false;
 gameelli = false;
 gamedome = true;
 
+pukgo = false;
+
 scene.add(field);
 scene.add(puk);
 
