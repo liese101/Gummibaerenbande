@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+// Alle Konstanten, die für alle Spiele benötigt werden
 
 var width = window.innerWidth + 200;
 var height = window.innerHeight + 200;
