@@ -93,7 +93,7 @@ var collect = function(){
         globPlace();
         sc2 += 1;
         eingesammelt_sound = new THREE.Audio(listener);
-        eingesammelt_sound.load("files/miauen.ogg");
+        eingesammelt_sound.load("files/plopp 1.ogg");
         eingesammelt_sound.autoplay = true;
         checkWinner();
         }
@@ -245,7 +245,7 @@ function loadGameTwo(){
     scene.add(ground);
     ground.position.z = -1;
     globPlace();
-    camera.add(hintergrund_sound);
+    scene.add(hintergrund_sound);
     camera.add(eingesammelt_sound);
     camera.add(ende_sound);
     console.log("Game#2 erstellt");

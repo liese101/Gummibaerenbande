@@ -22,6 +22,9 @@ var topfGesammelt;
 var ascore1 = 0, ascore2 = 0;
 var zeitstrafe = 0;
 var zeitlaeuft;
+var hintergrund_sound_e;
+var eingesammelt_sound_e;
+var ende_sound;
 
 // Szene (alles, was das Spiel braucht)
     var plane_e = new THREE.PlaneGeometry(50, 50);
@@ -114,8 +117,24 @@ camera.position.set(0, 10, 0);
 
 zeitlaeuft = false;
 
+scene.add(hintergrund_sound_e);
+camera.add(eingesammelt_sound_e);
+camera.add(spielerwechsel_sound);
+camera.add(ende_sound);
+
 console.log("Game#3 erstellt");
 }
+
+//audiolistener und sound initialisieren
+var listener = new THREE.AudioListener();
+camera.add(listener);
+console.log("Audiolistener added");
+//audio
+
+hintergrund_sound_e = new THREE.Audio(listener);
+hintergrund_sound_e.load("files/wind_forest.ogg");
+hintergrund_sound_e.autoplay = true;
+hintergrund_sound_e.setLoop(true);
 
 //
 //Honigtopf neu positionieren
@@ -124,6 +143,9 @@ var setTopf = function() {
         // Topf ist oben, und wird erreicht.
     if (topf.position.y === hoehe){
         topfGesammelt = true;
+        eingesammelt_sound_e = new THREE.Audio(listener);
+        eingesammelt_sound_e.load("files/schmatzen.ogg");
+        eingesammelt_sound_e.autoplay = true;
         topf.position.y = 0;
     }
         // Topf ist unten, und wird erreicht.
@@ -159,6 +181,9 @@ var spielerwechsel = function() {
         ascore1 = scoreberechnen();
         score = 0;
         zeitstrafe = 0;
+        spielerwechsel_sound = new THREE.Audio(listener);
+        spielerwechsel_sound.load("files/klingel.ogg");
+        spielerwechsel_sound.autoplay = true;
         spieler = 2;
         textplayer.innerHTML = "Spieler 2 spielt.";
         //text3.style.opacity = 1;
@@ -183,7 +208,10 @@ var spielerwechsel = function() {
             clearScene();
             scene.add(gleich);
         }
-        
+            ende_sound = new THREE.Audio(listener);
+            ende_sound.load("files/applaus.ogg");
+            ende_sound.autoplay = true;
+            camera.add(ende_sound);
         sc1 = 0;
         sc2 = 0;
         score1 += ascore1;
@@ -226,6 +254,10 @@ var astGefunden = function() {
     if(moveu) {
         baer.position.y -= 0.1;
         score -= 0.1;
+            ast_sound = new THREE.Audio(listener);
+            ast_sound.load("files/trommel tief.ogg");
+            ast_sound.autoplay = true;
+            camera.add(ast_sound);
     }
     if(moved) {
         baer.position.y += 0.1;
