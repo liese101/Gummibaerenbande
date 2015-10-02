@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//Alle Variablen werden zur Fehlerbehebung geladen
 var THREE;
 var renderer, camera, scene;
 var actionStart, actionStop;
