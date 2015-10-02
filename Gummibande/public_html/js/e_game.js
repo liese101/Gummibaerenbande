@@ -111,9 +111,15 @@ gameelli = true;    //Spiel freischalten
 text3.style.opacity = 1;
 textplayer.style.opacity = 1;
 
+//eventuell vorhandene alte Spielstände überschreiben
 spieler = 1;
 ascore1 = 0;
 ascore1 = 0;
+sc1 = 0;
+sc2 = 0;
+zeitstrafe = 0;
+topfGesammelt = false;
+
 
 //Kamera in perspektivische Kamera ändern
 camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
