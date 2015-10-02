@@ -57,3 +57,19 @@ var abstand1 = new THREE.Line3(ball1position, globposition);//((ball1.position.x
 var abstand2 = new THREE.Line3(ball2position, globposition);//((ball2.position.x, ball2.position.y, ball2.position.z), (glob.position.x, glob.position.y, glob.position.z));
 
 
+//SPIEL 3//
+var baersize = 0.5;
+var topfsize = 0.8;
+var spieler = 1;
+var topfGesammelt = false;
+// Variablen für den Baum
+var hoehe = 50;            //Höhe des Baums
+var dm = 1;                 //Durchmesser des Baums
+var laenge = 5;             //Länge der Äste
+var aeste = new Array();    //speichert Koordinaten der Äste
+// Variablen, die für die Kollisionserkennung (Spiel 3) benötigt werden.
+var baerposition = new THREE.Vector3(0, 0, 0);
+var topfposition = new THREE.Vector3(0, 0, 0);
+var abstand = new THREE.Line3(baerposition, topfposition);
+var astposition = new Array();
+var astabstand = new Array();

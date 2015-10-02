@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 var THREE;
-var renderer, camera, scene;
+var renderer, camera, camera2, scene;
 var actionStart, actionStop;
 var size, growth, rspeed, mspeed;
 var rollr, rolll, moveu, moved, mover, movel, reset;
@@ -19,6 +19,7 @@ var text1;
 var text2;
 var currentscale;
 var follow = true;
+var kamera;
 
 //
 //Ball wachsen Lassen
@@ -172,6 +173,7 @@ var render = function () {
 //    spring();
     radar();
     abstandCheck();
+    //kamera = camera;
     }
     
 
@@ -182,6 +184,15 @@ var render = function () {
     checkBorder();
     checkPlayers();
     dMove();
+    //kamera = camera;
+    }
+    
+    if (gameelli){
+    e_move();
+    kameraBewegen();
+    e_positionSet();
+    collision();
+    //kamera = camera2;
     }
 
     renderer.render(scene, camera);

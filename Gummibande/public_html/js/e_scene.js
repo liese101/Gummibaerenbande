@@ -15,7 +15,9 @@
     spotLight.castShadow = true;
     spotLight.position.set (20, 35, 40);
     scene.add(spotLight);
-    
+
+
+
     var plane = new THREE.PlaneGeometry(50, 50);
     var bodentextur = THREE.ImageUtils.loadTexture("files/waldboden.JPG");
     var bodenmat = new THREE.MeshBasicMaterial({map: bodentextur});
@@ -81,25 +83,26 @@
     baer.position.x = dm;
     camera.position.z = 10;
 
-    var text1 = document.createElement('div');
-    text1.style.position = 'absolute';
-    text1.style.width = 200;
-    text1.style.height = 20;
-    text1.style.backgroundColor = "grey";
-    text1.innerHTML = "Spieler: " + spieler + " spielt.";
-    text1.style.top = 50 + 'px';
-    text1.style.left = 20 + 'px';
-    document.body.appendChild(text1);
+    var textplayer = document.createElement('div');
+    textplayer.style.position = 'absolute';
+    textplayer.style.width = 200;
+    textplayer.style.height = 20;
+    textplayer.style.backgroundColor = "grey";
+    textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
+    textplayer.style.top = 50 + 'px';
+    textplayer.style.left = 20 + 'px';
+    document.body.appendChild(textplayer);
     
-    var text2 = document.createElement('div');
-    text2.style.position = 'absolute';
-    text2.style.width = 200;
-    text2.style.height = 20;
-    text2.style.backgroundColor = "grey";
-    text2.innerHTML = "Punkte: " + Math.round(score);
-    text2.style.top = 80 + 'px';
-    text2.style.left = 20 + 'px';
-    document.body.appendChild(text2);
+    var textscore = document.createElement('div');
+    textscore.style.position = 'absolute';
+    textscore.style.width = 200;
+    textscore.style.height = 20;
+    textscore.style.backgroundColor = "grey";
+    textscore.innerHTML = "Punkte: " + Math.round(score);
+    textscore.style.top = 80 + 'px';
+    textscore.style.left = 20 + 'px';
+    document.body.appendChild(textscore);
+    
     
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);

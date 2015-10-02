@@ -11,7 +11,7 @@ var rollr, rolll, moveu, moved, reset;
 var topf, baer, topfsize, baersize;
 var baerposition, topfposition, abstand;
 var score;
-var text2, text1;
+var textscore, textplayer;
 var currentscale;
 var hoehe, dm;
 var ast = new Array(hoehe);
@@ -20,11 +20,106 @@ var astabstand;
 var spieler, score1, score2;
 var topfGesammelt;
 
+// Szene (alles, was das Spiel braucht)
+    var plane_e = new THREE.PlaneGeometry(50, 50);
+    var bodentextur = THREE.ImageUtils.loadTexture("files/waldboden.JPG");
+    var bodenmat = new THREE.MeshBasicMaterial({map: bodentextur});
+    var boden = new THREE.Mesh(plane_e, bodenmat);
+    
+    var geometry1 = new THREE.SphereGeometry( 0.1 );
+    var geometry2 = new THREE.SphereGeometry( topfsize );
+    var material1 = new THREE.MeshBasicMaterial( {color: 0x123456} );
+    var topftextur = THREE.ImageUtils.loadTexture("files/honigtopf.JPG");
+    var material2 = new THREE.MeshBasicMaterial({map: topftextur});
+    
+    //Baum
+    var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
+    var holz = THREE.ImageUtils.loadTexture("files/holz.JPG");
+    var holzmaterial = new THREE.MeshBasicMaterial({map: holz});
+    var stamm = new THREE.Mesh( geometry3, holzmaterial );
+    
+    function aesteErstellen(){                 
+        for(i = 0; i < hoehe-3; i++) {
+            var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
+            var ast = new THREE.Mesh( geometry4, holzmaterial );
+            
+            //Berechnung der Positionen auf X- und Z-Achse
+            var a = Math.random()*Math.PI*2;
+            var x = Math.cos(a) * ((dm+laenge)/2);
+            var z = Math.sin(a) * ((dm+laenge)/2);
+            var y = i + 2;
+            
+            //Rotation und Verschiebung
+            ast.rotateZ(Math.PI / 2);
+            ast.rotateX(a);
+            ast.position.set(x, y, -z);
+            scene.add(ast);
+            
+            //Speichern der Positionen und ziehen der Linie zwischen Ast und Bär
+            astposition[i] = new THREE.Vector3(x, y, -z);
+            astabstand[i] = new THREE.Line3();
+        }
+    }       
+            
+    baer = new THREE.Mesh( geometry1, material1 );
+    topf = new THREE.Mesh( geometry2, material2 );
+    
+    //Sprite für den Bären
+    var spritemap = THREE.ImageUtils.loadTexture("files/kletterbaer.png");
+    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
+    var baerbild = new THREE.Sprite (spriteMaterial);
+    baerbild.transparent = true;
+    
+    
+    textplayer = document.createElement('div');
+    textplayer.style.position = 'absolute';
+    textplayer.style.width = 200;
+    textplayer.style.height = 20;
+    textplayer.style.backgroundColor = "grey";
+    textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
+    textplayer.style.top = 50 + 'px';
+    textplayer.style.left = 20 + 'px';
+    document.body.appendChild(textplayer);
+    
+    textscore = document.createElement('div');
+    textscore.style.position = 'absolute';
+    textscore.style.width = 200;
+    textscore.style.height = 20;
+    textscore.style.backgroundColor = "grey";
+    textscore.innerHTML = "Punkte: " + Math.round(score);
+    textscore.style.top = 80 + 'px';
+    textscore.style.left = 20 + 'px';
+    document.body.appendChild(textscore);
 
-var loadGameThree = function() {
-    clearScene();
-    //und so weiter
-};
+
+function loadGameThree(){
+    
+clearScene();
+
+gamemoni = false;
+gamedome = false;
+gameelli = true;
+
+//camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
+scene.add( boden );
+scene.add( baer );
+scene.add( topf );
+scene.add( stamm );
+aesteErstellen();
+baer.add( baerbild );
+
+boden.rotation.x = -Math.PI/2;
+boden.position.y -= 0.1;
+stamm.position.set(0, hoehe/2-0.5, 0);
+topf.position.y = hoehe;
+baer.position.x = dm;
+camera.position.z = 10;
+baerbild.position.x = baer.position.x;
+baerbild.position.y = baer.position.y;
+baerbild.position.z = baer.position.z;
+
+console.log("Game#3 erstellt")
+}
 
 //
 //Honigtopf neu positionieren
@@ -45,14 +140,15 @@ var setTopf = function() {
 
 var spielerwechsel = function() {
     if(spieler === 2){
+        score2 = score;
         spieler = 1;
         score = score1;
         scoreAnzeigen();
     }else{
+        score1 = score;
         spieler = 2;
         score = score2;
         scoreAnzeigen();
-        
     }
 };
 
@@ -65,7 +161,7 @@ var collision = function(){
     }
     
     i = Math.round(baer.position.y);
-    if(i < 1.5 || i > hoehe - 1.5) {        //y-Positionen 2 - 19 -> Indexe 0 - 17
+    if(i < 1.5 || i > hoehe - 1.5) {      //y-Positionen 2 - 19 -> Indexe 0 - 17
         // ungültige Indexe werden abgefangen
     } else if (astabstand[i-2].distance() < 2.3){ 
         astGefunden();   
@@ -109,7 +205,7 @@ var astGefunden = function() {
 //
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
 //
-var positionSet = function(){
+var e_positionSet = function(){
     baerposition.set(baer.position.x, baer.position.y, baer.position.z); 
     topfposition.set(topf.position.x, topf.position.y, topf.position.z);
     abstand.set(baerposition, topfposition);
@@ -123,7 +219,7 @@ var positionSet = function(){
 //
 //Bewegung in rotierte Richtung und Rotation
 //
-var move = function(){
+var e_move = function(){
 
 //Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
     if (moveu) {
@@ -181,23 +277,24 @@ var kameraBewegen = function() {
 };
 
 var scoreAnzeigen = function() {
-    text2.innerHTML = "Punkte: " + Math.round(score);
-    text1.innerHTML = "Spieler: " + spieler + " spielt.";
+    textscore.innerHTML = "Punkte: " + Math.round(score);
+    textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
 };
 
 //#######//
 //Rendern//
 //#######//
-var render = function () {
-    requestAnimationFrame( render );
+//var render = function () {
+//    requestAnimationFrame( render );
     
-    move();
+//    e_move();
     
-    kameraBewegen();
+//    kameraBewegen();
     
-    positionSet();
+//    e_positionSet();
     
-    collision();
+//    collision();
     
-    renderer.render(scene, camera);
-};
+//    renderer.render(scene, camera);
+//};
+

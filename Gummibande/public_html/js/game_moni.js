@@ -207,6 +207,11 @@ function loadGameTwo(){
     clearScene();
     gamedome = false;
     gamemoni = true;
+    
+    //camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
+    //camera.position.set(0, 0, 6);
+    //camera.rotation.y = Math.PI;
+    
     scene.add(glob);
     scene.add(ball1);
     ball1.add(bearp1);
