@@ -17,7 +17,7 @@ var hoehe, dm;
 var ast = new Array(hoehe);
 var astposition = new Array(hoehe);
 var astabstand;
-var spieler, score1, score2;
+var spieler;
 var topfGesammelt;
 var score1 = 0, score2 = 0;
 var zeitstrafe = 0;
@@ -125,9 +125,6 @@ stamm.position.set(0, hoehe/2-0.5, 0);
 topf.position.set = (0, hoehe, 0);
 baer.position.set(dm, 0, 0);
 camera.position.set(0, 10, 0);
-//baerbild.position.x = baer.position.x;
-baerbild.position.y = baer.position.y;
-//baerbild.position.z = baer.position.z;
 
 console.log("Game#3 erstellt");
 }
@@ -154,30 +151,32 @@ var setTopf = function() {
 
 var zeit = function() {
     zeitstrafe += 0.01;
+    textscore.innerHTML = "Punkte: " + scoreberechnen();
 };
 
 var spielerwechsel = function() {
-    if(spieler === 2){
-        score2 += scoreberechnen();
-        //spieler = 1;
-        //score = sc1;
-        scoreAnzeigen();
-        sc1 += score1;
-        sc2 += score2;
-        spieler = 0;
-    }else if (spieler === 1){
-        score1 += scoreberechnen();
-        spieler = 2;
+    if (spieler === 1){
+        score1 = scoreberechnen();
+        sc1 += score1/2;
         score = 0;
         zeitstrafe = 0;
+        spieler = 2;
         scoreAnzeigen();
+        //Spieler 2 beginnt...
+        
+    }else if(spieler === 2){
+        score2 = scoreberechnen();
+        sc2 += score2/2;
+        scoreAnzeigen();
+        
+        //END OF GAME
     }
 };
 
 var scoreberechnen = function() {
-    sc = 20;
-    sc += Math.round(score);
+    sc = Math.round(score);
     sc -= Math.round(zeitstrafe);
+    sc += 20;
     if(sc < 0) {
         sc = 0;
     }
@@ -309,7 +308,7 @@ var kameraBewegen = function() {
 };
 
 var scoreAnzeigen = function() {
-    textscore.innerHTML = "Punkte: " + Math.round(score);
+    //textscore.innerHTML = "Punkte: " + Math.round(score);
     textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
 };
 
