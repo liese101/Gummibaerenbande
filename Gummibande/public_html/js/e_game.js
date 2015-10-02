@@ -19,7 +19,7 @@ var astposition = new Array(hoehe);
 var astabstand;
 var spieler;
 var topfGesammelt;
-var score1 = 0, score2 = 0;
+var ascore1 = 0, ascore2 = 0;
 var zeitstrafe = 0;
 var zeitlaeuft;
 
@@ -154,7 +154,7 @@ var setTopf = function() {
 var zeit = function() {
     
     if (zeitlaeuft) {
-        zeitstrafe += 0.01;
+        zeitstrafe += 0.005;
         if (spieler === 1){
             sc1 = scoreberechnen();
         }else if(spieler === 2){
@@ -168,8 +168,7 @@ var spielerwechsel = function() {
     if (spieler === 1){
         
         zeitlaeuft = false;
-        score1 = scoreberechnen();
-        sc1 += score1;
+        ascore1 = scoreberechnen();
         score = 0;
         zeitstrafe = 0;
         spieler = 2;
@@ -179,12 +178,15 @@ var spielerwechsel = function() {
     }else if(spieler === 2){
         
         zeitlaeuft = false;
-        score2 = scoreberechnen();
-        sc2 += score2;
+        ascore2 = scoreberechnen();
+        
         scoreAnzeigen();
         
         spieler = 0;
         //END OF GAME
+        
+        score1 += ascore1;
+        score2 += ascore2;
     }
 };
 
