@@ -139,13 +139,11 @@ var setTopf = function() {
         // Topf ist oben, und wird erreicht.
     if (topf.position.y === hoehe){
         topfGesammelt = true;
-        score += 20;
         scoreAnzeigen();
         topf.position.y = 0;
     }
         // Topf ist unten, und wird erreicht.
     else if (topf.position.y === 0 && topfGesammelt){
-        score += 20;
         spielerwechsel();
         topf.position.y = hoehe;
         topfGesammelt = false;
@@ -177,7 +175,8 @@ var spielerwechsel = function() {
 };
 
 var scoreberechnen = function() {
-    sc = Math.round(score);
+    sc = 20;
+    sc += Math.round(score);
     sc -= Math.round(zeitstrafe);
     if(sc < 0) {
         sc = 0;
