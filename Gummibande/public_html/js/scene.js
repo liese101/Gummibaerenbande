@@ -10,8 +10,9 @@
     var ende_sound;
 
     var scene = new THREE.Scene(); // Scene erstellt
-    //var camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
     var camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
+    camera.position.set(0, 0, 6);
+    camera.rotation.y = 0;
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
     renderer.setSize( window.innerWidth, window.innerHeight*0.80 );
@@ -34,10 +35,6 @@
     var gleich = new THREE.Mesh(wingeo, gleichmat);
     gleich.position.z = 4;
     var anleitung = new THREE.Mesh(wingeo, anleitungmat);
-    
-
-
-    camera.position.z = 6;
     
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
@@ -95,15 +92,16 @@ Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst o
              obj = scene.children[i];
              scene.remove(obj);
         }
-        
-    camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
-    camera.position.set(0, 0, 6);
-    camera.rotation.y = 0;
     
     //Transperant machen
     textplayer.style.opacity = 0;
     text4.style.opacity = 0;
     text3.style.opacity = 0;
+    
+    //Kamera zurücksetzen
+    camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
+    camera.position.set(0, 0, 6);
+    camera.rotation.y = 0;
     
         console.log("Scene cleart");
     }
