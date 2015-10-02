@@ -160,8 +160,8 @@ var render = function () {
 //    text1.innerHTML = "P1: " + moveu + " _ " + moved + " _ " + rolll + " _ " + rollr + " </br>P2: " + auf + " _ " + ab + " _ " + links + " _ " + rechts;
 //    text1.innerHTML = "pukrotation: " + puk.rotation.z;
 //    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
-    text1.innerHTML = " Score: " + sc1;
-    text2.innerHTML = "  Score: " + sc2;
+    text1.innerHTML = " Score: " + (score1 + sc1);
+    text2.innerHTML = "  Score: " + (score2 + sc2);
     
 //game_moni
     if (gamemoni){

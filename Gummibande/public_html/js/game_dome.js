@@ -47,6 +47,8 @@ function loadGameFour(){
     
 clearScene();
 
+sc1 = 0;
+sc2 = 0;
 gamemoni = false;
 gameelli = false;
 gamedome = true;
@@ -65,7 +67,7 @@ p2.add(bear2);
 p2.position.set(fieldwidth-1, 0, 0);
 scene.add(p2);
 
-console.log("Game#4 erstellt")
+console.log("Game#4 erstellt");
 }
 
 //Bewegung von Spieler 1 und 2
@@ -140,7 +142,10 @@ function checkBorder(){
         pukgo = false;
         sc2 += 1;
         if(sc2 === 5){
-            // wechsel zum nächsten Spiel
+            checkWinner();
+            score2 = sc2;
+            sc2 = 0;
+            scene.add(p2win);
         }
     }
     //Aus Rechts
@@ -152,7 +157,9 @@ function checkBorder(){
         pukgo = false;
         sc1 += 1;
         if(sc1 === 5){
-            // wechsel zum nächsten Spiel
+            score1 = sc1;
+            sc1 = 0;
+            scene.add(p1win);
         }
     }
     
@@ -167,5 +174,6 @@ function checkBorder(){
         p2.position.y -= 0.11;
     
 }
+
 
 

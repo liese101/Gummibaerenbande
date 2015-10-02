@@ -77,17 +77,21 @@ var collect = function(){
         globPlace();
         sc1 += 1;
         if(sc1 === 5){
-            // wechsel zum nächsten Spiel
+            score1 = sc1;
+            sc1 = 0;
+            scene.add(p1win);
         }
     }
     if( abstand2.distance() < (ballsize+globsize)){
         globPlace();
         sc2 += 1;
         if(sc2 === 5){
-            // wechsel zum nächsten Spiel
+            score2 = sc2;
+            sc2 = 0;
+            scene.add(p2win);
         }
-    }
-};
+        }
+    };
 
 
 //Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)

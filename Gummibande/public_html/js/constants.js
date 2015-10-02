@@ -26,7 +26,8 @@ var ballsize = 0.2;
 var globsize = 1;
 var currentscale = 1;
 
-var score1, score2 = 0;
+var score1 = 0; 
+var score2 = 0;
 var sc1 = 0;
 var sc2 = 0;
 
