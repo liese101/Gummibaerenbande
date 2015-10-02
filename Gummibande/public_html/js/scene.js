@@ -21,6 +21,8 @@
     var p1winmat = new THREE.MeshBasicMaterial({map: p1winmap});
     var p2winmap = new THREE.ImageUtils.loadTexture("files/p2win.png");
     var p2winmat = new THREE.MeshBasicMaterial({map: p2winmap});
+    var gleichmap = new THREE.ImageUtils.loadTexture("files/unentschieden.png");
+    var gleichmat = new THREE.MeshBasicMaterial({map: gleichmap});
     var anleitungmap = new THREE.ImageUtils.loadTexture("files/anleitung.png");
     var anleitungmat = new THREE.MeshBasicMaterial({map: anleitungmap});
     
@@ -28,6 +30,8 @@
     p1win.position.z = 4;
     var p2win = new THREE.Mesh(wingeo, p2winmat);
     p2win.position.z = 4;
+    var gleich = new THREE.Mesh(wingeo, gleichmat);
+    gleich.position.z = 4;
     var anleitung = new THREE.Mesh(wingeo, anleitungmat);
     
 

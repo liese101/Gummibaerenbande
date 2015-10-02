@@ -179,15 +179,30 @@ var spielerwechsel = function() {
         
         zeitlaeuft = false;
         ascore2 = scoreberechnen();
-        
         scoreAnzeigen();
-        
         spieler = 0;
-        //END OF GAME
+        
+        //END OF GAME:
+        
+        if(sc1 > sc2) {
+            gameelli = false;
+            clearScene();
+            scene.add(p1win);
+        } else if (sc1 < sc2) {
+            gameelli = false;
+            clearScene();
+            scene.add(p2win);
+        } else {
+            gameelli = false;
+            clearScene();
+            scene.add(gleich);
+        }
+        
         sc1 = 0;
         sc2 = 0;
         score1 += ascore1;
         score2 += ascore2;
+        
     }
 };
 
