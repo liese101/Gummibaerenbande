@@ -3,6 +3,7 @@ var Physijs;
 var width = window.innerWidth;
 var height = window.innerHeight;
 aspect_ratio = width / height;
+var x, y, w, h;
 
 //physikeinstellungen
 Physijs.scripts.ammo = 'http://gamingJS.com/ammo.js';
@@ -201,6 +202,19 @@ function gameStep() {
 }
 gameStep();
 
+var render = function() {
+    requestAnimationFrame(render);
+    
+    makeBorder(x, y, w, h);
+    move(x);
+    placeGoal();
+    Ramp(x, y);
+    gameOver();
+    animate();
+    gameStep();
+    
+    renderer.render(scene, camera);
 
+};
 
 
