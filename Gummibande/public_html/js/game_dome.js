@@ -176,6 +176,7 @@ function checkBorder(){
         pukspeed = 0.1;
         pukgo = false;
         sc2 += 1;
+        playAusSound();
         checkWinner();
     }
     //Aus Rechts
