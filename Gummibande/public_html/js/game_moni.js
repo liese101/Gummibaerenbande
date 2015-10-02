@@ -85,7 +85,7 @@ var collect = function(){
         globPlace();
         sc1 += 1;
         eingesammelt_sound = new THREE.Audio(listener);
-        eingesammelt_sound.load("files/plopp 1.ogg");
+        eingesammelt_sound.load("files/einsammeln.ogg");
         eingesammelt_sound.autoplay = true;
         checkWinner();
     }
@@ -93,7 +93,7 @@ var collect = function(){
         globPlace();
         sc2 += 1;
         eingesammelt_sound = new THREE.Audio(listener);
-        eingesammelt_sound.load("files/plopp 1.ogg");
+        eingesammelt_sound.load("files/einsammeln.ogg");
         eingesammelt_sound.autoplay = true;
         checkWinner();
         }

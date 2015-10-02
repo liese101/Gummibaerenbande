@@ -119,7 +119,7 @@ var aus_sound;
 var spieler_sound;
 
 hintergrund_sound_d = new THREE.Audio(listener);
-hintergrund_sound_d.load("files/herzschlag.ogg");
+hintergrund_sound_d.load("files/frosch im gras.ogg");
 hintergrund_sound_d.autoplay = true;
 hintergrund_sound_d.setLoop(true);
 
@@ -166,6 +166,7 @@ function checkBorder(){
     if (puk.position.y < -fieldheight || puk.position.y > fieldheight){
         puk.rotation.z = -(puk.rotation.z+3.1415);
         puk.rotation.z %= 6.283;
+        playBorderSound();
     }
     //Aus Links
     if (puk.position.x < -fieldwidth){
@@ -180,6 +181,7 @@ function checkBorder(){
     //Aus Rechts
     if(puk.position.x > fieldwidth) {
         belongs = false;
+        playAusSound();
         puk.position.set(0,0,0);
         puk.rotation.z = Math.random()*-1.5-1;
         pukspeed = 0.1;
@@ -205,6 +207,19 @@ function playPongSound(){
     spieler_sound.load("files/trommel höher.ogg");
     spieler_sound.autoplay = true;
 }
+
+function playBorderSound(){
+    spieler_sound = new THREE.Audio(listener);
+    spieler_sound.load("files/trommel am höchsten.ogg");
+    spieler_sound.autoplay = true;
+}
+
+function playAusSound(){
+    spieler_sound = new THREE.Audio(listener);
+    spieler_sound.load("files/trommel hell.ogg");
+    spieler_sound.autoplay = true;
+}
+
 
 
 
