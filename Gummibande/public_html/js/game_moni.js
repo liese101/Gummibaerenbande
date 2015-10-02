@@ -85,7 +85,7 @@ var collect = function(){
         globPlace();
         sc1 += 1;
         eingesammelt_sound = new THREE.Audio(listener);
-        eingesammelt_sound.load("files/miauen.ogg");
+        eingesammelt_sound.load("files/plopp 1.ogg");
         eingesammelt_sound.autoplay = true;
         checkWinner();
     }
@@ -221,14 +221,9 @@ console.log("Audiolistener added");
 //audio
 
 hintergrund_sound = new THREE.Audio(listener);
-hintergrund_sound.load("files/wind_forest.ogg");
+hintergrund_sound.load("files/wiese.ogg");
 hintergrund_sound.autoplay = true;
 hintergrund_sound.setLoop(true);
-
-
-
-
-
 
 
 
