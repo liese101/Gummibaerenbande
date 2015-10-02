@@ -164,11 +164,11 @@ var spielerwechsel = function() {
         scoreAnzeigen();
         sc1 += score1;
         sc2 += score2;
-        endGame();
-    }else{
+        spieler = 0;
+    }else if (spieler === 1){
         score1 += scoreberechnen();
         spieler = 2;
-        score = score2;
+        score = 0;
         zeitstrafe = 0;
         scoreAnzeigen();
     }
