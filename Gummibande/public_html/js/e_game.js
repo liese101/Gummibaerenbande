@@ -11,7 +11,7 @@ var rollr, rolll, moveu, moved, reset;
 var topf, baer, topfsize, baersize;
 var baerposition, topfposition, abstand;
 var score = 0;
-var textplayer;
+var textscore, textplayer;
 var currentscale;
 var hoehe, dm;
 var ast = new Array(hoehe);
@@ -24,22 +24,22 @@ var zeitstrafe = 0;
 var zeitlaeuft;
 
 // Szene (alles, was das Spiel braucht)
-var plane_e = new THREE.PlaneGeometry(50, 50);
-var bodentextur = THREE.ImageUtils.loadTexture("files/waldboden.JPG");
-var bodenmat = new THREE.MeshBasicMaterial({map: bodentextur});
-var boden = new THREE.Mesh(plane_e, bodenmat);
+    var plane_e = new THREE.PlaneGeometry(50, 50);
+    var bodentextur = THREE.ImageUtils.loadTexture("files/waldboden.JPG");
+    var bodenmat = new THREE.MeshBasicMaterial({map: bodentextur});
+    var boden = new THREE.Mesh(plane_e, bodenmat);
     
-var geometry1 = new THREE.SphereGeometry( 0.1 );
-var geometry2 = new THREE.SphereGeometry( topfsize );
-var material1 = new THREE.MeshBasicMaterial( {color: 0x123456} );
-var topftextur = THREE.ImageUtils.loadTexture("files/honigtopf.JPG");
-var material2 = new THREE.MeshBasicMaterial({map: topftextur});
+    var geometry1 = new THREE.SphereGeometry( 0.1 );
+    var geometry2 = new THREE.SphereGeometry( topfsize );
+    var material1 = new THREE.MeshBasicMaterial( {color: 0x123456} );
+    var topftextur = THREE.ImageUtils.loadTexture("files/honigtopf.JPG");
+    var material2 = new THREE.MeshBasicMaterial({map: topftextur});
     
-//Baum
-var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
-var holz = THREE.ImageUtils.loadTexture("files/holz.JPG");
-var holzmaterial = new THREE.MeshBasicMaterial({map: holz});
-var stamm = new THREE.Mesh( geometry3, holzmaterial );
+    //Baum
+    var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
+    var holz = THREE.ImageUtils.loadTexture("files/holz.JPG");
+    var holzmaterial = new THREE.MeshBasicMaterial({map: holz});
+    var stamm = new THREE.Mesh( geometry3, holzmaterial );
     
     function aesteErstellen(){                 
         for(i = 0; i < hoehe-3; i++) {
@@ -64,21 +64,47 @@ var stamm = new THREE.Mesh( geometry3, holzmaterial );
         }
     }       
             
-baer = new THREE.Mesh( geometry1, material1 );
-topf = new THREE.Mesh( geometry2, material2 );
+    baer = new THREE.Mesh( geometry1, material1 );
+    topf = new THREE.Mesh( geometry2, material2 );
     
-//Sprite für den Bären                                                      //Hier stimmt was nicht!
-var spritemap = THREE.ImageUtils.loadTexture("files/kletterbaer.png");
-var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
-var baerbild = new THREE.Sprite (spriteMaterial);
-baerbild.transparent = true;
+    //Sprite für den Bären                                                      //Hier stimmt was nicht!
+    var spritemap = THREE.ImageUtils.loadTexture("files/kletterbaer.png");
+    var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
+    var baerbild = new THREE.Sprite (spriteMaterial);
+    baerbild.transparent = true;
     
-  
+    textplayer = document.createElement('div');
+    textplayer.style.position = 'absolute';
+    textplayer.style.width = 200;
+    textplayer.style.height = 20;
+    textplayer.style.backgroundColor = "grey";
+    textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
+    textplayer.style.top = 150 + 'px';
+    textplayer.style.left = 20 + 'px';
+    document.body.appendChild(textplayer);
+    textplayer.style.opacity = 0;
+    
+    textscore = document.createElement('div');
+    textscore.style.position = 'absolute';
+    textscore.style.width = 200;
+    textscore.style.height = 20;
+    textscore.style.backgroundColor = "grey";
+    textscore.innerHTML = "Punkte: " + Math.round(score);
+    textscore.style.top = 180 + 'px';
+    textscore.style.left = 20 + 'px';
+    document.body.appendChild(textscore);
+    textscore.style.opacity = 0;
+    if(gameelli) {
+        textscore.style.opacity = 1;
+    } else {
+        textscore.style.opacity = 0;
+    }
 
 function loadGameThree(){
     
 clearScene();
 
+textscore.style.opacity = 1;
 textplayer.style.opacity = 1;
 
 gamemoni = false;
@@ -101,7 +127,6 @@ baer.position.set(dm, 0, 0);
 camera.position.set(0, 10, 0);
 
 zeitlaeuft = false;
-info = true;
 
 console.log("Game#3 erstellt");
 }
@@ -317,6 +342,7 @@ var kameraBewegen = function() {
 };
 
 var scoreAnzeigen = function() {
+    //textscore.innerHTML = "Punkte: " + Math.round(score);
     textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
 };
 
