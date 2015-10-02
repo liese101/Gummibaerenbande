@@ -128,9 +128,9 @@ var setTopf = function() {
     }
         // Topf ist unten, und wird erreicht.
     else if (topf.position.y === 0 && topfGesammelt){
-        spielerwechsel();
         topf.position.y = hoehe;
         topfGesammelt = false;
+        spielerwechsel();
     }
     
     else if (topf.position.y === 0) {
@@ -149,6 +149,8 @@ var zeit = function() {
         }
     }
     
+    textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
+    
 };
 
 var spielerwechsel = function() {
@@ -158,13 +160,13 @@ var spielerwechsel = function() {
         score = 0;
         zeitstrafe = 0;
         spieler = 2;
-        scoreAnzeigen();
+        textplayer.innerHTML = "Spieler 2 spielt.";
+        //text3.style.opacity = 1;
         //Spieler 2 beginnt...
         
     }else if(spieler === 2){
         zeitlaeuft = false;
         ascore2 = scoreberechnen();
-        scoreAnzeigen();
         spieler = 0;
         
         //END OF GAME:
