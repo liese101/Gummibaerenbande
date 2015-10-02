@@ -129,7 +129,7 @@ camera.position.set(0, 10, 0);
 baerbild.position.y = baer.position.y;
 //baerbild.position.z = baer.position.z;
 
-console.log("Game#3 erstellt")
+console.log("Game#3 erstellt");
 }
 
 //
