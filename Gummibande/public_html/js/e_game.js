@@ -26,56 +26,61 @@ var hintergrund_sound_e;
 var eingesammelt_sound_e;
 var ende_sound;
 
-// Szene (alles, was das Spiel braucht)
+// Objekte der Spielszene erstellen
+    //Boden
     var plane_e = new THREE.PlaneGeometry(50, 50);
     var bodentextur = THREE.ImageUtils.loadTexture("files/waldboden.JPG");
     var bodenmat = new THREE.MeshBasicMaterial({map: bodentextur});
     var boden = new THREE.Mesh(plane_e, bodenmat);
     
-    var geometry1 = new THREE.SphereGeometry( 0.1 );
-    var geometry2 = new THREE.SphereGeometry( topfsize );
+    //Bär(geometry1 und material1) und Topf(geometry2 und material2)
+    var geometry1 = new THREE.SphereGeometry( 0.1 ); //0.1, damit möglichst klein
     var material1 = new THREE.MeshBasicMaterial( {color: 0x251d08} );
+    var geometry2 = new THREE.SphereGeometry( topfsize );
     var topftextur = THREE.ImageUtils.loadTexture("files/honigtopf.JPG");
     var material2 = new THREE.MeshBasicMaterial({map: topftextur});
     
-    //Baum
+    //Baum mit Durchmesser dm
     var geometry3 = new THREE.CylinderGeometry( dm, dm, hoehe+1 , 32 );
     var holz = THREE.ImageUtils.loadTexture("files/holz.JPG");
     var holzmaterial = new THREE.MeshBasicMaterial({map: holz});
     var stamm = new THREE.Mesh( geometry3, holzmaterial );
     
+    //Generierung der Äste nach Zufallsprinzip
     function aesteErstellen(){                 
-        for(i = 0; i < hoehe-3; i++) {
+        for(i = 0; i < hoehe-3; i++) { //für Baumhöhe-3 Äste
             var geometry4 = new THREE.CylinderGeometry( 0.5, 0.1, laenge, 32 );
             var ast = new THREE.Mesh( geometry4, holzmaterial );
             
             //Berechnung der Positionen auf X- und Z-Achse
-            var a = Math.random()*Math.PI*2;
-            var x = Math.cos(a) * ((dm+laenge)/2);
-            var z = Math.sin(a) * ((dm+laenge)/2);
-            var y = i + 2;
+            var a = Math.random()*Math.PI*2;        //Winkel des Asts
+            var x = Math.cos(a) * ((dm+laenge)/2);  //Position auf X-Achse
+            var z = Math.sin(a) * ((dm+laenge)/2);  //Position auf Z-Achse
+            var y = i + 2;                          //Position auf Y-Achse (immer Index+2)
             
-            //Rotation und Verschiebung
+            //Rotation und Verschiebung angewandt
             ast.rotateZ(Math.PI / 2);
             ast.rotateX(a);
             ast.position.set(x, y, -z);
-            scene.add(ast);
+            scene.add(ast);                         //Ast zur Szene hinzugefügt
             
-            //Speichern der Positionen und ziehen der Linie zwischen Ast und Bär
+            //Arrays zum Speichern der Positionen und ziehen der Linie zwischen Ast und Bär
             astposition[i] = new THREE.Vector3(x, y, -z);
             astabstand[i] = new THREE.Line3();
         }
     }       
             
+    //Bär und Topf erstellen
     baer = new THREE.Mesh( geometry1, material1 );
     topf = new THREE.Mesh( geometry2, material2 );
     
-    //Sprite für den Bären                                                      //Hier stimmt was nicht!
+    //Sprite für den Bären erstellen (als 2-dimensionaler Avatar)
     var spritemap = THREE.ImageUtils.loadTexture("files/kletterbaer.png");
     var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
     var baerbild = new THREE.Sprite (spriteMaterial);
     baerbild.transparent = true;
     
+    //Teftfeld für Anzeige, welcher Spieler an der Reihe ist
     textplayer = document.createElement('div');
     textplayer.style.position = 'absolute';
     textplayer.style.width = 200;
@@ -88,19 +93,23 @@ var ende_sound;
     textplayer.style.opacity = 0;
     
     
-
+//Läd die Szene und das Spiel
 function loadGameThree(){
     
-clearScene();
+clearScene();   //Szene leeren
 
 gamemoni = false;
 gamedome = false;
-gameelli = true;
+gameelli = true;    //Spiel freischalten
 
+//Textfelder sichtbar schalten
 text3.style.opacity = 1;
 textplayer.style.opacity = 1;
 
+//Kamera in perspektivische Kamera ändern
 camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
+
+//Objekte zur Szene hinzufüegen
 scene.add( boden );
 scene.add( baer );
 scene.add( topf );
@@ -108,20 +117,23 @@ scene.add( stamm );
 aesteErstellen();
 baer.add( baerbild );
 
+//Objekte positionieren
 boden.rotation.x = -Math.PI/2;
-boden.position.y -= 0.1;
 stamm.position.set(0, hoehe/2-0.5, 0);
-topf.position.set = (0, hoehe, 0);
+topf.position.set = (0, hoehe+topszize, 0);
 baer.position.set(dm, 0, 0);
 camera.position.set(0, 10, 0);
 
+//Zeitmessung ausschalten (startet erst bei Beginn des Spiels)
 zeitlaeuft = false;
 
+//Soundeffekte laden
 camera.add(hintergrund_sound_e);
 camera.add(eingesammelt_sound_e);
 camera.add(spielerwechsel_sound);
 camera.add(ende_sound);
 
+//Ausgabe in der Konsole
 console.log("Game#3 erstellt");
 }
 
@@ -138,10 +150,10 @@ hintergrund_sound_e.autoplay = true;
 hintergrund_sound_e.setLoop(true);
 
 //
-//Honigtopf neu positionieren
+//Honigtopf neu positionieren (wird nach unten gesetzt, wenn er eingesammelt wurde)
 //
 var setTopf = function() {
-        // Topf ist oben, und wird erreicht.
+        // Topf ist oben, wird erreicht.
     if (topf.position.y === hoehe){
         topfGesammelt = true;
         eingesammelt_sound_e = new THREE.Audio(listener);
@@ -149,20 +161,22 @@ var setTopf = function() {
         eingesammelt_sound_e.autoplay = true;
         topf.position.y = 0;
     }
-        // Topf ist unten, und wird erreicht.
+        // Topf ist unten und wurde eingesammelt
     else if (topf.position.y === 0 && topfGesammelt){
         topf.position.y = hoehe;
         topfGesammelt = false;
         spielerwechsel();
     }
-    
+        // Topf ist unten, wurde jedoch nicht eingesammelt (sollte nie vorkommen)
     else if (topf.position.y === 0) {
         topf.position.y = hoehe;
     }
 };
 
+//
+//Zählt Zeitstrafpunkte hoch und aktuallisiert Textfelder
+//
 var zeit = function() {
-    
     if (zeitlaeuft) {
         zeitstrafe += 0.005;
         if (spieler === 1){
@@ -171,31 +185,37 @@ var zeit = function() {
             sc2 = scoreberechnen();
         }
     }
-    
     textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
-    
 };
 
+//
+//Wechselt von Spieler1 auf Spieler2 und beendet das Spiel
+//
 var spielerwechsel = function() {
+    //wenn Spieler1 die Runde beendet
     if (spieler === 1){
         zeitlaeuft = false;
-        ascore1 = scoreberechnen();
+        ascore1 = scoreberechnen(); //aktueller Score von Spieler 1
         score = 0;
         zeitstrafe = 0;
+        
+        //Soundeffekt
         spielerwechsel_sound = new THREE.Audio(listener);
         spielerwechsel_sound.load("files/klingel.ogg");
         spielerwechsel_sound.autoplay = true;
-        spieler = 2;
-        textplayer.innerHTML = "Spieler 2 spielt.";
-        text3.style.opacity = 1;
-        //Spieler 2 beginnt...
         
+        spieler = 2; //Spieler 2 beginnt...
+        textplayer.innerHTML = "Spieler 2 spielt.";
+        text3.style.opacity = 1; //Textfeld zum Spielbeginn wird wieder eingeblendet
+        
+    //wenn Spieler 2 die Runde beendet    
     }else if(spieler === 2){
         zeitlaeuft = false;
-        ascore2 = scoreberechnen();
+        ascore2 = scoreberechnen(); //aktueller Score von Spieler 2
         spieler = 0;
         
         //END OF GAME:
+        //Wer hat gewonnen?
         if(sc1 > sc2) {
             gameelli = false;
             clearScene();
@@ -209,10 +229,13 @@ var spielerwechsel = function() {
             clearScene();
             scene.add(gleich);
         }
+            //Soundeffekt
             ende_sound = new THREE.Audio(listener);
             ende_sound.load("files/applaus.ogg");
             ende_sound.autoplay = true;
             camera.add(ende_sound);
+            
+        //Score setzen    
         sc1 = 0;
         sc2 = 0;
         score1 += ascore1;
@@ -220,6 +243,9 @@ var spielerwechsel = function() {
     }
 };
 
+//
+//Score wird berechnet (20 Punkte abzüglich Fehler- und Zeitstrafe)
+//
 var scoreberechnen = function() {
     sc = Math.round(score);
     sc -= Math.round(zeitstrafe);
@@ -231,7 +257,7 @@ var scoreberechnen = function() {
 };
 
 //
-//Abstand Prüfen (Bär und Honigtopf, Bär und Äste)
+//Abstand prüfen (Bär und Honigtopf, Bär und Äste)
 //
 var collision = function(){
     if (abstand.distance() < (baersize+topfsize)){
@@ -253,8 +279,9 @@ var collision = function(){
 //
 var astGefunden = function() {
     if(moveu) {
-        baer.position.y -= 0.1;
-        score -= 0.1;
+        baer.position.y -= 0.1; //Bär spring zurück
+        score -= 0.1;           //Strafpunkte werden hinzugefügt/abgezogen
+            //Soundeffekt:
             ast_sound = new THREE.Audio(listener);
             ast_sound.load("files/trommel tief.ogg");
             ast_sound.autoplay = true;
@@ -281,7 +308,7 @@ var astGefunden = function() {
 };
 
 //
-//Positionen Aktualisieren / Linie ziehen (nur nach Bewegung)
+//Positionen Aktualisieren / Linien ziehen (nur nach Bewegung)
 //
 var e_positionSet = function(){
     baerposition.set(baer.position.x, baer.position.y, baer.position.z); 
@@ -295,11 +322,11 @@ var e_positionSet = function(){
 };
 
 //
-//Bewegung in rotierte Richtung und Rotation
+//Bewegung und Rotation
 //
 var e_move = function(){
 
-//Bewegung (mit "C" switchen, ob Camera mitläuft oder nicht.
+//Bewegung (mit W-A-S-D), wenn das Spiel (die Zeit) läuft
     if (moveu && zeitlaeuft) {
         if(baer.position.y <= hoehe) {
             baer.position.x += Math.sin(-(baer.rotation.z)) * mspeed;
@@ -318,13 +345,12 @@ var e_move = function(){
         }
     }
     
-//Rotation
+//Rotation/Seitwärtsbewegung
     if (rolll && zeitlaeuft) {
         baer.rotation.y += rspeed;
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;
         baer.position.z = Math.sin(baer.rotation.y)* dm;
-        //baer.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
     }
 
     if (rollr && zeitlaeuft) {
@@ -332,25 +358,13 @@ var e_move = function(){
         baer.rotation.y %= Math.PI*2;
         baer.position.x = Math.cos(baer.rotation.y)* dm;   
         baer.position.z = Math.sin(baer.rotation.y)* dm;
-        //baer.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
-    }
-   
-//Reset
-    if (reset) {                                    //muss noch gemacht werden!
-        zeitlaueft = false;
-        baer.rotation.y = 0;
-        baer.position.x = 1;
-        baer.position.y = 0;
-        baer.position.z = 0;
-        camera.position.set( 0, 0, 10);
-        camera.position.y = baer.position.y;
-        camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
-        camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
     }
 };
 
+//
+//Kamera bewegt/dreht sich mit dem Bär
+//
 var kameraBewegen = function() {
-    camera.position.y = baer.position.y;
-    camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
-    camera.position.set(baer.position.x * 10, baer.position.y+3, baer.position.z * 10);
+    camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2); //Drehung in Richtung des Bärs
+    camera.position.set(baer.position.x * 10, baer.position.y + 3, baer.position.z * 10);
 };
