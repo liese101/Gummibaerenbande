@@ -111,6 +111,10 @@ gameelli = true;    //Spiel freischalten
 text3.style.opacity = 1;
 textplayer.style.opacity = 1;
 
+spieler = 1;
+ascore1 = 0;
+ascore1 = 0;
+
 //Kamera in perspektivische Kamera ändern
 camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
 
