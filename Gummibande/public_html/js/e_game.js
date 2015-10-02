@@ -117,7 +117,7 @@ camera.position.set(0, 10, 0);
 
 zeitlaeuft = false;
 
-scene.add(hintergrund_sound_e);
+camera.add(hintergrund_sound_e);
 camera.add(eingesammelt_sound_e);
 camera.add(spielerwechsel_sound);
 camera.add(ende_sound);

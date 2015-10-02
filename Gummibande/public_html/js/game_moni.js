@@ -245,7 +245,7 @@ function loadGameTwo(){
     scene.add(ground);
     ground.position.z = -1;
     globPlace();
-    scene.add(hintergrund_sound);
+    camera.add(hintergrund_sound);
     camera.add(eingesammelt_sound);
     camera.add(ende_sound);
     console.log("Game#2 erstellt");

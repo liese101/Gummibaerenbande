@@ -98,6 +98,23 @@ function movePuk(){
     }
 }
 
+//audiolistener und sound initialisieren
+var listener = new THREE.AudioListener();
+camera.add(listener);
+console.log("Audiolistener added");
+//audio
+
+//audiovariablen
+var hintergund_sound_d;
+var bande_sound;
+var aus_sound;
+var spieler_sound;
+
+hintergrund_sound_d = new THREE.Audio(listener);
+hintergrund_sound_d.load("files/herzschlag.ogg");
+hintergrund_sound_d.autoplay = true;
+hintergrund_sound_d.setLoop(true);
+
 //kontakt mit Spielern prüfen
 function checkPlayers(){
     if(belongs){
@@ -106,6 +123,9 @@ function checkPlayers(){
                 puk.rotation.z = -(puk.rotation.z)+0.05;
                 belongs = false;
                 pukspeed *= 1.05;
+        spieler_sound = new THREE.Audio(listener);
+        spieler_sound.load("files/klack.ogg");
+        spieler_sound.autoplay = true;
             }
             if(puk.position.y > p1.position.y-1.3 && puk.position.y < p1.position.y){
                 puk.rotation.z = -(puk.rotation.z)-0.05;
