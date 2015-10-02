@@ -151,13 +151,17 @@ var setTopf = function() {
 
 var zeit = function() {
     zeitstrafe += 0.01;
-    textscore.innerHTML = "Punkte: " + scoreberechnen();
+    if (spieler === 1){
+        sc1 = scoreberechnen();
+    }else if(spieler === 2){
+        sc2 = scoreberechnen();
+    }
 };
 
 var spielerwechsel = function() {
     if (spieler === 1){
         score1 = scoreberechnen();
-        sc1 += score1/2;
+        sc1 += score1;
         score = 0;
         zeitstrafe = 0;
         spieler = 2;
@@ -166,9 +170,10 @@ var spielerwechsel = function() {
         
     }else if(spieler === 2){
         score2 = scoreberechnen();
-        sc2 += score2/2;
+        sc2 += score2;
         scoreAnzeigen();
         
+        spieler = 0;
         //END OF GAME
     }
 };
