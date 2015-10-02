@@ -77,6 +77,22 @@ Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst o
     document.body.appendChild(text4);
     text4.style.opacity = 0;
     
+    var text3 = document.createElement('div');
+    text3.style.position = 'absolute';
+    text3.style.width = 200;
+    text3.style.height = 50;
+    text3.style.backgroundColor = "lightblue";
+    text3.innerHTML = "Spiel startet durch klicken von der Taste 'g'.";
+    text3.style.top = 400 + 'px';
+    text3.style.left = ((width/2)-200) + "px";
+    document.body.appendChild(text3);
+    text3.style.opacity = 0;
+    if(info) {
+        text3.style.opacity = 1;
+    } else {
+        text3.style.opacity = 0;
+    }
+    
     
     function clearScene() {
         var i;
@@ -90,9 +106,9 @@ Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst o
     camera.rotation.y = 0;
     
     //Transperant machen
-    textscore.style.opacity = 0;
     textplayer.style.opacity = 0;
     text4.style.opacity = 0;
+    info = false;
     
         console.log("Scene cleart");
     }
