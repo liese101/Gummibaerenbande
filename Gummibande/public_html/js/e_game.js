@@ -64,7 +64,7 @@ var topfGesammelt;
     baer = new THREE.Mesh( geometry1, material1 );
     topf = new THREE.Mesh( geometry2, material2 );
     
-    //Sprite für den Bären
+    //Sprite für den Bären                                                      //Hier stimmt was nicht!
     var spritemap = THREE.ImageUtils.loadTexture("files/kletterbaer.png");
     var spriteMaterial = new THREE.SpriteMaterial({map: spritemap});
     var baerbild = new THREE.Sprite (spriteMaterial);
@@ -144,6 +144,8 @@ var setTopf = function() {
         spielerwechsel();
         topf.position.y = hoehe;
         topfGesammelt = false;
+    } else if (topf.position.y === 0) {
+        topf.position.y = hoehe;
     }
 };
 

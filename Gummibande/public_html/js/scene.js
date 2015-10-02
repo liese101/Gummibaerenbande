@@ -83,7 +83,7 @@ Gelangt dein Bär schneller zu seinem heißgeliebten Honigtopf? Probier es aus u
 nacheinander und versucht den Baum zu erklimmen, aber vorsicht: Dein Bär soll sich nicht den Kopf an den Ästen stoßen, sonst gibt's Punktabzug!" + "<br>" +
 "HONIGSUCHE: " + "Dieses Spiel macht süchtig. Du suchst ein nicht sichtbares Objekt nur mit Hilfe der Schleife deines Bärs.\n\
 Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst oder dich entfernst. Hab die Schleife im Blick und besiege so deinen Gegner!";
-    text4.style.top = 85 + 'px';
+    text4.style.top = 200 + 'px';
     document.body.appendChild(text4);
     text4.style.opacity = 0;
     
