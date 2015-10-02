@@ -90,13 +90,12 @@ function loadGameThree(){
     
 clearScene();
 
-text3.style.opacity = 1;
-
-textplayer.style.opacity = 1;
-
 gamemoni = false;
 gamedome = false;
 gameelli = true;
+
+text3.style.opacity = 1;
+textplayer.style.opacity = 1;
 
 camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
 scene.add( boden );
@@ -115,7 +114,6 @@ camera.position.set(0, 10, 0);
 
 zeitlaeuft = false;
 
-
 console.log("Game#3 erstellt");
 }
 
@@ -133,7 +131,9 @@ var setTopf = function() {
         spielerwechsel();
         topf.position.y = hoehe;
         topfGesammelt = false;
-    } else if (topf.position.y === 0) {
+    }
+    
+    else if (topf.position.y === 0) {
         topf.position.y = hoehe;
     }
 };
@@ -153,25 +153,21 @@ var zeit = function() {
 
 var spielerwechsel = function() {
     if (spieler === 1){
-        
         zeitlaeuft = false;
         ascore1 = scoreberechnen();
         score = 0;
         zeitstrafe = 0;
         spieler = 2;
         scoreAnzeigen();
-        text3.style.opacity = 1;
         //Spieler 2 beginnt...
         
     }else if(spieler === 2){
-        
         zeitlaeuft = false;
         ascore2 = scoreberechnen();
         scoreAnzeigen();
         spieler = 0;
         
         //END OF GAME:
-        
         if(sc1 > sc2) {
             gameelli = false;
             clearScene();
@@ -190,7 +186,6 @@ var spielerwechsel = function() {
         sc2 = 0;
         score1 += ascore1;
         score2 += ascore2;
-        
     }
 };
 
