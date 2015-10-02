@@ -19,6 +19,8 @@ var astposition = new Array(hoehe);
 var astabstand;
 var spieler, score1, score2;
 var topfGesammelt;
+var score1, score2 = 0;
+var zeitstrafe = 0;
 
 // Szene (alles, was das Spiel braucht)
     var plane_e = new THREE.PlaneGeometry(50, 50);
@@ -137,10 +139,13 @@ var setTopf = function() {
         // Topf ist oben, und wird erreicht.
     if (topf.position.y === hoehe){
         topfGesammelt = true;
+        score += 20;
+        scoreAnzeigen();
         topf.position.y = 0;
     }
         // Topf ist unten, und wird erreicht.
     else if (topf.position.y === 0 && topfGesammelt){
+        score += 20;
         spielerwechsel();
         topf.position.y = hoehe;
         topfGesammelt = false;
@@ -149,19 +154,36 @@ var setTopf = function() {
     }
 };
 
+var zeit = function() {
+    zeitstrafe += 0.01;
+};
+
 var spielerwechsel = function() {
     if(spieler === 2){
-        sc2 += Math.round(score);
-        spieler = 1;
-        score = sc1;
+        score2 += scoreberechnen();
+        //spieler = 1;
+        //score = sc1;
         scoreAnzeigen();
+        sc1 += score1;
+        sc2 += score2;
+        endGame();
     }else{
-        sc1 += Math.round(score);
+        score1 += scoreberechnen();
         spieler = 2;
         score = sc2;
+        zeitstrafe = 0;
         scoreAnzeigen();
     }
 };
+
+var scoreberechnen = function() {
+    sc = Math.round(score);
+    sc -= Math.round(zeitstrafe);
+    if(sc < 0) {
+        sc = 0;
+    }
+    return sc;
+}
 
 //
 //Abstand Prüfen (Bär und Honigtopf, Bär und Äste)

@@ -186,6 +186,7 @@ var render = function () {
     kameraBewegen();
     e_positionSet();
     collision();
+    zeit();
     }
 
     renderer.render(scene, camera);

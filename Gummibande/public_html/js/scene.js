@@ -125,6 +125,7 @@ Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst o
     camera.position.set(0, 0, 6);
     camera.rotation.y = 0;
     
+    //Transperant machen
     textscore.style.opacity = 0;
     textplayer.style.opacity = 0;
     text4.style.opacity = 0;
