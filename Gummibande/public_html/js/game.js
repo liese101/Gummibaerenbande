@@ -17,6 +17,7 @@ var abstand2;
 var score;
 var text1;
 var text2;
+var text3;
 var currentscale;
 var follow = true;
 
