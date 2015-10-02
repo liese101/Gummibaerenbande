@@ -131,11 +131,13 @@ function checkPlayers(){
                 puk.rotation.z = -(puk.rotation.z)+0.05;
                 belongs = false;
                 pukspeed *= 1.05;
+                playPongSound();
             }
             if(puk.position.y > p1.position.y-1.3 && puk.position.y < p1.position.y){
                 puk.rotation.z = -(puk.rotation.z)-0.05;
                 belongs = false;
                 pukspeed *= 1.05;
+                playPongSound();
             }
         }
     }
@@ -145,17 +147,16 @@ function checkPlayers(){
                 puk.rotation.z = -(puk.rotation.z)-0.05;
                 belongs = true;
                 pukspeed *= 1.05;
+                playPongSound();
             }
             if(puk.position.y > p2.position.y-1.3 && puk.position.y < p2.position.y){
                 puk.rotation.z = -(puk.rotation.z)+0.05;
                 belongs = true;
                 pukspeed *= 1.05;
+                playPongSound();
             }
 
         }
-                spieler_sound = new THREE.Audio(listener);
-        spieler_sound.load("files/trommel höher.ogg");
-        spieler_sound.autoplay = true;
     }
     
 }
@@ -197,6 +198,12 @@ function checkBorder(){
     if (p2.position.y > fieldheight+0.5)
         p2.position.y -= 0.11;
     
+}
+
+function playPongSound(){
+    spieler_sound = new THREE.Audio(listener);
+    spieler_sound.load("files/trommel höher.ogg");
+    spieler_sound.autoplay = true;
 }
 
 
