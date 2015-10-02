@@ -119,7 +119,7 @@ boden.rotation.x = -Math.PI/2;
 stamm.position.set(0, hoehe/2-0.5, 0);
 topf.position.set(0, hoehe, 0);
 baer.position.set(dm, 0.5, 0);
-camera.position.set(0, 3.5, 10);
+camera.position.set(0, 2.5, 10);
 
 //Objekte zur Szene hinzufüegen
 scene.add( boden );
@@ -371,5 +371,5 @@ var e_move = function(){
 //
 var kameraBewegen = function() {
     camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2); //Drehung in Richtung des Bärs
-    camera.position.set(baer.position.x * 10, baer.position.y + 3, baer.position.z * 10);
+    camera.position.set(baer.position.x * 10, baer.position.y + 2, baer.position.z * 10);
 };
