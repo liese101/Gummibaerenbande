@@ -184,7 +184,8 @@ var spielerwechsel = function() {
         
         spieler = 0;
         //END OF GAME
-        
+        sc1 = 0;
+        sc2 = 0;
         score1 += ascore1;
         score2 += ascore2;
     }
