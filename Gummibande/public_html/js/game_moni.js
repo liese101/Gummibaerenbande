@@ -207,6 +207,7 @@ function loadGameTwo(){
     clearScene();
     gamedome = false;
     gamemoni = true;
+    gameelli = false;
     
     scene.add(glob);
     scene.add(ball1);

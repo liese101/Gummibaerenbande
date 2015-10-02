@@ -90,14 +90,6 @@ var topfGesammelt;
     textscore.style.top = 80 + 'px';
     textscore.style.left = 20 + 'px';
     document.body.appendChild(textscore);
-    
-
-var bildfolgt = function() {
-    baerbild.position.x = baer.position.x;
-    baerbild.position.y = baer.position.y;
-    baerbild.position.z = baer.position.z;
-};
-
 
 function loadGameThree(){
     

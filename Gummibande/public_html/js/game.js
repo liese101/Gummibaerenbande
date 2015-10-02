@@ -17,7 +17,6 @@ var abstand2;
 var score;
 var text1;
 var text2;
-var text3;
 var currentscale;
 var follow = true;
 
@@ -163,7 +162,6 @@ var render = function () {
 //    text2.innerHTML = "Score P1: " + sc1 + " / " + "Score P2: " + sc2;
     text1.innerHTML = " Score: " + sc1;
     text2.innerHTML = "  Score: " + sc2;
-    text3.innerHTML;
     
 //game_moni
     if (gamemoni){
@@ -188,7 +186,6 @@ var render = function () {
     kameraBewegen();
     e_positionSet();
     collision();
-    bildfolgt();
     }
 
     renderer.render(scene, camera);
