@@ -17,6 +17,12 @@ var currentscale;
 var sc1 , sc2;
 var follow = true;
 
+moni_game_sounds = {};
+var hintergrund_sound;
+var eingesammelt_sound;
+var ende_sound;
+
+
     var geometry1 = new THREE.SphereGeometry( ballsize );
     var geometry3 = new THREE.SphereGeometry( ballsize );
     var geometry2 = new THREE.SphereGeometry( globsize );
@@ -79,6 +85,13 @@ var collect = function(){
         if(sc1 === 5){
             score1 = sc1;
             sc1 = 0;
+            
+            eingesammelt_sound = new THREE.Audio(listener);
+            eingesammelt_sound.loadGameTwo("files/hummel.ogg");
+            eingesammelt_sound.autoplay = true;
+            eingesammelt_sound.setLoop(false);
+            camera.add(eingesammelt_sound);
+
             scene.add(p1win);
         }
     }
@@ -207,6 +220,22 @@ function radar(){ //Vergrößerung der Schleife wenn der Abstand zum Ziel (Glob)
 }
 
 
+
+//audiolistener und sound initialisieren
+var listener = new THREE.AudioListener();
+camera.add(listener);
+console.log("Audiolistener added");
+//audio
+
+hintergrund_sound = new THREE.Audio(listener);
+hintergrund_sound.loadGameTwo("files/wind_forest.ogg");
+hintergrund_sound.autoplay = true;
+hintergrund_sound.setLoop(true);
+camera.add(hintergrund_sound);
+
+
+
+
 function loadGameTwo(){
     clearScene();
     gamedome = false;
@@ -225,5 +254,6 @@ function loadGameTwo(){
     scene.add(ground);
     ground.position.z = -1;
     globPlace();
+    scene.add(hintergrund_sound);
     console.log("Game#2 erstellt");
 }
