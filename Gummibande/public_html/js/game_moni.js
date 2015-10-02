@@ -16,8 +16,10 @@ var text2, text1;
 var currentscale;
 var sc1 , sc2;
 var follow = true;
+var Sounds;
 
-moni_game_sounds = {};
+//moni_game_sounds = {};
+//soundfiles alle von www.bigsoundbank.com kostenfrei heruntergeladen
 var hintergrund_sound;
 var eingesammelt_sound;
 var ende_sound;
@@ -82,11 +84,17 @@ var collect = function(){
     if (abstand1.distance() < (ballsize+globsize)){
         globPlace();
         sc1 += 1;
+        eingesammelt_sound = new THREE.Audio(listener);
+        eingesammelt_sound.load("files/miauen.ogg");
+        eingesammelt_sound.autoplay = true;
         checkWinner();
     }
     if( abstand2.distance() < (ballsize+globsize)){
         globPlace();
         sc2 += 1;
+        eingesammelt_sound = new THREE.Audio(listener);
+        eingesammelt_sound.load("files/miauen.ogg");
+        eingesammelt_sound.autoplay = true;
         checkWinner();
         }
     };
@@ -213,10 +221,13 @@ console.log("Audiolistener added");
 //audio
 
 hintergrund_sound = new THREE.Audio(listener);
-hintergrund_sound.loadGameTwo("files/wind_forest.ogg");
+hintergrund_sound.load("files/wind_forest.ogg");
 hintergrund_sound.autoplay = true;
 hintergrund_sound.setLoop(true);
-camera.add(hintergrund_sound);
+
+
+
+
 
 
 
@@ -239,6 +250,8 @@ function loadGameTwo(){
     scene.add(ground);
     ground.position.z = -1;
     globPlace();
-    scene.add(hintergrund_sound);
+    camera.add(hintergrund_sound);
+    camera.add(eingesammelt_sound);
+    camera.add(ende_sound);
     console.log("Game#2 erstellt");
 }
