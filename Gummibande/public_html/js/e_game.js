@@ -10,7 +10,7 @@ var rspeed, mspeed;
 var rollr, rolll, moveu, moved, reset;
 var topf, baer, topfsize, baersize;
 var baerposition, topfposition, abstand;
-var score;
+var score = 0;
 var textscore, textplayer;
 var currentscale;
 var hoehe, dm;
@@ -19,7 +19,7 @@ var astposition = new Array(hoehe);
 var astabstand;
 var spieler, score1, score2;
 var topfGesammelt;
-var score1, score2 = 0;
+var score1 = 0, score2 = 0;
 var zeitstrafe = 0;
 
 // Szene (alles, was das Spiel braucht)
@@ -170,7 +170,7 @@ var spielerwechsel = function() {
     }else{
         score1 += scoreberechnen();
         spieler = 2;
-        score = sc2;
+        score = score2;
         zeitstrafe = 0;
         scoreAnzeigen();
     }
