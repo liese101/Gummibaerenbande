@@ -18,7 +18,6 @@
     renderer.setSize( window.innerWidth, window.innerHeight*0.80 );
     document.body.appendChild( renderer.domElement );
     
-    //Erstellen einer Plane und Hinzufügen von Bildern für Ereignisse (Sieg, unentschieden, Spielanleitung)
     var wingeo = new THREE.PlaneGeometry(17,11);
     var p1winmap = new THREE.ImageUtils.loadTexture("files/p1win.png");
     var p1winmat = new THREE.MeshBasicMaterial({map: p1winmap});
@@ -29,7 +28,6 @@
     var anleitungmap = new THREE.ImageUtils.loadTexture("files/anleitung.png");
     var anleitungmat = new THREE.MeshBasicMaterial({map: anleitungmap});
     
-    //Meshs
     var p1win = new THREE.Mesh(wingeo, p1winmat);
     p1win.position.z = 4;
     var p2win = new THREE.Mesh(wingeo, p2winmat);
@@ -38,13 +36,6 @@
     gleich.position.z = 4;
     var anleitung = new THREE.Mesh(wingeo, anleitungmat);
     
-
-
-
-    camera.position.z = 6;
-    
-    //Text
-
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
     text1.style.width = window.innerWidth;
@@ -67,6 +58,23 @@
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
     
+    var text4 = document.createElement('div1');
+    text4.style.position = 'absolute';
+    text4.style.width = window.innerWidth;
+    text4.style.height = 200;
+    text4.style.backgroundColor = "yellow";
+    text4.style.color = "black";
+    text4.innerHTML = "PONG: " + "Dieses einzigartige Multiplayergame kennt doch jeder! Spieler 1 bedient seinen\n\
+    Bär mit der Tastenkombination aus W-A-S-D und versucht so, den Ball nicht ins Aus fliegen zu lassen. Spieler 2 verfolgt natürlich das selbe Ziel\n\
+und koordiniert seinen Bären mit I-K-J-L." + "<br>" + "HONIGJAGD: " + "Kannst du den Baum schneller erklimmen, wie dein Gegner? \n\
+Gelangt dein Bär schneller zu seinem heißgeliebten Honigtopf? Probier es aus und erlebe das abenteuerlustige Spiel HONIGJAGD. Du und dein Gegner spielt \n\
+nacheinander und versucht den Baum zu erklimmen, aber vorsicht: Dein Bär soll sich nicht den Kopf an den Ästen stoßen, sonst gibt's Punktabzug!" + "<br>" +
+"HONIGSUCHE: " + "Dieses Spiel macht süchtig. Du suchst ein nicht sichtbares Objekt nur mit Hilfe der Schleife deines Bärs.\n\
+Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst oder dich entfernst. Hab die Schleife im Blick und besiege so deinen Gegner!";
+    text4.style.top = 200 + 'px';
+    document.body.appendChild(text4);
+    text4.style.opacity = 0;
+    
     var text3 = document.createElement('div');
     text3.style.position = 'absolute';
     text3.style.width = 200;
@@ -78,20 +86,12 @@
     document.body.appendChild(text3);
     text3.style.opacity = 0;
     
-    
-    //Function, die die Scene beim Übergang zum nächsten Spiel bereinigt
     function clearScene() {
         var i;
         for( var i = scene.children.length - 1; i >= 0; i--) {
              obj = scene.children[i];
              scene.remove(obj);
         }
-
-    //Kameraeinstellungen für PONG und HONIGSUCHE  
-    camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
-    camera.position.set(0, 0, 6);
-    camera.rotation.y = 0;
-
     
     //Transperant machen
     textplayer.style.opacity = 0;
@@ -105,7 +105,7 @@
     
         console.log("Scene cleart");
     }
-//Function, die der Scene das Bild der Spielanleitung hinzufügt, wenn der Button geklickt wird
+
 function loadAnleitung(){
     clearScene();
     gameelli = false;
@@ -114,7 +114,7 @@ function loadAnleitung(){
     scene.add(anleitung);
     console.log("Anleitung geladen");
 }
-//Function die den Sieger ermittelt und ein Bild der Scene hinzufügt (Score:5)
+
 function checkWinner(){
     if (sc1===5){
         score1 += sc1;
