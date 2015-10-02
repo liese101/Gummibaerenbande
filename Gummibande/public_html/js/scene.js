@@ -70,6 +70,24 @@
     document.addEventListener("keydown", actionStart, false);
     document.addEventListener("keyup", actionStop, false);
     
+    var text4 = document.createElement('div1');
+    text4.style.position = 'absolute';
+    text4.style.width = window.innerWidth;
+    text4.style.height = 200;
+    text4.style.backgroundColor = "yellow";
+    text4.style.color = "black";
+    text4.innerHTML = "PONG: " + "Dieses einzigartige Multiplayergame kennt doch jeder! Spieler 1 bedient seinen\n\
+    Bär mit der Tastenkombination aus W-A-S-D und versucht so, den Ball nicht ins Aus fliegen zu lassen. Spieler 2 verfolgt natürlich das selbe Ziel\n\
+und koordiniert seinen Bären mit I-K-J-L." + "<br>" + "HONIGJAGD: " + "Kannst du den Baum schneller erklimmen, wie dein Gegner? \n\
+Gelangt dein Bär schneller zu seinem heißgeliebten Honigtopf? Probier es aus und erlebe das abenteuerlustige Spiel HONIGJAGD. Du und dein Gegner spielt \n\
+nacheinander und versucht den Baum zu erklimmen, aber vorsicht: Dein Bär soll sich nicht den Kopf an den Ästen stoßen, sonst gibt's Punktabzug!" + "<br>" +
+"HONIGSUCHE: " + "Dieses Spiel macht süchtig. Du suchst ein nicht sichtbares Objekt nur mit Hilfe der Schleife deines Bärs.\n\
+Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst oder dich entfernst. Hab die Schleife im Blick und besiege so deinen Gegner!";
+    text4.style.top = 85 + 'px';
+    document.body.appendChild(text4);
+    text4.style.opacity = 0;
+    
+    
     function addModel( geometry,  materials ){
         var material = new THREE.MeshFaceMaterial( materials );
         bear_1 = new THREE.Mesh( geometry, material );
@@ -106,6 +124,10 @@
     camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
     camera.position.set(0, 0, 6);
     camera.rotation.y = 0;
+    
+    textscore.style.opacity = 0;
+    textplayer.style.opacity = 0;
+    text4.style.opacity = 0;
     
         console.log("Scene cleart");
     }

@@ -77,9 +77,10 @@ var topfGesammelt;
     textplayer.style.height = 20;
     textplayer.style.backgroundColor = "grey";
     textplayer.innerHTML = "Spieler: " + spieler + " spielt.";
-    textplayer.style.top = 50 + 'px';
+    textplayer.style.top = 150 + 'px';
     textplayer.style.left = 20 + 'px';
     document.body.appendChild(textplayer);
+    textplayer.style.opacity = 0;
     
     textscore = document.createElement('div');
     textscore.style.position = 'absolute';
@@ -87,13 +88,22 @@ var topfGesammelt;
     textscore.style.height = 20;
     textscore.style.backgroundColor = "grey";
     textscore.innerHTML = "Punkte: " + Math.round(score);
-    textscore.style.top = 80 + 'px';
+    textscore.style.top = 180 + 'px';
     textscore.style.left = 20 + 'px';
     document.body.appendChild(textscore);
+    textscore.style.opacity = 0;
+    if(gameelli) {
+        textscore.style.opacity = 1;
+    } else {
+        textscore.style.opacity = 0;
+    }
 
 function loadGameThree(){
     
 clearScene();
+
+textscore.style.opacity = 1;
+textplayer.style.opacity = 1;
 
 gamemoni = false;
 gamedome = false;
