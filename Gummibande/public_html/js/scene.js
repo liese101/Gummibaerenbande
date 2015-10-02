@@ -7,6 +7,7 @@
     var ballposition;
     var abstand1;
     var abstand2; 
+    var ende_sound;
 
     var scene = new THREE.Scene(); // Scene erstellt
     //var camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
@@ -123,6 +124,10 @@ function checkWinner(){
         score2 += sc2;
         sc2 = 0;
         scene.add(p1win);
+            ende_sound = new THREE.Audio(listener);
+            ende_sound.load("files/applaus.ogg");
+            ende_sound.autoplay = true;
+            camera.add(ende_sound);
         
     }
     if (sc2===5){
@@ -131,5 +136,10 @@ function checkWinner(){
         sc1 = 0;
         score2 += sc2;
         sc2 = 0;
+            ende_sound = new THREE.Audio(listener);
+            ende_sound.load("files/applaus.ogg");
+            ende_sound.autoplay = true;
+            camera.add(ende_sound);
     }
+
 }
