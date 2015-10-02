@@ -109,6 +109,7 @@ textplayer.style.opacity = 1;
 //Kamera in perspektivische Kamera ändern
 camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
 
+
 //Objekte zur Szene hinzufüegen
 scene.add( boden );
 scene.add( baer );
@@ -121,8 +122,10 @@ baer.add( baerbild );
 boden.rotation.x = -Math.PI/2;
 stamm.position.set(0, hoehe/2-0.5, 0);
 topf.position.set = (0, hoehe+topszize, 0);
-baer.position.set(dm, 0, 0);
-camera.position.set(0, 10, 0);
+baer.position.set(0, 0, dm);
+baer.rotation.y = 0;
+camera.position.set(0, 0, 10);
+camera.rotation.y = 0;
 
 //Zeitmessung ausschalten (startet erst bei Beginn des Spiels)
 zeitlaeuft = false;
