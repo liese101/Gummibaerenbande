@@ -90,6 +90,13 @@ var topfGesammelt;
     textscore.style.top = 80 + 'px';
     textscore.style.left = 20 + 'px';
     document.body.appendChild(textscore);
+    
+
+var bildfolgt = function() {
+    baerbild.position.x = baer.position.x;
+    baerbild.position.y = baer.position.y;
+    baerbild.position.z = baer.position.z;
+};
 
 
 function loadGameThree(){
@@ -100,7 +107,7 @@ gamemoni = false;
 gamedome = false;
 gameelli = true;
 
-//camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
+camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
 scene.add( boden );
 scene.add( baer );
 scene.add( topf );
@@ -111,9 +118,9 @@ baer.add( baerbild );
 boden.rotation.x = -Math.PI/2;
 boden.position.y -= 0.1;
 stamm.position.set(0, hoehe/2-0.5, 0);
-topf.position.y = hoehe;
-baer.position.x = dm;
-camera.position.z = 10;
+topf.position.set = (0, hoehe, 0);
+baer.position.set(dm, 0, 0);
+camera.position.set(0, 10, 0);
 baerbild.position.x = baer.position.x;
 baerbild.position.y = baer.position.y;
 baerbild.position.z = baer.position.z;

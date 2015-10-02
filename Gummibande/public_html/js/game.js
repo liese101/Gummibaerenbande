@@ -20,7 +20,6 @@ var text2;
 var text3;
 var currentscale;
 var follow = true;
-var kamera;
 
 //
 //Ball wachsen Lassen
@@ -172,13 +171,9 @@ var render = function () {
     moveTwo();
     testBorder();
     collect();
-//    spring();
     radar();
     abstandCheck();
-    //kamera = camera;
     }
-    
-
     
     //game_dome
     if (gamedome){
@@ -186,7 +181,6 @@ var render = function () {
     checkBorder();
     checkPlayers();
     dMove();
-    //kamera = camera;
     }
     
     if (gameelli){
@@ -194,7 +188,7 @@ var render = function () {
     kameraBewegen();
     e_positionSet();
     collision();
-    //kamera = camera2;
+    bildfolgt();
     }
 
     renderer.render(scene, camera);

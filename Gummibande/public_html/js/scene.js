@@ -9,7 +9,7 @@
     var abstand2; 
 
     var scene = new THREE.Scene(); // Scene erstellt
-    var camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
+    //var camera2 = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight*0.9, 0.1, 1000 ); //Kamera erstellt
     var camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
 
     var renderer = new THREE.WebGLRenderer(); //Renderer erstellt
@@ -102,6 +102,11 @@
              obj = scene.children[i];
              scene.remove(obj);
         }
+        
+    camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
+    camera.position.set(0, 0, 6);
+    camera.rotation.y = 0;
+    
         console.log("Scene cleart");
     }
     
