@@ -118,10 +118,10 @@ var bande_sound;
 var aus_sound;
 var spieler_sound;
 
-hintergrund_sound_d = new THREE.Audio(listener);
-hintergrund_sound_d.load("files/frosch im gras.ogg");
-hintergrund_sound_d.autoplay = true;
-hintergrund_sound_d.setLoop(true);
+//hintergrund_sound_d = new THREE.Audio(listener);
+//hintergrund_sound_d.load("files/frosch im gras.ogg");
+//hintergrund_sound_d.autoplay = true;
+//hintergrund_sound_d.setLoop(true);
 
 //kontakt mit Spielern prüfen
 function checkPlayers(){
