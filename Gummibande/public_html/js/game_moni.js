@@ -262,18 +262,18 @@ var listener = new THREE.AudioListener();
 camera.add(listener);
 console.log("Audiolistener added");
 //audio
-<<<<<<< HEAD
+
 hintergrund_sound = new THREE.Audio(listener);
 hintergrund_sound.load("files/wiese.ogg");
 hintergrund_sound.autoplay = true;
 hintergrund_sound.setLoop(true);
-=======
+
 
 //hintergrund_sound = new THREE.Audio(listener);
 //hintergrund_sound.load("files/wiese.ogg");
 //hintergrund_sound.autoplay = true;
 //hintergrund_sound.setLoop(true);
->>>>>>> origin/master
+
 
 
 //Function zum Laden des Spiels; Variablen werden geladen und Objekte der Scene hinzugefügt

@@ -38,14 +38,13 @@
     gleich.position.z = 4;
     var anleitung = new THREE.Mesh(wingeo, anleitungmat);
     
-<<<<<<< HEAD
+
 
 
     camera.position.z = 6;
     
     //Text
-=======
->>>>>>> origin/master
+
     var text1 = document.createElement('div');
     text1.style.position = 'absolute';
     text1.style.width = window.innerWidth;
@@ -87,13 +86,12 @@
              obj = scene.children[i];
              scene.remove(obj);
         }
-<<<<<<< HEAD
+
     //Kameraeinstellungen für PONG und HONIGSUCHE  
     camera = new THREE.OrthographicCamera( width / - 160, width / 160, height / 160, height / - 160, 1, 1000 );
     camera.position.set(0, 0, 6);
     camera.rotation.y = 0;
-=======
->>>>>>> origin/master
+
     
     //Transperant machen
     textplayer.style.opacity = 0;
