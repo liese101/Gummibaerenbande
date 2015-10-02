@@ -31,6 +31,8 @@ var score2 = 0;
 var sc1 = 0;
 var sc2 = 0;
 
+var info = false;   //gibt an, ob Info zum Spielstart gezeigt werden soll.
+
 
 //game_moni
 var gamemoni = false;
@@ -59,18 +61,19 @@ var abstand2 = new THREE.Line3(ball2position, globposition);//((ball2.position.x
 
 
 //SPIEL 3//
-var baersize = 0.5;
-var topfsize = 0.8;
-var spieler = 1;
-var topfGesammelt = false;
+//Allgemeine Variablen für den Spielablauf
+var spieler = 1;                                //Spieler 1 beginnt (darf nicht geändert werden)
+var topfGesammelt = false;                      //variable die überprüft, ob der Honigtopf eingesammelt wurde (darf nicht geändert werden)
 // Variablen für den Baum
-var hoehe = 50;            //Höhe des Baums
-var dm = 1;                 //Durchmesser des Baums
-var laenge = 5;             //Länge der Äste
-var aeste = new Array();    //speichert Koordinaten der Äste
+var hoehe = 50;                                 //Höhe des Baums
+var dm = 1;                                     //Durchmesser des Baums
+var laenge = 5;                                 //Länge der Äste
+var aeste = new Array();                        //speichert Koordinaten der Äste
 // Variablen, die für die Kollisionserkennung (Spiel 3) benötigt werden.
-var baerposition = new THREE.Vector3(0, 0, 0);
-var topfposition = new THREE.Vector3(0, 0, 0);
-var abstand = new THREE.Line3(baerposition, topfposition);
-var astposition = new Array();
-var astabstand = new Array();
+var baersize = 0.5;                             //Größe des Bärs
+var topfsize = 0.8;                             //Größe des Honigtopfs
+var baerposition = new THREE.Vector3(0, 0, 0);  //Position vom Bär
+var topfposition = new THREE.Vector3(0, 0, 0);  //Position vom Topf
+var abstand = new THREE.Line3(baerposition, topfposition);  //Linie zwischen Bär und Topf
+var astposition = new Array();                  //Array, das die Positionnen der Äste speichert
+var astabstand = new Array();                   //Array, das Abstand der Äste zum Bär speichert
