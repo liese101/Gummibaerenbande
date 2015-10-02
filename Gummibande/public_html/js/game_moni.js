@@ -21,7 +21,7 @@ var follow = true;
 var Sounds;
 
 //moni_game_sounds = {};
-//soundfiles alle von www.bigsoundbank.com kostenfrei heruntergeladen
+//soundfiles alle von www.bigsoundbank.com kosten- und lizenzfrei heruntergeladen
 var hintergrund_sound;
 var eingesammelt_sound;
 var ende_sound;
@@ -222,10 +222,10 @@ camera.add(listener);
 console.log("Audiolistener added");
 //audio
 
-hintergrund_sound = new THREE.Audio(listener);
-hintergrund_sound.load("files/wiese.ogg");
-hintergrund_sound.autoplay = true;
-hintergrund_sound.setLoop(true);
+//hintergrund_sound = new THREE.Audio(listener);
+//hintergrund_sound.load("files/wiese.ogg");
+//hintergrund_sound.autoplay = true;
+//hintergrund_sound.setLoop(true);
 
 
 
