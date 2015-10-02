@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+// Registriert Tastendruck und setzt entprechende Variablen auf True / startet Spiele.
 var actionStart = function (event) {
     var keyPressed = String.fromCharCode(event.keyCode);
 
@@ -53,13 +54,13 @@ var actionStart = function (event) {
             loadAnleitung();
             break;
         case "2":
-            loadGameTwo();
+            loadGameFour();
             break;
         case "3":
             loadGameThree();
             break;
         case "4":
-            loadGameFour();
+            loadGameTwo();
         default:
             break; 
 
@@ -67,6 +68,8 @@ var actionStart = function (event) {
     }
 };
 
+
+// Registriert Tasten loslassen und setzt entprechende Variablen auf false
 var actionStop = function (event) {
     var keyPressed = String.fromCharCode(event.keyCode);
     switch(keyPressed){

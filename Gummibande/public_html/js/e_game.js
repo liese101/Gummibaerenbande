@@ -319,5 +319,5 @@ var e_move = function(){
 var kameraBewegen = function() {
     camera.position.y = baer.position.y;
     camera.rotation.y = (-(baer.rotation.y) + Math.PI/2)%(Math.PI*2);
-    camera.position.set(baer.position.x * 10, baer.position.y, baer.position.z * 10);
+    camera.position.set(baer.position.x * 10, baer.position.y+3, baer.position.z * 10);
 };

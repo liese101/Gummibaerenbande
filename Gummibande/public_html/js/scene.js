@@ -106,13 +106,6 @@ Diese wächst und schrumpft umso mehr du dich dem unsichtbaren Objekt näherst o
     
         console.log("Scene cleart");
     }
-    
-    function checkWinner(){
-    if (sc1>sc2)
-        scene.add(p1win);
-    if (sc2<sc1)
-        scene.add(p2win);
-}
 
 function loadAnleitung(){
     clearScene();
@@ -121,4 +114,22 @@ function loadAnleitung(){
     gamedome = false;
     scene.add(anleitung);
     console.log("Anleitung geladen");
+}
+
+function checkWinner(){
+    if (sc1===5){
+        score1 = sc1;
+        sc1 = 0;
+        score2 = sc2;
+        sc2 = 0;
+        scene.add(p1win);
+        
+    }
+    if (sc2===5){
+        scene.add(p2win);
+        score1 = sc1;
+        sc1 = 0;
+        score2 = sc2;
+        sc2 = 0;
+    }
 }
